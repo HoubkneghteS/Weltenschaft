@@ -9,6 +9,13 @@ canvas{
     background: dodgerblue;
 }
 
+button{
+    background:navy;
+    color:white;
+    padding: 0.3em;
+    border: none;
+}
+
 @media screen and (min-width: 1500px) {
     
     canvas{
