@@ -25,14 +25,14 @@ function generate() {
     for (var i = 1; i < resolution; i++) {
         elevation[i][0] = incline(elevation[i - 1][0]);
         for (var j = 1; j < resolution * 2; j++) {
-            elevation[i][j] = incline((elevation[i - 1][j] + elevation[i][j - 1] + elevation[i - 1][j + 1]) / 3);
+            elevation[i][j] = incline((elevation[i][j - 1] + elevation[i - 1][j + 1]) / 2);
         }
     }
 
     //adds noise
     for (var i = 0; i < resolution; i++) {
         for (var j = 0; j < resolution; j++) {
-            elevation[i][j] = incline(elevation[i][j], hilliness * 0.34);
+            elevation[i][j] = incline(elevation[i][j], hilliness * 0.25);
         }
     }
 
@@ -62,7 +62,7 @@ function draw(mode) {
                         : "royalblue"; //abyss
                     break;
                 case "heightmap":
-                    var lightLevel = (elevation[i][j]+300) /6;
+                    var lightLevel = (elevation[i][j]+500) /7;
                     ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
                     break;
             }
