@@ -67,7 +67,8 @@ function draw(mode) {
                         : "royalblue"; //abyss
                     break;
                 case "heightmap":
-                    ctx.fillStyle = `rgb(${(terrainHeight[i][j]+150) /5}, ${(terrainHeight[i][j]+150) /5}, ${(terrainHeight[i][j]+150) /5})`;
+                    var lightLevel = (terrainHeight[i][j]+300) /6;
+                    ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
                     break;
             }
 
