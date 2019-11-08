@@ -1,0 +1,18 @@
+body {
+    font-family: verdana;
+    background: black;
+    color: white;
+}
+
+canvas{
+    width:100%;
+    background: dodgerblue;
+}
+
+@media screen and (min-width: 1500px) {
+    
+    canvas{
+        margin:auto;
+        width:90%;
+    }
+}

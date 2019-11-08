@@ -1,0 +1,14 @@
+{
+  "name": "weltenschaft",
+  "version": "0.0.2",
+  "description": "terrain generator JS",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "HoubkneghteS (Adam Simons)",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^6.1.4"
+  }
+}
