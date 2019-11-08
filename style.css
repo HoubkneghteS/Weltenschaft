@@ -1,25 +1,34 @@
 body {
     font-family: verdana;
+    padding:10px;
     background: black;
     color: white;
 }
 
 canvas{
-    width:100%;
     background: dodgerblue;
+    width: 600px;
+    height: 400px;
 }
 
 button{
     background:navy;
     color:white;
-    padding: 0.3em;
+    padding: 0.4em;
     border: none;
+    text-decoration: none;
+    cursor: pointer;
 }
 
+button:hover{
+    background: #003;
+}
+
+/*larger window mode*/
 @media screen and (min-width: 1500px) {
     
     canvas{
-        margin:auto;
-        width:90%;
+        width: 1200px;
+        height: 800px;
     }
 }

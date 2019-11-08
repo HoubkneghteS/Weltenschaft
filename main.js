@@ -11,8 +11,8 @@ let mainWindow, infoWindow; //window setup
 app.on('ready', function () {
 
     mainWindow = new BrowserWindow({
-        minWidth: 400,
-        minHeight: 350
+        minWidth: 800,
+        minHeight: 600
     });
 
     // Load html into window
