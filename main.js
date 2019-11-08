@@ -79,6 +79,12 @@ function createInfoWindow() {
     infoWindow.on('close', function () {
         infoWindow = null;
     });
+
+    //opens github link in browser instead of in the app itself
+    infoWindow.webContents.on('new-window', function(e, url) {
+        e.preventDefault();
+        electron.shell.openExternal(url);
+    });
 };
 
 //mac compatibility
