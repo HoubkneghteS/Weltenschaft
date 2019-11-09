@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 var resolution = 150 //resolution of terrain
     hilliness = 150; //max incline between parts
 
@@ -68,6 +70,12 @@ function draw(mode) {
             }
 
             ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, (canvas.height / resolution) + 2, (canvas.height / resolution) + 2);
+
+            //nice ;)
+            if(hilliness == 69) {
+                ctx.fillStyle = ("black");
+                ctx.fillText("nice", 69, 69);
+            }
         }
     }
 }

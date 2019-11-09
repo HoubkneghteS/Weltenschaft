@@ -12,17 +12,15 @@ app.on('ready', function () {
 
     mainWindow = new BrowserWindow({
         minWidth: 800,
-        minHeight: 600
+        minHeight: 600,
+        webPreferences: {
+            nodeIntegration: true
+          }
     });
 
     // Load html into window
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'main.html'),
-        protocol: 'file',
-        slashes: true
-    }));
+    mainWindow.loadFile('main.html');
 
-    //Build menu from template
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
     //quits all windows when closed
@@ -69,11 +67,7 @@ function createInfoWindow() {
     });
 
     // Load html into window
-    infoWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'info.html'),
-        protocol: 'file',
-        slashes: true
-    }));
+    infoWindow.loadFile('info.html');
 
     //clears memory when closed
     infoWindow.on('close', function () {
