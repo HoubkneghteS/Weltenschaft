@@ -1,16 +1,17 @@
 const fs = require('fs');
 
+//these are the parameters of the terrain generation
 var resolution = 150 //resolution of terrain
-    hilliness = 150; //max incline between parts
+    hilliness = 175; //max incline between parts
 
-var elevation = []
+var elevation = []; //elevation heightmap
 
 //Incline -- inclines by a random value
 function incline(base = 0, slope = hilliness) {
-    return base + (Math.random() * slope - (slope / 2))
+    return base + (Math.random() * slope - (slope / 2));
 }
 
-//Terrain generation -- draws and generates terrain
+//Terrain generation -- generates terrain
 function generate() {
 
     //setup 2d array for heightmap
@@ -42,6 +43,7 @@ function generate() {
     draw();
 }
 
+//Draw -- draws terrain to canvas 
 function draw(mode) {
     var canvas = document.getElementById('terrainbox');
     var ctx = canvas.getContext('2d');
@@ -60,7 +62,7 @@ function draw(mode) {
                         elevation[i][j] > 1000 ? "white" //snow mountain
                         : elevation[i][j] > 800 ? "sienna" //mountain
                         : elevation[i][j] > 0 ? "green" //default (will soon add biomes)
-                        : elevation[i][j] > -500 ? "dodgerblue" //ocean
+                        : elevation[i][j] > -500 ? "dodgerblue" //water
                         : "royalblue"; //abyss
                     break;
                 case "heightmap":
@@ -72,7 +74,7 @@ function draw(mode) {
             ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, (canvas.height / resolution) + 2, (canvas.height / resolution) + 2);
 
             //nice ;)
-            if(hilliness == 69) {
+            if (hilliness == 69) {
                 ctx.fillStyle = ("black");
                 ctx.fillText("nice", 69, 69);
             }
