@@ -12,11 +12,12 @@
 </head>
 <body onload="generate()">
   <script src="gen.js"></script>
+  <script src="translate.js"></script>
   <canvas id="terrainbox"></canvas>
   <hr/>
-  <button onclick="generate()">Generate</button>
-  <button onclick="draw('heightmap')">Draw Heightmap</button>
-  <button onclick="draw()">Draw Regular</button>
+  <button id="generate" onclick="generate()">Generate</button>
+  <button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
+  <button id="standardDraw" onclick="draw()">Draw Regular</button>
 </body>
 
 </html>
