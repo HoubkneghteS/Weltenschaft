@@ -9,6 +9,6 @@
   "author": "HoubkneghteS (Adam Simons)",
   "license": "MIT",
   "dependencies": {
-    "electron": "^6.1.4"
+    "electron": "6.1.7"
   }
 }
