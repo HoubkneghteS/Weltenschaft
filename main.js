@@ -2,6 +2,7 @@
 const electron = require('electron');
     url = require('url');
     path = require('path');
+    fs = require('fs');
 
 const { app, BrowserWindow, Menu } = electron;
 
@@ -17,6 +18,14 @@ app.on('ready', function () {
             nodeIntegration: true
           }
     });
+
+    if (!mainWindow.loadFile('lang.json')){
+        var lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
+        if (lang != "de" & lang != "en") {
+            lang = "en" //default translation is english
+        }
+        fs.writeFileSync('lang.json', JSON.stringify(lang)); //saves to json
+    }
 
     // Load html into window
     mainWindow.loadFile('main.html');
