@@ -4,38 +4,56 @@ const fs = require('fs');
 var resolution = 150 //resolution of terrain
     hilliness = 175; //max incline between parts
 
-var elevation = []; //elevation heightmap
+var elevation = [] //elevation heightmap
+    humidity = []; //humidity heightmap
 
 //Incline -- inclines by a random value
 function incline(base = 0, slope = hilliness) {
     return base + (Math.random() * slope - (slope / 2));
 }
 
+//noisemap -- has equations for the heightmaps used in the terrain gen
+function noisemap(array, noise = 0.25, slope = hilliness){
+        //setup 2d array for heightmaps
+        for (i = 0; i, i < resolution; i++) {
+            array[i] = [];
+        }
+    
+        //generates terrain heightmap for top layer
+        array[0][0] = incline();
+        for (var i = 1; i < resolution * 2; i++) {
+            array[0][i] = incline(array[0][i - 1], slope);
+        }
+        //generates rest of the heightmap
+        for (var i = 1; i < resolution; i++) {
+            array[i][0] = incline(array[i - 1][0], slope);
+            for (var j = 1; j < resolution * 2; j++) {
+                array[i][j] = incline((array[i][j - 1] + array[i - 1][j + 1]) / 2, slope);
+            }
+        }
+    
+        //adds noise
+        for (var i = 0; i < resolution; i++) {
+            for (var j = 0; j < resolution; j++) {
+                array[i][j] = incline(array[i][j], slope * noise);
+            }
+        }
+}
+
 //Terrain generation -- generates terrain
 function generate() {
 
-    //setup 2d array for heightmap
-    for (i = 0; i, i < resolution; i++) {
-        elevation[i] = [];
-    }
+    //generates heightmap
+    noisemap(elevation);
 
-    //generates terrain heightmap for top layer
-    elevation[0][0] = incline();
-    for (var i = 1; i < resolution * 2; i++) {
-        elevation[0][i] = incline(elevation[0][i - 1]);
-    }
-    //generates rest of the heightmap
-    for (var i = 1; i < resolution; i++) {
-        elevation[i][0] = incline(elevation[i - 1][0]);
-        for (var j = 1; j < resolution * 2; j++) {
-            elevation[i][j] = incline((elevation[i][j - 1] + elevation[i - 1][j + 1]) / 2);
-        }
-    }
+    //generates humidity map    
+    noisemap(humidity, 0.25, 30);
 
-    //adds noise
     for (var i = 0; i < resolution; i++) {
         for (var j = 0; j < resolution; j++) {
-            elevation[i][j] = incline(elevation[i][j], hilliness * 0.25);
+            if (elevation[i][j] <= 0) {
+                humidity[i][j] += 1000;
+            }
         }
     }
 
@@ -67,6 +85,10 @@ function draw(mode) {
                     break;
                 case "heightmap":
                     var lightLevel = (elevation[i][j]+500) /7;
+                    ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
+                    break;
+                case "humidity":
+                    var lightLevel = (humidity[i][j]+500) /7;
                     ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
                     break;
             }

@@ -1,7 +1,8 @@
 {
     "generate":"Gelände Generieren",
-    "heightmap":"Höhenfeld Zeichnen",
-    "standardDraw":"Gelände Zeichnen",
+    "heightmap":"Höhenfeld zeichnen",
+    "standardDraw":"Gelände zeichnen",
+    "humidity":"Feuchtigkeit zeichnen",
     "info":"Weltenschaft-Infos",
     "credits":"von HoubkneghteS (Adam Simons)",
     "githubLink":"Github-Seite"
