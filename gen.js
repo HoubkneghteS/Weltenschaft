@@ -2,7 +2,8 @@ const fs = require('fs');
 
 //these are the parameters of the terrain generation
 var resolution = 150 //resolution of terrain
-    hilliness = 175; //max incline between parts
+    hilliness = 175 //variable for hilliness of the terrain
+    baseHumidity = 0 //base humidity for the biomes
 
 var elevation = [] //elevation heightmap
     humidity = []; //humidity heightmap
@@ -13,14 +14,14 @@ function incline(base = 0, slope = hilliness) {
 }
 
 //noisemap -- has equations for the heightmaps used in the terrain gen
-function noisemap(array, noise = 0.25, slope = hilliness){
+function noisemap(array, noise = 0.25, base = 0, slope = hilliness){
         //setup 2d array for heightmaps
         for (i = 0; i, i < resolution; i++) {
             array[i] = [];
         }
     
         //generates terrain heightmap for top layer
-        array[0][0] = incline();
+        array[0][0] = incline(base);
         for (var i = 1; i < resolution * 2; i++) {
             array[0][i] = incline(array[0][i - 1], slope);
         }
@@ -47,7 +48,7 @@ function generate() {
     noisemap(elevation);
 
     //generates humidity map    
-    noisemap(humidity, 0.25, 30);
+    noisemap(humidity, 0.25, baseHumidity, 50);
 
     for (var i = 0; i < resolution; i++) {
         for (var j = 0; j < resolution; j++) {
@@ -79,8 +80,14 @@ function draw(mode) {
                     ctx.fillStyle =
                         elevation[i][j] > 1000 ? "white" //snow mountain
                         : elevation[i][j] > 800 ? "sienna" //mountain
-                        : elevation[i][j] > 0 ? "green" //default (will soon add biomes)
-                        : elevation[i][j] > -500 ? "dodgerblue" //water
+                        : elevation[i][j] > 0 ? 
+                        humidity[i][j] > 70 ? "darkgreen" //forest
+                            : humidity[i][j] > -50 ? "green" //plains
+                            : "sandybrown" //desert
+                        /*SEA LEVEL ELEVATION*/
+                        : elevation[i][j] > -500 ? 
+                            humidity[i][j] > -70 ? "dodgerblue" //water
+                            : "sandybrown" //below sea level desert 
                         : "royalblue"; //abyss
                     break;
                 case "heightmap":
@@ -88,7 +95,7 @@ function draw(mode) {
                     ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
                     break;
                 case "humidity":
-                    var lightLevel = (humidity[i][j]+500) /7;
+                    var lightLevel = (humidity[i][j]+150) /3;
                     ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
                     break;
             }

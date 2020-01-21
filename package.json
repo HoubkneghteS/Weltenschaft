@@ -1,6 +1,6 @@
 {
   "name": "weltenschaft",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "terrain generator JS",
   "main": "main.js",
   "scripts": {
