@@ -3,7 +3,7 @@ const fs = require('fs');
 //these are the parameters of the terrain generation
 var resolution = 150 //resolution of terrain
     hilliness = 175 //variable for hilliness of the terrain
-    baseHumidity = 0 //base humidity for the biomes
+    baseHumidity = 10 //base humidity for the biomes
 
 var elevation = [] //elevation heightmap
     humidity = []; //humidity heightmap
@@ -48,7 +48,7 @@ function generate() {
     noisemap(elevation);
 
     //generates humidity map    
-    noisemap(humidity, 0.25, baseHumidity, 50);
+    noisemap(humidity, 0.30, baseHumidity, 40);
 
     for (var i = 0; i < resolution; i++) {
         for (var j = 0; j < resolution; j++) {
