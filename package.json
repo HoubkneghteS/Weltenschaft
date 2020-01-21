@@ -1,5 +1,6 @@
 {
   "name": "weltenschaft",
+  "productName": "Weltenschaft",
   "version": "0.1.0",
   "description": "terrain generator JS",
   "main": "main.js",
@@ -10,5 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "electron": "^6.1.7"
+  },
+  "devDependencies": {
+    "electron-packager": "^14.2.0"
   }
 }
