@@ -81,14 +81,15 @@ function draw(mode) {
                         elevation[i][j] > 1000 ? "white" //snow mountain
                         : elevation[i][j] > 800 ? "sienna" //mountain
                         : elevation[i][j] > 0 ? 
-                        humidity[i][j] > 70 ? "darkgreen" //forest
+                        humidity[i][j] > 80 ? "darkgreen" //forest
                             : humidity[i][j] > -50 ? "green" //plains
                             : "sandybrown" //desert
                         /*SEA LEVEL ELEVATION*/
                         : elevation[i][j] > -500 ? 
                             humidity[i][j] > -70 ? "dodgerblue" //water
                             : "sandybrown" //below sea level desert 
-                        : "royalblue"; //abyss
+                        : humidity[i][j] > -100 ? "royalblue" //abyss
+                        : "brown"; //abyss
                     break;
                 case "heightmap":
                     var lightLevel = (elevation[i][j]+500) /7;
