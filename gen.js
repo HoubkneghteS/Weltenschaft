@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 //these are the parameters of the terrain generation
-var resolution = 150 //resolution of terrain
+var resolution = 170 //resolution of terrain
     hilliness = 175 //variable for hilliness of the terrain
     baseHumidity = 10 //base humidity for the biomes
 
@@ -86,15 +86,15 @@ function draw(mode) {
                     break;
                 case "heightmap":
                     var lightLevel = (elevation[i][j]+500) /7;
-                    ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
+                    ctx.fillStyle = `rgb(10, ${lightLevel}, 10)`;
                     break;
                 case "humidity":
-                    var lightLevel = (humidity[i][j]+150) /3;
-                    ctx.fillStyle = `rgb(${lightLevel}, ${lightLevel}, ${lightLevel})`;
+                    var lightLevel = (humidity[i][j]+200) /3;
+                    ctx.fillStyle = `rgb(10, 10, ${lightLevel})`;
                     break;
             }
 
-            ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, (canvas.width / resolution), (canvas.height / resolution) + 2);
+            ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, (canvas.width / resolution) + 1, (canvas.height / resolution) + 1);
 
             //nice ;)
             if (hilliness == 69) {

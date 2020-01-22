@@ -27,7 +27,6 @@ app.on('ready', function () {
         fs.writeFileSync('lang.json', JSON.stringify(lang)); //saves to json
     }
 
-    // Load html into window
     mainWindow.loadFile('main.html');
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
