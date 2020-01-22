@@ -5,7 +5,8 @@
   "description": "terrain generator JS",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager ."
   },
   "author": "HoubkneghteS (Adam Simons)",
   "license": "MIT",
