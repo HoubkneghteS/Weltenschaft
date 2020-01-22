@@ -19,7 +19,7 @@ app.on('ready', function () {
           }
     });
 
-    if (!mainWindow.loadFile('lang.json')){
+    if (!fs.existsSync('lang.json')){
         var lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
         if (lang != "de" & lang != "en") {
             lang = "en" //default translation is english
