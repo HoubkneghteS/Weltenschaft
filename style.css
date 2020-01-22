@@ -8,7 +8,7 @@ body {
 canvas{
     background: dodgerblue;
     width: 600px;
-    height: 400px;
+    height: 450px;
 }
 
 button{
@@ -29,7 +29,7 @@ button:hover{
 
     canvas{
         width: 1200px;
-        height: 800px;
+        height: 900px;
     }
     
 }
