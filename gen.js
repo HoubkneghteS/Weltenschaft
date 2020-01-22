@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 //these are the parameters of the terrain generation
-var resolution = 170 //resolution of terrain
+var resolution = 150 //resolution of terrain
     hilliness = 175 //variable for hilliness of the terrain
     baseHumidity = 10 //base humidity for the biomes
 
