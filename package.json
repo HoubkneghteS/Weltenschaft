@@ -2,13 +2,14 @@
   "name": "weltenschaft",
   "productName": "Weltenschaft",
   "version": "0.1.0",
-  "description": "terrain generator JS",
+  "description": "Open-Source JS terrain generator",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package": "electron-packager ."
   },
   "author": "HoubkneghteS (Adam Simons)",
+  "repository": "github:HoubkneghteS/Weltenschaft",
   "license": "MIT",
   "dependencies": {
     "electron": "^6.1.7"
