@@ -19,6 +19,7 @@ button{
     border: none;
     text-decoration: none;
     cursor: pointer;
+    outline: none;
 }
 
 button:hover{

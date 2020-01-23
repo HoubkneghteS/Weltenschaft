@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 //these are the parameters of the terrain generation
-var resolution = 150 //resolution of terrain
+var resolution = 170 //resolution of terrain
     hilliness = 175 //variable for hilliness of the terrain
     baseHumidity = 10 //base humidity for the biomes
 
@@ -59,9 +59,14 @@ function generate() {
 
 //Draw -- draws terrain to canvas 
 function draw(mode = drawMode) {
+
     var canvas = document.getElementById('terrainbox');
     var ctx = canvas.getContext('2d');
     
+    //HD
+    canvas.width =  canvas.getBoundingClientRect().width;
+    canvas.height = canvas.getBoundingClientRect().height;
+
     if(mode){
         drawMode = mode; //sets the draw mode to the input if given
     }
@@ -86,10 +91,11 @@ function draw(mode = drawMode) {
                             : "sandybrown" //desert
                         /*SEA LEVEL ELEVATION*/
                         : elevation[i][j] > -500 ? 
-                            humidity[i][j] > -70 ? "dodgerblue" //water
+                            humidity[i][j] > 0 ? "dodgerblue" //water
                             : "sandybrown" //below sea level desert 
-                        : humidity[i][j] > -100 ? "royalblue" //abyss
-                        : "brown"; //desert abyss
+                        : humidity[i][j] > 100 ? "royalblue" //abyss
+                            : humidity[i][j] > 0 ? "dodgerblue"
+                            : "brown"; //desert abyss
                     break;
                 case "heightmap":
                     var lightLevel = (elevation[i][j]+500) /7;
@@ -101,8 +107,7 @@ function draw(mode = drawMode) {
                     break;
             }
 
-            ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, (canvas.width / resolution) + 1, (canvas.height / resolution) + 1);
-
+            ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, canvas.width / resolution + 1, canvas.height / resolution + 1);
             //nice ;)
             if (hilliness == 69) {
                 ctx.fillStyle = ("black");
