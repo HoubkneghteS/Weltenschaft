@@ -3,6 +3,7 @@ body {
     padding:10px;
     background: black;
     color: white;
+    overflow: hidden;
 }
 
 canvas{

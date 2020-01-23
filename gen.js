@@ -8,6 +8,8 @@ var resolution = 150 //resolution of terrain
 var elevation = [] //elevation heightmap
     humidity = []; //humidity heightmap
 
+var drawMode;
+
 //Incline -- inclines by a random value
 function incline(base = 0, slope = hilliness) {
     return base + (Math.random() * slope - (slope / 2));
@@ -56,9 +58,13 @@ function generate() {
 }
 
 //Draw -- draws terrain to canvas 
-function draw(mode) {
+function draw(mode = drawMode) {
     var canvas = document.getElementById('terrainbox');
     var ctx = canvas.getContext('2d');
+    
+    if(mode){
+        drawMode = mode; //sets the draw mode to the input if given
+    }
 
     //clears previous terrain
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -69,6 +75,7 @@ function draw(mode) {
 
             switch (mode) {
                 default:
+                case "normal":
                     //default fill colors
                     ctx.fillStyle =
                         elevation[i][j] > 1000 ? "white" //peak
