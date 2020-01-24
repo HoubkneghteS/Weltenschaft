@@ -87,9 +87,9 @@ function createInfoWindow() {
         e.preventDefault();
         electron.shell.openExternal(url);
     });
-};
+}
 
 //mac compatibility
 if (process.platform == 'darwin') {
     menuTemplate.unshift({});
-};
+}

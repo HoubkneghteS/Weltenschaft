@@ -1,12 +1,11 @@
 {
   "name": "weltenschaft",
   "productName": "Weltenschaft",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Open-Source JS terrain generator",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
-    "pack-win": "electron-packager . --platform=win32 --arch=ia32 --icon=assets/icons/weltenschaft.ico --prune=true --out=release-builds"
+    "start": "electron ."
   },
   "author": "HoubkneghteS (Adam Simons)",
   "repository": "github:HoubkneghteS/Weltenschaft",
