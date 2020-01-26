@@ -8,6 +8,8 @@
 
 ## Roadmap (To be added)
 * Cities
+* Settings screen to replace the command console
+* Temperature
 * Saving & Loading worlds
 * Localizations
 * Basic in-browser implementation
