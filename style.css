@@ -27,7 +27,7 @@ button:hover{
 }
 
 /*larger window mode*/
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1250px) {
 
     canvas{
         width: 1200px;
