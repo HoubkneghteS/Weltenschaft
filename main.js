@@ -12,7 +12,7 @@ let mainWindow, infoWindow; //window setup
 app.on('ready', function () {
 
     mainWindow = new BrowserWindow({
-        minWidth: 800,
+        minWidth: 650,
         minHeight: 600,
         webPreferences: {
             nodeIntegration: true
