@@ -1,5 +1,5 @@
 # Weltenschaft
- Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program
+Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program
 
 ## Features
 * Random elevation
@@ -13,3 +13,7 @@
 * Saving & Loading worlds
 * Localizations
 * Basic in-browser implementation
+
+## Gallery
+
+![Weltenschaft 0.1.1](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
