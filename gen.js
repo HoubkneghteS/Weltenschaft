@@ -47,14 +47,6 @@ function generate() {
 
     seaLevel = incline(baseHumidity - 50, 10) / 2;
 
-    for (var i = 0; i < resolution; i++) {
-        for (var j = 0; j < resolution; j++) {
-            if (elevation[i][j] < seaLevel) {
-                humidity[i][j] += 500;
-            }
-        }
-    }
-
     //draws terrain
     draw();
 }
@@ -109,7 +101,12 @@ function draw(mode = drawMode) {
                     ctx.fillStyle = `rgb(10, ${lightLevel}, 10)`;
                     break;
                 case "humidity":
-                    var lightLevel = (humidity[i][j]+100) /2;
+                    if(elevation[i][j] > seaLevel){
+                        var lightLevel = (humidity[i][j]+100) /2;
+                    }else{
+                        //undersea is always blue
+                        var lightLevel = '256';
+                    }
                     ctx.fillStyle = `rgb(10, 10, ${lightLevel})`;
                     break;
             }
