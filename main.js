@@ -4,9 +4,10 @@ const electron = require('electron');
     path = require('path');
     fs = require('fs');
 
+
 const { app, BrowserWindow, Menu } = electron;
 
-let mainWindow, infoWindow; //window setup
+let mainWindow, infoWindow, settingsWindow; //window setup
 
 //startup functions
 app.on('ready', function () {
@@ -49,6 +50,12 @@ const menuTemplate = [
                 }
             },
             {
+                label: 'Settings',
+                click() {
+                    createSettingsWindow();
+                }
+            },
+            {
                 label: "Debug",
                 accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
                 click(item, focusedWindow) {
@@ -88,6 +95,32 @@ function createInfoWindow() {
         electron.shell.openExternal(url);
     });
 }
+
+//settings window
+function createSettingsWindow() {
+    if(settingsWindow == null){
+    settingsWindow = new BrowserWindow({
+        width: 375,
+        height: 500,
+        resizable: false,
+    });
+    }
+
+    // Load html into window
+    settingsWindow.loadFile('settings.html');
+
+    //clears memory when closed
+    settingsWindow.on('close', function () {
+        settingsWindow = null;
+    });
+
+    //opens github link in browser instead of in the app itself
+    settingsWindow.webContents.on('new-window', function(e, url) {
+        e.preventDefault();
+        electron.shell.openExternal(url);
+    });
+}
+
 
 //mac compatibility
 if (process.platform == 'darwin') {
