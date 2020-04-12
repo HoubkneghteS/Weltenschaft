@@ -58,7 +58,7 @@ function draw(mode = drawMode) {
     var ctx = canvas.getContext('2d');
     
     //HD
-    canvas.width =  1200;
+    canvas.width = 1200;
     canvas.height = 900;
 
     if(mode){

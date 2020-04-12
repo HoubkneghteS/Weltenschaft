@@ -121,7 +121,6 @@ function createSettingsWindow() {
     });
 }
 
-
 //mac compatibility
 if (process.platform == 'darwin') {
     menuTemplate.unshift({});

@@ -5,5 +5,8 @@
     "humidity":"Feuchtigkeit zeichnen",
     "info":"Weltenschaft-Infos",
     "credits":"von HoubkneghteS (Adam Simons)",
-    "githubLink":"Github-Seite"
+    "githubLink":"Github-Seite",
+    "settingsHeader":"Weltenschaft-Einstellungen",
+    "settings":"Einstellungen",
+    "hillinessHeader":"Hügeligkeit"
 }

@@ -5,5 +5,8 @@
     "humidity":"Draw Humidity",
     "info":"Weltenschaft Info",
     "credits":"by HoubkneghteS (Adam Simons)",
-    "githubLink":"Github Page"
+    "githubLink":"Github Page",
+    "settingsHeader":"Weltenschaft Settings",
+    "settings":"Settings",
+    "hillinessHeader":"Hilliness"
 }
