@@ -1,5 +1,5 @@
 {
-    "generate":"Gelände Generieren",
+    "generate":"Gelände generieren",
     "heightmap":"Höhenfeld zeichnen",
     "standardDraw":"Gelände zeichnen",
     "humidity":"Feuchtigkeit zeichnen",
@@ -8,5 +8,6 @@
     "githubLink":"Github-Seite",
     "settingsHeader":"Weltenschaft-Einstellungen",
     "settings":"Einstellungen",
-    "hillinessHeader":"Hügeligkeit"
+    "hillinessHeader":"Hügeligkeit",
+    "humidityHeader":"Feuchtigkeit"
 }
