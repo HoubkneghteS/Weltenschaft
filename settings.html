@@ -11,10 +11,10 @@
 <body>
     <script src="translate.js"></script>
     <h1 id="settings">Settings</h1>
-    <h2 id="hillinessHeader">Hilliness</h2>
-    <input type="range" min="0" max="200" value="50" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
-    <h2 id="humidityHeader">Humidity</h2>
-    <input type="range" min="-12" max="150" value="50" class="slider" id="humidity" onInput="settingsSet('humidity');">
+    <h2><span id="hillinessHeader">Hilliness</span>⛰️</h2>
+    <input type="range" min="0" max="250" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
+    <h2><span id="humidityHeader">Humidity</span>💧</h2>
+    <input type="range" min="-20" max="150" class="slider" id="humidity" onInput="settingsSet('humidity');">
     <p id="demo"></p>
     <script>
         const electron = require("electron"),
@@ -22,9 +22,9 @@
 
         //loads variables to move the slider (not yet functional)
         var hilliness = 76;
-        var humidity = 190;
+        var humidity = 0;
 
-        //moves slider
+        //moves slider to their correct position when loaded
         document.getElementById("hilliness").setAttribute("value", hilliness);
         document.getElementById("humidity").setAttribute("value", humidity);
 
