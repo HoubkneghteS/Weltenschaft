@@ -11,22 +11,26 @@
 <body>
     <script src="translate.js"></script>
     <h1 id="settings">Settings</h1>
-    <h2><span id="hillinessHeader">Hilliness</span>⛰️</h2>
+    <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
     <input type="range" min="0" max="250" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
-    <h2><span id="humidityHeader">Humidity</span>💧</h2>
-    <input type="range" min="-20" max="150" class="slider" id="humidity" onInput="settingsSet('humidity');">
+    <h2><span id="humidityHeader">Humidity</span> 💧</h2>
+    <input type="range" min="-20" max="150" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
+    <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
+    <input type="range" min="20" max="300" class="slider" id="resolution" onInput="settingsSet('resolution');">
     <p id="demo"></p>
     <script>
         const electron = require("electron"),
             {ipcRenderer} = electron;
 
         //loads variables to move the slider (not yet functional)
-        var hilliness = 76;
-        var humidity = 0;
+        var resolution = 240 //resolution of terrain
+            hilliness = 175 //variable for hilliness of the terrain
+            baseHumidity = 50 //base humidity for the biomes
 
         //moves slider to their correct position when loaded
+        document.getElementById("resolution").setAttribute("value", resolution);
         document.getElementById("hilliness").setAttribute("value", hilliness);
-        document.getElementById("humidity").setAttribute("value", humidity);
+        document.getElementById("baseHumidity").setAttribute("value", baseHumidity);
 
         //detects the change in setting
         function settingsSet(setting) {
