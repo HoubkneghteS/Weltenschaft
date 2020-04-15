@@ -79,6 +79,9 @@ function createInfoWindow() {
         width: 375,
         height: 500,
         resizable: false,
+        webPreferences: {
+            nodeIntegration: true
+          }
     });
 
     // Load html into window
@@ -103,6 +106,9 @@ function createSettingsWindow() {
         width: 375,
         height: 500,
         resizable: false,
+        webPreferences: {
+            nodeIntegration: true
+          }
     });
     }
 

@@ -20,6 +20,14 @@
         const electron = require("electron"),
             {ipcRenderer} = electron;
 
+        //loads variables to move the slider (not yet functional)
+        var hilliness = 76;
+        var humidity = 190;
+
+        //moves slider
+        document.getElementById("hilliness").setAttribute("value", hilliness);
+        document.getElementById("humidity").setAttribute("value", humidity);
+
         //detects the change in setting
         function settingsSet(setting) {
             var x = document.getElementById(setting).value;
