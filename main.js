@@ -51,6 +51,7 @@ const menuTemplate = [
             },
             {
                 label: 'Settings',
+                accelerator: process.platform == 'darwin' ? 'Command+E' : 'Ctrl+E',
                 click() {
                     createSettingsWindow();
                 }
