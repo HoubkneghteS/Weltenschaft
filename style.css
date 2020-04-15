@@ -12,6 +12,14 @@ canvas{
     height: 450px;
 }
 
+.slider {
+    width: 100%;
+}
+
+.slider {
+    cursor: pointer;
+}
+
 button{
     background:navy;
     color:white;
