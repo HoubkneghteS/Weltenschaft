@@ -22,6 +22,8 @@ canvas{
 
 button{
     background:navy;
+    font-family: verdana;
+    font-size: 14px;
     color:white;
     padding: 0.4em;
     border: none;
