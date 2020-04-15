@@ -9,5 +9,6 @@
     "settingsHeader":"Weltenschaft-Einstellungen",
     "settings":"Einstellungen",
     "hillinessHeader":"Hügeligkeit",
-    "humidityHeader":"Feuchtigkeit"
+    "humidityHeader":"Feuchtigkeit",
+    "resolutionHeader":"Kartengröße"
 }

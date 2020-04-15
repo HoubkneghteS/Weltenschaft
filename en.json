@@ -9,5 +9,6 @@
     "settingsHeader":"Weltenschaft Settings",
     "settings":"Settings",
     "hillinessHeader":"Hilliness",
-    "humidityHeader":"Humidity"
+    "humidityHeader":"Humidity",
+    "resolutionHeader":"Map Size"
 }
