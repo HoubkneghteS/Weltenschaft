@@ -75,7 +75,7 @@ const menuTemplate = [
 ];
 
 //Detects settings and sends it to main window
-ipcMain.on("setting",function(e, value){
+ipcMain.on("setting", function(e, value){
     mainWindow.webContents.send("setting", value);
 });
 
@@ -121,15 +121,12 @@ function createSettingsWindow() {
     // Load html into window
     settingsWindow.loadFile('settings.html');
 
+    //tells main window to send its paramaters
+    mainWindow.webContents.send("createSettingsWindow");
+
     //clears memory when closed
     settingsWindow.on('close', function () {
         settingsWindow = null;
-    });
-
-    //opens github link in browser instead of in the app itself
-    settingsWindow.webContents.on('new-window', function(e, url) {
-        e.preventDefault();
-        electron.shell.openExternal(url);
     });
 }
 

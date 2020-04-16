@@ -14,7 +14,7 @@
     <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
     <input type="range" min="0" max="300" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
     <h2><span id="humidityHeader">Humidity</span> 💧</h2>
-    <input type="range" min="-30" max="150" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
+    <input type="range" min="-20" max="150" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
     <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
     <input type="range" min="20" max="325" class="slider" id="resolution" onInput="settingsSet('resolution');">
     <p id="demo"></p>
@@ -34,7 +34,7 @@
         //detects the change in setting
         function settingsSet(setting) {
             var value = [setting, document.getElementById(setting).value];
-            document.getElementById("demo").innerHTML = value;
+            document.getElementById("demo").innerHTML = value[1];
             ipcRenderer.send("setting", value);
         };
     </script>
