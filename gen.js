@@ -57,6 +57,11 @@ function heightmap(array, base = 0, slope = hilliness){
 //Terrain generation -- generates terrain
 function generate() {
 
+    //hardcapping resolution for now
+    if(resolution > 512){
+        resolution = 512
+    }
+
     //generates heightmap
     heightmap(elevation);
 
