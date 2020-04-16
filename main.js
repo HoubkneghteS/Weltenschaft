@@ -5,7 +5,7 @@ const electron = require('electron');
     fs = require('fs');
 
 
-const { app, BrowserWindow, Menu } = electron;
+const { app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow, infoWindow, settingsWindow; //window setup
 
@@ -73,6 +73,11 @@ const menuTemplate = [
         ]
     }
 ];
+
+//Detects settings and sends it to main window
+ipcMain.on("setting",function(e, value){
+    mainWindow.webContents.send("setting", value);
+});
 
 //info window
 function createInfoWindow() {

@@ -1,4 +1,7 @@
-const fs = require('fs');
+const fs = require('fs')
+    electron = require("electron")
+
+const {ipcRenderer} = electron;
 
 //these are the parameters of the terrain generation
 var resolution = 240 //resolution of terrain
@@ -14,6 +17,21 @@ var drawMode, seaLevel;
 function incline(base = 0, slope = hilliness) {
     return base + (Math.random() * slope - (slope / 2));
 }
+
+//detects setting change from the settings window and applies it
+ipcRenderer.on("setting", function(e, value){
+    switch(value[0]){
+        case "resolution":
+            resolution = value[1];
+            break;
+        case "hilliness":
+            hilliness = value[1];
+            break;
+        case "baseHumidity":
+            baseHumidity = parseInt(value[1]);
+            break;
+    }
+});
 
 //heightmap -- has equations for the heightmaps used in the terrain gen
 function heightmap(array, base = 0, slope = hilliness){
