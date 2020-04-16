@@ -93,6 +93,9 @@ function createInfoWindow() {
     // Load html into window
     infoWindow.loadFile('info.html');
 
+    //no Menu bar
+    infoWindow.removeMenu();
+
     //clears memory when closed
     infoWindow.on('close', function () {
         infoWindow = null;
@@ -123,6 +126,9 @@ function createSettingsWindow() {
 
     //tells main window to send its paramaters
     mainWindow.webContents.send("createSettingsWindow");
+
+    //no Menu bar
+    settingsWindow.removeMenu();
 
     //clears memory when closed
     settingsWindow.on('close', function () {
