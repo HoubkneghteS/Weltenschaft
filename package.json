@@ -5,7 +5,8 @@
   "description": "Open-Source JS terrain generator",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . --icon=assets/icons/weltenschaft.ico --out=release-builds --executablename=weltenschaft"
   },
   "author": "HoubkneghteS (Adam Simons)",
   "repository": "github:HoubkneghteS/Weltenschaft",
