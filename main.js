@@ -1,11 +1,8 @@
 //modules
 const electron = require('electron');
-    url = require('url');
-    path = require('path');
     fs = require('fs');
 
-
-const { app, BrowserWindow, Menu, ipcMain} = electron;
+const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow, infoWindow, settingsWindow; //window setup
 
@@ -110,7 +107,9 @@ function createInfoWindow() {
 
 //settings window
 function createSettingsWindow() {
-    if(settingsWindow == null){
+
+    if(settingsWindow) return; //blocks multiple from being created
+
     settingsWindow = new BrowserWindow({
         width: 375,
         height: 500,
@@ -119,7 +118,6 @@ function createSettingsWindow() {
             nodeIntegration: true
           }
     });
-    }
 
     // Load html into window
     settingsWindow.loadFile('settings.html');
