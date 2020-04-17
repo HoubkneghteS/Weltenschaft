@@ -54,6 +54,37 @@ function heightmap(array, base = 0, slope = hilliness){
     }
 }
 
+function poly(array, base = 0, slope = hilliness){
+    //setup 2d array for heightmaps
+    for (i = 0; i, i < resolution; i++) {
+        array[i] = [];
+    }
+
+    //generates terrain heightmap for top layer
+    array[0][0] = incline(base, slope/3);
+    for (var i = 1; i < resolution; i++) {
+        array[0][i] = incline(array[0][i - 1], slope);
+    }
+    //generates rest of the heightmap
+    for (var i = 1; i < resolution; i++) {
+        array[i][0] = incline(array[i - 1][0], slope);
+        for (var j = 1; j < resolution; j++) {
+            array[i][j] = incline((array[i][j - 1] * array[i - 1][j]) / 2, slope);
+        }
+    }
+}
+
+function polygon(){
+
+        poly(elevation);   
+        poly(humidity, baseHumidity, 40);
+    
+        seaLevel = 0
+    
+        draw();
+        console.log("Hail Sierpinski")
+}
+
 //Terrain generation -- generates terrain
 function generate() {
 
