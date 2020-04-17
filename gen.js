@@ -66,10 +66,19 @@ function poly(array, base = 0, slope = hilliness){
         array[0][i] = incline(array[0][i - 1], slope);
     }
     //generates rest of the heightmap
-    for (var i = 1; i < resolution; i++) {
-        array[i][0] = incline(array[i - 1][0], slope);
-        for (var j = 1; j < resolution; j++) {
-            array[i][j] = incline((array[i][j - 1] * array[i - 1][j]) / 2, slope);
+    if(Math.floor(Math.random() * 2) == 0){
+        for (var i = 1; i < resolution; i++) {
+            array[i][0] = incline(array[i - 1][0], slope);
+            for (var j = 1; j < resolution; j++) {
+                array[i][j] = incline(array[i][j - 1] ^ array[i - 1][j] / (Math.random() * 100), slope);
+            }
+        }
+    }else{
+        for (var i = 1; i < resolution; i++) {
+            array[i][0] = incline(array[i - 1][0], slope);
+            for (var j = 1; j < resolution; j++) {
+                array[i][j] = incline(array[i][j - 1] * array[i - 1][j] / (Math.random() * 100), slope);
+            }
         }
     }
 }
