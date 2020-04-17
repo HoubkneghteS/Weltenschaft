@@ -54,18 +54,21 @@ function heightmap(array, base = 0, slope = hilliness){
     }
 }
 
+//P O L Y G O N S
 function poly(array, base = 0, slope = hilliness){
-    //setup 2d array for heightmaps
+
+    //hardcapping resolution at 1024
+    if(resolution > 1024){
+        resolution = 1024
+    }
+
     for (i = 0; i, i < resolution; i++) {
         array[i] = [];
     }
-
-    //generates terrain heightmap for top layer
     array[0][0] = incline(base, slope/3);
     for (var i = 1; i < resolution; i++) {
         array[0][i] = incline(array[0][i - 1], slope);
     }
-    //generates rest of the heightmap
     if(Math.floor(Math.random() * 2) == 0){
         for (var i = 1; i < resolution; i++) {
             array[i][0] = incline(array[i - 1][0], slope);
@@ -94,10 +97,10 @@ function polygon(){
         console.log("Hail Sierpinski")
 }
 
-//Terrain generation -- generates terrain
+//Generate -- generates terrain
 function generate() {
 
-    //hardcapping resolution for now
+    //hardcapping resolution at 512
     if(resolution > 512){
         resolution = 512
     }
@@ -161,7 +164,7 @@ function draw(mode = drawMode) {
                     break;
                 case "heightmap":
                     var lightLevel = (elevation[i][j]+500) /7;
-                    ctx.fillStyle = `rgb(10, ${lightLevel}, 10)`;
+                    ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
                     break;
                 case "humidity":
                     if(elevation[i][j] > seaLevel){
@@ -170,16 +173,19 @@ function draw(mode = drawMode) {
                         //undersea is always blue
                         var lightLevel = '256';
                     }
-                    ctx.fillStyle = `rgb(10, 10, ${lightLevel})`;
+                    ctx.fillStyle = `rgb(0, 0, ${lightLevel})`;
                     break;
             }
 
+            //draws pixel
             ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, canvas.width / resolution + 1, canvas.height / resolution + 1);
-            //nice ;)
-            if (hilliness == 69) {
-                ctx.fillStyle = ("black");
-                ctx.fillText("nice", 69, 69);
-            }
         }
     }
+
+    //nice ;)
+    if (hilliness == 69) {
+        ctx.fillStyle = ("black");
+        ctx.fillText("nice", 69, 69);
+    }
+
 }
