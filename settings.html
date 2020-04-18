@@ -13,22 +13,23 @@
     <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
     <input type="range" min="0" max="300" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
     <h2><span id="humidityHeader">Humidity</span> 💧</h2>
-    <input type="range" min="-150" max="150" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
+    <input type="range" min="-250" max="250" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
     <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
     <input type="range" min="20" max="325" class="slider" id="resolution" onInput="settingsSet('resolution');">
     <p id="demo"></p>
     <script>
         const {ipcRenderer} = require("electron");
 
-        //loads variables to move the slider (not yet functional)
-        var resolution = 240 //resolution of terrain
-            hilliness = 175 //variable for hilliness of the terrain
-            baseHumidity = 50 //base humidity for the biomes
+        //loads variables to move the slider
+        ipcRenderer.on("settingsInit", function(e, value){
 
-        //moves slider to their correct position when loaded
-        document.getElementById("resolution").setAttribute("value", resolution);
-        document.getElementById("hilliness").setAttribute("value", hilliness);
-        document.getElementById("baseHumidity").setAttribute("value", baseHumidity);
+            //moves slider to their correct position when loaded
+            document.getElementById("resolution").setAttribute("value", parseInt(value[0]));
+            document.getElementById("hilliness").setAttribute("value", parseInt(value[1]));
+            document.getElementById("baseHumidity").setAttribute("value", parseInt(value[2]));
+        });
+
+        ipcRenderer.send("createSettingsWindow");
 
         //detects the change in setting
         function settingsSet(setting) {

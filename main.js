@@ -76,6 +76,16 @@ ipcMain.on("setting", function(e, value){
     mainWindow.webContents.send("setting", value);
 });
 
+//Detects settings and sends it to main window
+ipcMain.on("createSettingsWindow", function(e, value){
+    mainWindow.webContents.send("createSettingsWindow");
+});
+
+//Detects settings and sends it to main window
+ipcMain.on("settingsInit", function(e, value){
+    settingsWindow.webContents.send("settingsInit", value);
+});
+
 //info window
 function createInfoWindow() {
     infoWindow = new BrowserWindow({
@@ -122,11 +132,8 @@ function createSettingsWindow() {
     // Load html into window
     settingsWindow.loadFile('settings.html');
 
-    //tells main window to send its paramaters
-    mainWindow.webContents.send("createSettingsWindow");
-
     //no Menu bar
-    settingsWindow.removeMenu();
+    //settingsWindow.removeMenu();
 
     //clears memory when closed
     settingsWindow.on('close', function () {
