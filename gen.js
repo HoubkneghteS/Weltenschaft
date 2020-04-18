@@ -33,6 +33,11 @@ ipcRenderer.on("setting", function(e, value){
     }
 });
 
+//detects settings window being loaded and sends values over in an array
+ipcRenderer.on("createSettingsWindow", function(e){
+    ipcRenderer.send("settingsInit", [resolution, hilliness, baseHumidity]);
+});
+
 //heightmap -- has equations for the heightmaps used in the terrain gen
 function heightmap(array, base = 0, slope = hilliness){
     //setup 2d array for heightmaps
@@ -144,11 +149,17 @@ function draw(mode = drawMode) {
                     //default fill colors
                     if(elevation[i][j] > seaLevel){
                     ctx.fillStyle =
-                        elevation[i][j] > 1000 ? "white" //peak
-                        : elevation[i][j] > 800 ? "sienna" //mountain
+                        elevation[i][j] > 1200 ? "white" //peak
+                        : elevation[i][j] > 1000 ? "silver" //mountain
+                        : elevation[i][j] > 850 ? "sienna"
+                        : elevation[i][j] > 750 ?
+                            humidity[i][j] > 0 ? "sienna" //hill
+                            : "tomato" //mesa
                         : elevation[i][j] > -100 ? 
-                            humidity[i][j] > 80 ? "darkgreen" //forest
+                            humidity[i][j] > 200 ? "#005700"//primeval forest
+                            : humidity[i][j] > 150 ? "darkgreen" //forest
                             : humidity[i][j] > 0 ? "green" //plains
+                            : humidity[i][j] > -30 ? "#8a9932" //savannah
                             : "sandybrown" //desert
                         : elevation[i][j] > -500 ? 
                             humidity[i][j] > 0 ? "sandybrown"
@@ -157,9 +168,9 @@ function draw(mode = drawMode) {
                             : "brown" //desert abyss
                     //filling in water
                     }else if (elevation[i][j] > seaLevel - 500){
-                        ctx.fillStyle = "dodgerblue";
+                        ctx.fillStyle = "dodgerblue"; //water
                     }else {
-                        ctx.fillStyle = "royalblue";
+                        ctx.fillStyle = "royalblue"; //abyss
                     }
                     break;
                 case "heightmap":
