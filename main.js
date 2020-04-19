@@ -76,15 +76,13 @@ ipcMain.on("setting", function(e, value){
     mainWindow.webContents.send("setting", value);
 });
 
-//Detects settings and sends it to main window
-ipcMain.on("createSettingsWindow", function(e, value){
-    mainWindow.webContents.send("createSettingsWindow");
-});
-
-//Detects settings and sends it to main window
-ipcMain.on("settingsInit", function(e, value){
-    settingsWindow.webContents.send("settingsInit", value);
-});
+//tells mainWindow to send values back to settingsWindow
+ipcMain.on("loadSettings", function(e){
+    mainWindow.webContents.send("loadSettings");
+})
+ipcMain.on("sendSettings",function(e, value){
+    settingsWindow.webContents.send("sendSettings", value)
+})
 
 //info window
 function createInfoWindow() {
@@ -134,6 +132,9 @@ function createSettingsWindow() {
 
     //no Menu bar
     //settingsWindow.removeMenu();
+
+    //doesn't go out of focus
+    settingsWindow.setAlwaysOnTop(true);
 
     //clears memory when closed
     settingsWindow.on('close', function () {

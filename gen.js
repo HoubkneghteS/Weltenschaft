@@ -33,10 +33,10 @@ ipcRenderer.on("setting", function(e, value){
     }
 });
 
-//detects settings window being loaded and sends values over in an array
-ipcRenderer.on("createSettingsWindow", function(e){
-    ipcRenderer.send("settingsInit", [resolution, hilliness, baseHumidity]);
-});
+//sends settings to settings screen when it's loaded
+ipcRenderer.on("loadSettings", function(e){
+    ipcRenderer.send("sendSettings", [resolution, hilliness, baseHumidity]);
+})
 
 //heightmap -- has equations for the heightmaps used in the terrain gen
 function heightmap(array, base = 0, slope = hilliness){

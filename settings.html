@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
+<body class="unselectable">
     <script src="translate.js"></script>
     <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
     <input type="range" min="0" max="300" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
@@ -17,19 +17,19 @@
     <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
     <input type="range" min="20" max="325" class="slider" id="resolution" onInput="settingsSet('resolution');">
     <p id="demo"></p>
-    <script>
+    <script type="text/javascript">
         const {ipcRenderer} = require("electron");
 
-        //loads variables to move the slider
-        ipcRenderer.on("settingsInit", function(e, value){
+        //tells gen.js to send values over
+        ipcRenderer.send("loadSettings");
 
-            //moves slider to their correct position when loaded
-            document.getElementById("resolution").setAttribute("value", parseInt(value[0]));
-            document.getElementById("hilliness").setAttribute("value", parseInt(value[1]));
-            document.getElementById("baseHumidity").setAttribute("value", parseInt(value[2]));
+        //loads settings from gen.js when sent and applies them to sliders
+        ipcRenderer.on("sendSettings", function(e, value){
+
+            document.getElementById("resolution").value = value[0];
+            document.getElementById("hilliness").value = value[1];
+            document.getElementById("baseHumidity").value = value[2];
         });
-
-        ipcRenderer.send("createSettingsWindow");
 
         //detects the change in setting
         function settingsSet(setting) {
