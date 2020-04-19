@@ -90,6 +90,7 @@ function createInfoWindow() {
         width: 375,
         height: 500,
         resizable: false,
+        autoHideMenuBar: true,
         webPreferences: {
             nodeIntegration: true
           }
@@ -97,9 +98,6 @@ function createInfoWindow() {
 
     // Load html into window
     infoWindow.loadFile('info.html');
-
-    //no Menu bar
-    infoWindow.removeMenu();
 
     //clears memory when closed
     infoWindow.on('close', function () {
@@ -122,6 +120,8 @@ function createSettingsWindow() {
         width: 375,
         height: 500,
         resizable: false,
+        autoHideMenuBar: true,
+        setAlwaysOnTop: true,
         webPreferences: {
             nodeIntegration: true
           }
@@ -129,12 +129,6 @@ function createSettingsWindow() {
 
     // Load html into window
     settingsWindow.loadFile('settings.html');
-
-    //no Menu bar
-    //settingsWindow.removeMenu();
-
-    //doesn't go out of focus
-    settingsWindow.setAlwaysOnTop(true);
 
     //clears memory when closed
     settingsWindow.on('close', function () {
