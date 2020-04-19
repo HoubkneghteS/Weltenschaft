@@ -1,0 +1,14 @@
+{
+    "generate":"Generate",
+    "heightmap":"Draw Heightmap",
+    "standardDraw":"Draw Regular",
+    "humidity":"Draw Humidity",
+    "info":"Weltenschaft Info",
+    "credits":"by HoubkneghteS (Adam Simons)",
+    "githubLink":"Github Page",
+    "settingsHeader":"Weltenschaft Settings",
+    "settings":"Settings",
+    "hillinessHeader":"Hilliness",
+    "humidityHeader":"Humidity",
+    "resolutionHeader":"Map Size"
+}

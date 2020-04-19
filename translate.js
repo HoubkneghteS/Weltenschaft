@@ -5,9 +5,9 @@ function setLang() {
 
     //sets local locale object from JSON
     if(lang == "de"){
-        var locale = require("./de.json");
+        var locale = require("./locales/de.json");
     }else{
-        var locale = require("./en.json"); 
+        var locale = require("./locales/en.json"); 
     }
 
     //replaces text with the value found in the locale JSON
