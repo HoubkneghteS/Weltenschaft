@@ -15,6 +15,13 @@ canvas{
 .slider {
     width: 100%;
     cursor: pointer;
+    margin-top: 0px;
+    margin-bottom:10px;
+}
+
+.unselectable {
+
+    user-select: none;
 }
 
 button{
