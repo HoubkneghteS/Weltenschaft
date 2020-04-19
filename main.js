@@ -104,7 +104,7 @@ function createInfoWindow() {
         infoWindow = null;
     });
 
-    //opens github link in browser instead of in the app itself
+    //opens github and discord link in browser instead of in the app itself
     infoWindow.webContents.on('new-window', function(e, url) {
         e.preventDefault();
         electron.shell.openExternal(url);
@@ -121,7 +121,7 @@ function createSettingsWindow() {
         height: 500,
         resizable: false,
         autoHideMenuBar: true,
-        setAlwaysOnTop: true,
+        parent: mainWindow, //always shows on top of main window
         webPreferences: {
             nodeIntegration: true
           }

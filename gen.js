@@ -1,5 +1,6 @@
 const fs = require('fs')
     electron = require("electron")
+    biomes = require('./biomes.json')
 
 const {ipcRenderer} = electron;
 
@@ -46,9 +47,9 @@ function heightmap(array, base = 0, slope = hilliness){
     }
 
     //generates terrain heightmap for top layer
-    array[0][0] = incline(base, slope/3);
+    array[0][0] = incline(base, slope / 3);
     for (var i = 1; i < resolution * 2; i++) {
-        array[0][i] = incline(array[0][i - 1], slope);
+        array[0][i] = incline(array[0][i - 1], slope / 2);
     }
     //generates rest of the heightmap
     for (var i = 1; i < resolution; i++) {
