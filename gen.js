@@ -150,23 +150,22 @@ function draw(mode = drawMode) {
                     //default fill colors
                     if(elevation[i][j] > seaLevel){
                     ctx.fillStyle =
-                        elevation[i][j] > 1200 ? "white" //peak
-                        : elevation[i][j] > 1000 ? "silver" //mountain
-                        : elevation[i][j] > 850 ? "sienna"
+                        elevation[i][j] > 1200 ? biomes.peak
+                        : elevation[i][j] > 1000 ? biomes.mountain
+                        : elevation[i][j] > 850 ? biomes.mountain2
                         : elevation[i][j] > 750 ?
-                            humidity[i][j] > 0 ? "sienna" //hill
-                            : "tomato" //mesa
+                            humidity[i][j] > 0 ? biomes.mountain2
+                            : biomes.mesa
                         : elevation[i][j] > -100 ? 
-                            humidity[i][j] > 200 ? "#005700"//primeval forest
-                            : humidity[i][j] > 150 ? "darkgreen" //forest
-                            : humidity[i][j] > 0 ? "green" //plains
-                            : humidity[i][j] > -30 ? "#8a9932" //savannah
-                            : "sandybrown" //desert
+                            humidity[i][j] > 200 ? biomes.urwald
+                            : humidity[i][j] > 150 ? biomes.forest
+                            : humidity[i][j] > 0 ? biomes.plains
+                            : humidity[i][j] > -30 ? biomes.savannah
+                            : biomes.desert
                         : elevation[i][j] > -500 ? 
-                            humidity[i][j] > 0 ? "sandybrown"
-                            : "coral" //canyon 
-                        : humidity[i][j] > 0 ? "sandybrown"
-                            : "brown" //desert abyss
+                            humidity[i][j] > 0 ? biomes.desert
+                            : biomes.canyon
+                        : biomes.desertabyss
                     //filling in water
                     }else if (elevation[i][j] > seaLevel - 500){
                         ctx.fillStyle = "dodgerblue"; //water
