@@ -140,6 +140,8 @@ function draw(mode = drawMode) {
     //clears previous terrain
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    var {width, height} = canvas;
+
     //draws terrain
     for (var i = 0; i < resolution; i++) {
         for (var j = 0; j < resolution; j++) {
@@ -189,7 +191,7 @@ function draw(mode = drawMode) {
             }
 
             //draws pixel
-            ctx.fillRect((canvas.width / resolution) * i, (canvas.height / resolution) * j, canvas.width / resolution + 1, canvas.height / resolution + 1);
+            ctx.fillRect((width / resolution) * i, (height / resolution) * j, width / resolution + 1, height / resolution + 1);
         }
     }
 
