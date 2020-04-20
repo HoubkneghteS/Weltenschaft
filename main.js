@@ -48,14 +48,14 @@ const menuTemplate = [
             },
             {
                 label: 'Settings',
-                accelerator: process.platform == 'darwin' ? 'Command+E' : 'Ctrl+E',
+                accelerator: 'CmdOrCtrl+E',
                 click() {
                     createSettingsWindow();
                 }
             },
             {
                 label: 'Quit',
-                accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
+                accelerator: 'CmdOrCtrl+Q',
                 role: "quit"
             }
         ],
@@ -65,13 +65,13 @@ const menuTemplate = [
         submenu: [
             {
                 label: "Debug",
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                accelerator: 'CmdOrCtrl+I',
                 role: "toggleDevTools"
             },
             {
                 label: "Reload",
                 role: "reload",
-                accelerator: process.platform == 'darwin' ? 'Command+R' : 'Ctrl+R',
+                accelerator: 'CmdOrCtrl+R',
             }
         ]
     }
