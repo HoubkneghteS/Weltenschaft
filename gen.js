@@ -49,7 +49,7 @@ function heightmap(array, base = 0, slope = hilliness){
     //generates terrain heightmap for top layer
     array[0][0] = incline(base, slope / 3);
     for (var i = 1; i < resolution * 2; i++) {
-        array[0][i] = incline(array[0][i - 1], slope / 3);
+        array[0][i] = incline(array[0][i - 1], slope);
     }
     //generates rest of the heightmap
     for (var i = 1; i < resolution; i++) {
