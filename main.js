@@ -54,18 +54,24 @@ const menuTemplate = [
                 }
             },
             {
-                label: "Debug",
-                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
-                click(item, focusedWindow) {
-                    focusedWindow.toggleDevTools();
-                }
-            },
-            {
                 label: 'Quit',
                 accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
-                click() {
-                    app.quit();
-                }
+                role: "quit"
+            }
+        ],
+    },
+    {
+        label: "View",
+        submenu: [
+            {
+                label: "Debug",
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                role: "toggleDevTools"
+            },
+            {
+                label: "Reload",
+                role: "reload",
+                accelerator: process.platform == 'darwin' ? 'Command+R' : 'Ctrl+R',
             }
         ]
     }
