@@ -54,6 +54,13 @@ const menuTemplate = [
                 }
             },
             {
+                label: 'Generate',
+                accelerator: 'CmdOrCtrl+G',
+                click() {
+                    mainWindow.webContents.send("generate");
+                }
+            },
+            {
                 label: 'Quit',
                 accelerator: 'CmdOrCtrl+Q',
                 role: "quit"

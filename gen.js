@@ -37,7 +37,12 @@ ipcRenderer.on("setting", function(e, value){
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", function(e){
     ipcRenderer.send("sendSettings", [resolution, hilliness, baseHumidity]);
-})
+});
+
+//keyboard shortcut to generate terrain (ctrl+g)
+ipcRenderer.on("generate", function(e){
+    generate();
+});
 
 //heightmap -- has equations for the heightmaps used in the terrain gen
 function heightmap(array, base = 0, slope = hilliness){
