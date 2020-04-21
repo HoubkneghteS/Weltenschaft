@@ -1,9 +1,10 @@
 //modules
 const electron = require('electron');
+    fs = require('fs');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
-const mainWindow, infoWindow, settingsWindow; //window setup
+let mainWindow, infoWindow, settingsWindow; //window setup
 
 //startup functions
 app.on('ready', function () {
