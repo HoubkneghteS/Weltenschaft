@@ -4,6 +4,9 @@ const electron = require('electron');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
+//futureproofing (remember to remove this when electron 9.0 comes out)
+app.allowRendererProcessReuse = true;
+
 let mainWindow, infoWindow, settingsWindow; //window setup
 
 //startup functions
