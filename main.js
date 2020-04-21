@@ -61,7 +61,7 @@ const menuTemplate = [
                 label: 'Generate',
                 accelerator: 'CmdOrCtrl+G',
                 click() {
-                    mainWindow.webContents.send("generate");
+                    mainWindow.webContents.send("shortcut", ["generate"]);
                 }
             },
             {
@@ -81,7 +81,29 @@ const menuTemplate = [
             {
                 role: "reload",
                 accelerator: 'CmdOrCtrl+R',
-            }
+            },
+            { type: "separator"},
+            {
+                label: "Draw Regular",
+                accelerator: 'CmdOrCtrl+1',
+                click() {
+                    mainWindow.webContents.send("shortcut", ["draw", "normal"]);
+                }
+            },
+            {
+                label: "Draw Heightmap",
+                accelerator: 'CmdOrCtrl+2',
+                click() {
+                    mainWindow.webContents.send("shortcut", ["draw", "heightmap"]);
+                }
+            },
+            {
+                label: "Draw Humidity",
+                accelerator: 'CmdOrCtrl+3',
+                click() {
+                    mainWindow.webContents.send("shortcut", ["draw", "humidity"]);
+                }
+            },
         ]
     }
 ];

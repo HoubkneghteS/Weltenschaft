@@ -1,6 +1,5 @@
 const fs = require('fs')
     electron = require("electron")
-    biomes = require('./biomes.json')
 
 const {ipcRenderer} = electron;
 
@@ -40,8 +39,15 @@ ipcRenderer.on("loadSettings", function(e){
 });
 
 //keyboard shortcut to generate terrain (ctrl+g)
-ipcRenderer.on("generate", function(e){
-    generate();
+ipcRenderer.on("shortcut", function(e, value){
+    switch (value[0]){
+        case "generate":
+            generate();
+            break;
+        case "draw":
+            draw(value[1]);
+        break;
+    }
 });
 
 //heightmap -- has equations for the heightmaps used in the terrain gen
@@ -54,7 +60,7 @@ function heightmap(array, base = 0, slope = hilliness){
     //generates terrain heightmap for top layer
     array[0][0] = incline(base, slope / 3);
     for (var i = 1; i < resolution * 2; i++) {
-        array[0][i] = incline(array[0][i - 1], slope);
+        array[0][i] = incline(array[0][i - 1], slope / 3);
     }
     //generates rest of the heightmap
     for (var i = 1; i < resolution; i++) {
@@ -131,8 +137,9 @@ function generate() {
 //Draw -- draws terrain to canvas 
 function draw(mode = drawMode) {
 
-    var canvas = document.getElementById('terrainbox');
-    var ctx = canvas.getContext('2d');
+    const canvas = document.getElementById('terrainbox');
+    const ctx = canvas.getContext('2d');
+    const biomes = require('./biomes.json')
     
     //HD
     canvas.width = 1200;
