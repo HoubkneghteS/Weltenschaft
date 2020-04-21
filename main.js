@@ -44,8 +44,7 @@ const menuTemplate = [
             {
                 label: 'Info',
                 click() {
-
-                    app.showAboutPanel() 
+                    createInfoWindow();
                 }
             },
             {
