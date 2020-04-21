@@ -1,4 +1,5 @@
-const electron = require("electron")
+const fs = require('fs')
+    electron = require("electron")
     biomes = require('./biomes.json')
 
 const {ipcRenderer} = electron;

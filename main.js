@@ -65,7 +65,6 @@ const menuTemplate = [
                 }
             },
             {
-                label: 'Quit',
                 accelerator: 'CmdOrCtrl+Q',
                 role: "quit"
             }
@@ -80,7 +79,6 @@ const menuTemplate = [
                 role: "toggleDevTools"
             },
             {
-                label: "Reload",
                 role: "reload",
                 accelerator: 'CmdOrCtrl+R',
             }
