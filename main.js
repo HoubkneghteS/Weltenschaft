@@ -10,6 +10,7 @@ let mainWindow, infoWindow, settingsWindow; //window setup
 app.on('ready', function () {
 
     mainWindow = new BrowserWindow({
+        title: `Weltenschaft ${app.getVersion()}`,
         minWidth: 650,
         minHeight: 600,
         webPreferences: {
@@ -43,7 +44,8 @@ const menuTemplate = [
             {
                 label: 'Info',
                 click() {
-                    createInfoWindow();
+
+                    app.showAboutPanel() 
                 }
             },
             {
