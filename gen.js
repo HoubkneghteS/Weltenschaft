@@ -38,7 +38,7 @@ ipcRenderer.on("loadSettings", function(e){
     ipcRenderer.send("sendSettings", [resolution, hilliness, baseHumidity]);
 });
 
-//keyboard shortcut to generate terrain (ctrl+g)
+//keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", function(e, value){
     switch (value[0]){
         case "generate":
