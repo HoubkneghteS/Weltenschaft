@@ -24,8 +24,7 @@
         ipcRenderer.send("loadSettings");
 
         //loads settings from gen.js when sent and applies them to sliders
-        ipcRenderer.on("sendSettings", function(e, value){
-
+        ipcRenderer.on("sendSettings", (e, value) => {
             document.getElementById("resolution").value = value[0];
             document.getElementById("hilliness").value = value[1];
             document.getElementById("baseHumidity").value = value[2];

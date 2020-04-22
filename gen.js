@@ -19,7 +19,7 @@ function incline(base = 0, slope = hilliness) {
 }
 
 //detects setting change from the settings window and applies it
-ipcRenderer.on("setting", function(e, value){
+ipcRenderer.on("setting", (e, value) => {
     switch(value[0]){
         case "resolution":
             resolution = value[1];
@@ -34,7 +34,7 @@ ipcRenderer.on("setting", function(e, value){
 });
 
 //sends settings to settings screen when it's loaded
-ipcRenderer.on("loadSettings", function(e){
+ipcRenderer.on("loadSettings", (e) => {
     ipcRenderer.send("sendSettings", [resolution, hilliness, baseHumidity]);
 });
 
@@ -212,5 +212,4 @@ function draw(mode = drawMode) {
         ctx.fillStyle = ("black");
         ctx.fillText("nice", 69, 69);
     }
-
 }

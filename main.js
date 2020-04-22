@@ -10,15 +10,21 @@ app.allowRendererProcessReuse = true;
 let mainWindow, infoWindow, settingsWindow; //window setup
 
 //startup functions
-app.on('ready', function () {
+app.on('ready', () => {
 
     mainWindow = new BrowserWindow({
         title: `Weltenschaft ${app.getVersion()}`,
         minWidth: 650,
         minHeight: 600,
+        show: false,
         webPreferences: {
             nodeIntegration: true
           }
+    });
+
+    //delays showing
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
     });
 
     if (!fs.existsSync('lang.json')){
@@ -34,7 +40,7 @@ app.on('ready', function () {
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
     //quits all windows when closed
-    mainWindow.on('close', function () {
+    mainWindow.on('close', () => {
         app.quit();
     })
 });
@@ -109,15 +115,15 @@ const menuTemplate = [
 ];
 
 //Detects settings and sends it to main window
-ipcMain.on("setting", function(e, value){
+ipcMain.on("setting", (e, value) => {
     mainWindow.webContents.send("setting", value);
 });
 
 //tells mainWindow to send values back to settingsWindow
-ipcMain.on("loadSettings", function(e){
+ipcMain.on("loadSettings", (e) => {
     mainWindow.webContents.send("loadSettings");
 })
-ipcMain.on("sendSettings",function(e, value){
+ipcMain.on("sendSettings", (e, value) =>{
     settingsWindow.webContents.send("sendSettings", value)
 })
 
@@ -126,6 +132,7 @@ function createInfoWindow() {
     infoWindow = new BrowserWindow({
         width: 375,
         height: 500,
+        show: false,
         resizable: false,
         autoHideMenuBar: true,
         webPreferences: {
@@ -133,11 +140,16 @@ function createInfoWindow() {
           }
     });
 
+    //delays showing
+    infoWindow.once('ready-to-show', () => {
+        infoWindow.show();
+    });
+
     // Load html into window
     infoWindow.loadFile('info.html');
 
     //clears memory when closed
-    infoWindow.on('close', function () {
+    infoWindow.on('close', () => {
         infoWindow = null;
     });
 
@@ -156,6 +168,7 @@ function createSettingsWindow() {
     settingsWindow = new BrowserWindow({
         width: 375,
         height: 500,
+        show: false,
         resizable: false,
         autoHideMenuBar: true,
         parent: mainWindow, //always shows on top of main window
@@ -164,11 +177,16 @@ function createSettingsWindow() {
           }
     });
 
+    //delays showing
+    settingsWindow.once('ready-to-show', () =>{
+        settingsWindow.show();
+    })
+
     // Load html into window
     settingsWindow.loadFile('settings.html');
 
     //clears memory when closed
-    settingsWindow.on('close', function () {
+    settingsWindow.on('close', () => {
         settingsWindow = null;
     });
 }
