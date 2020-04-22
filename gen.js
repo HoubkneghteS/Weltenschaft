@@ -1,5 +1,4 @@
-const fs = require('fs')
-    electron = require("electron")
+const electron = require("electron")
 
 const {ipcRenderer} = electron;
 
@@ -79,9 +78,7 @@ function heightmap(array, base = 0, slope = hilliness){
 function poly(array, base = 0, slope = hilliness){
 
     //hardcapping resolution at 1024
-    if(resolution > 1024){
-        resolution = 1024
-    }
+    if(resolution > 1024) resolution = 1024
 
     for (let i = 0; i, i < resolution; i++) {
         array[i] = [];
@@ -122,9 +119,7 @@ function polygon(){
 function generate() {
 
     //hardcapping resolution at 512
-    if(resolution > 512){
-        resolution = 512
-    }
+    if(resolution > 512) resolution = 512
 
     //generates heightmap
     heightmap(elevation);
@@ -153,10 +148,10 @@ function draw(mode = drawMode) {
         drawMode = mode; //sets the draw mode to the input if given
     }
 
-    //clears previous terrain
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
     var {width, height} = canvas;
+
+    //clears previous terrain
+    ctx.clearRect(0, 0, width, height);
 
     //draws terrain
     for (let i = 0; i < resolution; i++) {
