@@ -111,7 +111,8 @@ const menuTemplate = [
                 }
             },
         ]
-    }
+    },
+    {role: "windowmenu"}
 ];
 
 //Detects settings and sends it to main window
