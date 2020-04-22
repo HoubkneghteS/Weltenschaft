@@ -20,3 +20,9 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 ## Gallery
 
 ![Weltenschaft 0.1.1](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
+
+## License
+
+This code is released under the MIT License
+
+© Adam Simons
