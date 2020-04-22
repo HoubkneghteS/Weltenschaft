@@ -17,15 +17,16 @@ function incline(base = 0, slope = hilliness) {
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, value) => {
+    let newValue = parseInt(value[1]);
     switch(value[0]){
         case "resolution":
-            resolution = value[1];
+            resolution = newValue;
             break;
         case "hilliness":
-            hilliness = value[1];
+            hilliness = newValue;
             break;
         case "baseHumidity":
-            baseHumidity = parseInt(value[1]);
+            baseHumidity = newValue;
             break;
     }
 });
