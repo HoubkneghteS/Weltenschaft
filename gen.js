@@ -1,6 +1,4 @@
-const electron = require("electron")
-
-const {ipcRenderer} = electron;
+const {ipcRenderer} = require("electron");
 
 //these are the parameters of the terrain generation
 var resolution = 240 //resolution of terrain
