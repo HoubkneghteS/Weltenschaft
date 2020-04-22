@@ -53,19 +53,19 @@ ipcRenderer.on("shortcut", function(e, value){
 //heightmap -- has equations for the heightmaps used in the terrain gen
 function heightmap(array, base = 0, slope = hilliness){
     //setup 2d array for heightmaps
-    for (i = 0; i, i < resolution; i++) {
+    for (let i = 0; i, i < resolution; i++) {
         array[i] = [];
     }
 
     //generates terrain heightmap for top layer
     array[0][0] = incline(base, slope / 3);
-    for (var i = 1; i < resolution * 2; i++) {
+    for (let i = 1; i < resolution * 2; i++) {
         array[0][i] = incline(array[0][i - 1], slope / 3);
     }
     //generates rest of the heightmap
-    for (var i = 1; i < resolution; i++) {
+    for (let i = 1; i < resolution; i++) {
         array[i][0] = incline(array[i - 1][0], slope);
-        for (var j = 1; j < resolution * 2; j++) {
+        for (let j = 1; j < resolution * 2; j++) {
             array[i][j] = incline((array[i][j - 1] + array[i - 1][j + 1]) / 2, slope);
         }
     }
@@ -83,20 +83,20 @@ function poly(array, base = 0, slope = hilliness){
         array[i] = [];
     }
     array[0][0] = incline(base, slope/3);
-    for (var i = 1; i < resolution; i++) {
+    for (let i = 1; i < resolution; i++) {
         array[0][i] = incline(array[0][i - 1], slope);
     }
     if(Math.floor(Math.random() * 2) == 0){
-        for (var i = 1; i < resolution; i++) {
+        for (let i = 1; i < resolution; i++) {
             array[i][0] = incline(array[i - 1][0], slope);
-            for (var j = 1; j < resolution; j++) {
+            for (let j = 1; j < resolution; j++) {
                 array[i][j] = incline(array[i][j - 1] ^ array[i - 1][j] / (Math.random() * 100), slope);
             }
         }
     }else{
-        for (var i = 1; i < resolution; i++) {
+        for (let i = 1; i < resolution; i++) {
             array[i][0] = incline(array[i - 1][0], slope);
-            for (var j = 1; j < resolution; j++) {
+            for (let j = 1; j < resolution; j++) {
                 array[i][j] = incline(array[i][j - 1] * array[i - 1][j] / (Math.random() * 100), slope);
             }
         }
@@ -155,8 +155,8 @@ function draw(mode = drawMode) {
     var {width, height} = canvas;
 
     //draws terrain
-    for (var i = 0; i < resolution; i++) {
-        for (var j = 0; j < resolution; j++) {
+    for (let i = 0; i < resolution; i++) {
+        for (let j = 0; j < resolution; j++) {
 
             switch (mode) {
                 default:
