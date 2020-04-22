@@ -83,7 +83,7 @@ function poly(array, base = 0, slope = hilliness){
         resolution = 1024
     }
 
-    for (i = 0; i, i < resolution; i++) {
+    for (let i = 0; i, i < resolution; i++) {
         array[i] = [];
     }
     array[0][0] = incline(base, slope/3);
