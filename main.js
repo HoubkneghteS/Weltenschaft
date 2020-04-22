@@ -154,7 +154,7 @@ function createInfoWindow() {
     });
 
     //opens github and discord link in browser instead of in the app itself
-    infoWindow.webContents.on('new-window', function(e, url) {
+    infoWindow.webContents.on('new-window', (e, url) => {
         e.preventDefault();
         electron.shell.openExternal(url);
     });
@@ -178,7 +178,7 @@ function createSettingsWindow() {
     });
 
     //delays showing
-    settingsWindow.once('ready-to-show', () =>{
+    settingsWindow.once('ready-to-show', () => {
         settingsWindow.show();
     })
 

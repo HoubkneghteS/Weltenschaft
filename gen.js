@@ -143,9 +143,7 @@ function draw(mode = drawMode) {
     canvas.width = 1200;
     canvas.height = 900;
 
-    if(mode){
-        drawMode = mode; //sets the draw mode to the input if given
-    }
+    drawMode = mode || "normal"; //sets the draw mode to the input if given
 
     var {width, height} = canvas;
 

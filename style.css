@@ -1,8 +1,8 @@
 body {
     font-family: verdana;
     padding:10px;
-    background: black;
-    color: white;
+    background: #101010;
+    color: WhiteSmoke;
     overflow: hidden;
 }
 
@@ -14,9 +14,25 @@ canvas{
 
 .slider {
     width: 100%;
+    background-color: whitesmoke;
     cursor: pointer;
     margin-top: 0px;
     margin-bottom:10px;
+    outline: none;
+    height:5px;
+    -webkit-appearance: none;
+    cursor: default;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    transition-duration: 0.3s;
+    height: 20px;
+}
+
+hr{
+    border:1px solid #0D3F9D; 
 }
 
 .unselectable {
@@ -24,19 +40,26 @@ canvas{
 }
 
 button{
-    background:navy;
     font-family: verdana;
     font-size: 14px;
-    color:white;
+    color:whitesmoke;
     padding: 0.4em;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
+    transition-duration: 0.3s;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    outline: none}
+
+button, .slider::-webkit-slider-thumb{
+    border: 1px solid #05193D;
+    background:#0D3F9D;
     outline: none;
 }
 
-button:hover{
-    background: #003;
+/*darkens buttons when hovered*/
+.slider::-webkit-slider-thumb:hover, button:hover{
+    background: #05193D;
+    cursor: pointer;
 }
 
 /*larger window mode*/
