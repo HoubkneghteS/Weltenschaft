@@ -127,6 +127,7 @@ function createInfoWindow() {
     if(infoWindow) return; //blocks multiple from being created
 
     infoWindow = new BrowserWindow({
+        title: "Weltenschaft Info",
         width: 375,
         height: 500,
         show: false,
@@ -163,6 +164,7 @@ function createSettingsWindow() {
     if(settingsWindow) return; //blocks multiple from being created
 
     settingsWindow = new BrowserWindow({
+        title: "Settings",
         width: 375,
         height: 500,
         show: false,
