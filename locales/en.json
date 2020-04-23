@@ -6,9 +6,11 @@
     "info":"Weltenschaft Info",
     "credits":"by HoubkneghteS (Adam Simons)",
     "githubLink":"Github Page",
-    "settingsHeader":"Weltenschaft Settings",
     "settings":"Settings",
     "hillinessHeader":"Hilliness",
     "humidityHeader":"Humidity",
-    "resolutionHeader":"Map Size"
+    "resolutionHeader":"Map Size",
+    "file":"File",
+    "view":"View",
+    "exit":"Exit"
 }

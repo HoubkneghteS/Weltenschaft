@@ -1,11 +1,11 @@
 const {ipcRenderer} = require("electron");
 
 //these are the parameters of the terrain generation
-var resolution = 240 //resolution of terrain
-    hilliness = 175 //variable for hilliness of the terrain
-    baseHumidity = 50 //base humidity for the biomes
+var resolution = 240, //resolution of terrain
+    hilliness = 175, //variable for hilliness of the terrain
+    baseHumidity = 50; //base humidity for the biomes
 
-var elevation = [] //elevation heightmap
+var elevation = [], //elevation heightmap
     humidity = []; //humidity heightmap
 
 var drawMode, seaLevel;
@@ -62,7 +62,7 @@ function heightmap(array, base = 0, slope = hilliness){
     //generates terrain heightmap for top layer
     array[0][0] = incline(base, slope / 3);
     for (let i = 1; i < resolution * 2; i++) {
-        array[0][i] = incline(array[0][i - 1], slope / 3);
+        array[0][i] = incline(array[0][i - 1], slope / 2);
     }
     //generates rest of the heightmap
     for (let i = 1; i < resolution; i++) {
@@ -135,9 +135,9 @@ function generate() {
 //Draw -- draws terrain to canvas 
 function draw(mode = drawMode) {
 
-    const canvas = document.getElementById('terrainbox');
-    const ctx = canvas.getContext('2d');
-    const biomes = require('./biomes.json')
+    const canvas = document.getElementById('terrainbox'),
+        ctx = canvas.getContext('2d'),
+        biomes = require('./biomes.json')
     
     //HD
     canvas.width = 1200;
@@ -145,7 +145,7 @@ function draw(mode = drawMode) {
 
     drawMode = mode || "normal"; //sets the draw mode to the input if given
 
-    var {width, height} = canvas;
+    const {width, height} = canvas;
 
     //clears previous terrain
     ctx.clearRect(0, 0, width, height);

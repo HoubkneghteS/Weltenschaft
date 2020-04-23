@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="style.css">
 
 </head>
-<body onload="generate()">
+<body onload="generate();">
   <script src="gen.js"></script>
-  <script src="translate.js"></script>
+  <script defer src="translate.js" onload="setLang()"></script>
   <canvas id="terrainbox"></canvas>
   <hr/>
   <div class="unselectable">

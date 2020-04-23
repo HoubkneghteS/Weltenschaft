@@ -1,5 +1,5 @@
 //modules
-const electron = require('electron');
+const electron = require('electron'),
     fs = require('fs');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
@@ -7,7 +7,7 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 //futureproofing (remember to remove this when electron 9.0 comes out)
 app.allowRendererProcessReuse = true;
 
-let mainWindow, infoWindow, settingsWindow; //window setup
+var mainWindow, infoWindow, settingsWindow; //window setup
 
 //startup functions
 app.on('ready', () => {
@@ -29,9 +29,7 @@ app.on('ready', () => {
 
     if (!fs.existsSync('lang.json')){
         var lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
-        if (lang != "de" & lang != "en") {
-            lang = "en" //default translation is english
-        }
+        if (lang != "de" & lang != "en") lang = "en" //default translation is english
         fs.writeFileSync('lang.json', JSON.stringify(lang)); //saves to json
     }
 
@@ -42,7 +40,7 @@ app.on('ready', () => {
     //quits all windows when closed
     mainWindow.on('close', () => {
         app.quit();
-    })
+    });
 });
 
 //create menu template
@@ -84,10 +82,6 @@ const menuTemplate = [
                 accelerator: 'CmdOrCtrl+I',
                 role: "toggleDevTools"
             },
-            {
-                role: "reload",
-                accelerator: 'CmdOrCtrl+R',
-            },
             { type: "separator"},
             {
                 label: "Draw Regular",
@@ -111,8 +105,7 @@ const menuTemplate = [
                 }
             },
         ]
-    },
-    {role: "windowmenu"}
+    }
 ];
 
 //Detects settings and sends it to main window
@@ -130,6 +123,9 @@ ipcMain.on("sendSettings", (e, value) =>{
 
 //info window
 function createInfoWindow() {
+
+    if(infoWindow) return; //blocks multiple from being created
+
     infoWindow = new BrowserWindow({
         width: 375,
         height: 500,
@@ -159,7 +155,7 @@ function createInfoWindow() {
         e.preventDefault();
         electron.shell.openExternal(url);
     });
-}
+};
 
 //settings window
 function createSettingsWindow() {

@@ -15,11 +15,9 @@ canvas{
 .slider {
     width: 100%;
     background-color: whitesmoke;
-    cursor: pointer;
-    margin-top: 0px;
     margin-bottom:10px;
     outline: none;
-    height:5px;
+    height:4px;
     -webkit-appearance: none;
     cursor: default;
 }
@@ -27,7 +25,6 @@ canvas{
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 20px;
-    transition-duration: 0.3s;
     height: 20px;
 }
 
@@ -41,17 +38,17 @@ hr{
 
 button{
     font-family: verdana;
-    font-size: 14px;
+    font-size: 13px;
     color:whitesmoke;
     padding: 0.4em;
-    transition-duration: 0.3s;
     float: left;
-    padding-left: 20px;
-    padding-right: 20px;
-    outline: none}
+    padding-left: 16px;
+    padding-right: 16px;
+}
 
 button, .slider::-webkit-slider-thumb{
     border: 1px solid #05193D;
+    transition-duration: 0.3s;
     background:#0D3F9D;
     outline: none;
 }
