@@ -114,9 +114,6 @@ ipcMain.on("setting", (e, value) => {
 });
 
 //tells mainWindow to send values back to settingsWindow
-ipcMain.on("loadSettings", (e) => {
-    mainWindow.webContents.send("loadSettings");
-})
 ipcMain.on("sendSettings", (e, value) =>{
     settingsWindow.webContents.send("sendSettings", value)
 })
@@ -179,6 +176,7 @@ function createSettingsWindow() {
     //delays showing
     settingsWindow.once('ready-to-show', () => {
         settingsWindow.show();
+        mainWindow.webContents.send("loadSettings");
     })
 
     // Load html into window

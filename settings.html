@@ -18,9 +18,6 @@
     <script type="text/javascript">
         const {ipcRenderer} = require("electron");
 
-        //tells gen.js to send values over
-        ipcRenderer.send("loadSettings");
-
         //loads settings from gen.js when sent and applies them to sliders
         ipcRenderer.on("sendSettings", (e, value) => {
             for(let key in value){
