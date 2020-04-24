@@ -1,4 +1,6 @@
-# Weltenschaft [![GitHub version](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft.svg)](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft)
+![Weltenschaft](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/icons/logo.png)
+[![GitHub version](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft.svg)](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft)
+
 Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program
 
   <a href="https://github.com/HoubkneghteS/Weltenschaft" target="_blank"><img alt="Github" src="https://cdn4.iconfinder.com/data/icons/iconsimple-logotypes/512/github-512.png" title="Github" width="40px" target="_blank"></a>
