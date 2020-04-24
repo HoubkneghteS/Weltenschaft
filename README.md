@@ -6,6 +6,8 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 
 ----
 
+![Weltenschaft 0.2.0](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
+
 [![Download Weltenschaft](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/weltenschaft/files/latest/download)
 
 ## Features
@@ -19,10 +21,6 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 * Saving & Loading worlds
 * Localizations (50% complete for English and German)
 * Basic in-browser implementation
-
-## Gallery
-
-![Weltenschaft 0.1.1](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
 
 ## License
 
