@@ -19,7 +19,7 @@ app.on('ready', () => {
         show: false,
         webPreferences: {
             nodeIntegration: true
-          }
+        }
     });
 
     //delays showing
@@ -28,8 +28,8 @@ app.on('ready', () => {
     });
 
     if (!fs.existsSync('lang.json')){
-        var lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
-        if (lang != "de" & lang != "en") lang = "en" //default translation is english
+        let lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
+        if (lang != "de" && lang != "en") lang = "en" //default translation is english
         fs.writeFileSync('lang.json', JSON.stringify(lang)); //saves to json
     }
 
