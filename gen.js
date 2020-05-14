@@ -63,15 +63,15 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed){
         array[x] = [];
     }
 
-    const small = 0.04 * scale;
+    const small = 0.025 * scale;
 
-    //creates new heightmap from simplex noise
-    const map = new tumult.Simplex2(seed); 
+    //creates new heightmap from perlin noise
+    const map = new tumult.Perlin2(seed); 
     
-    //sets array values to that from simplex object
+    //sets array values to that from perlin object
     for (let x = 0; x < resolution; x++) {
         for (let y = 0; y < resolution; y++) {
-            array[x][y] = base + (4 * map.gen(x / small, y / small) + 60 * map.octavate(6, x / scale, y / scale)) * slope;
+            array[x][y] = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope;
         }
     }
 }
