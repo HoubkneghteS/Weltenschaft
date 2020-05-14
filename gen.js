@@ -4,7 +4,9 @@ const {ipcRenderer} = require("electron"),
 //these are the parameters of the terrain generation
 var resolution = 256, //resolution of terrain
     hilliness = 25, //variable for hilliness of the terrain
-    baseHumidity = 50; //base humidity for the biomes
+    baseHumidity = 50, //base humidity for the biomes
+    biomeScale = 150, //size for the biomes
+    landScale = 100; //size for the land
 
 var elevation = [], //elevation heightmap
     humidity = []; //humidity heightmap
@@ -54,20 +56,22 @@ ipcRenderer.on("shortcut", (e, value) => {
 });
 
 //heightmap -- generates 2d arrays using perlin noise
-function heightmap(array, base = 0, slope = 20, scale = 100){
+function heightmap(array, base = 0, slope = 20, scale = 100, seed){
 
     //setup 2d array for heightmaps
     for (let x = 0; x < resolution; x++) {
         array[x] = [];
     }
 
+    const small = 0.03 * scale;
+
     //creates new heightmap from perlin noise
-    const map = new tumult.Perlin2(); 
+    const map = new tumult.Perlin2(seed); 
     
     //sets array values to that from perlin object
     for (let x = 0; x < resolution; x++) {
         for (let y = 0; y < resolution; y++) {
-            array[x][y] = base + (4 * map.gen(x / 3, y / 3) + 60 * map.octavate(6, x / scale, y / scale)) * slope;
+            array[x][y] = base + (7 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope;
         }
     }
 }
@@ -114,16 +118,20 @@ function polygon(){
 }
 
 //Generate -- generates terrain
-function generate() {
+function generate(seed) {
 
     //hardcapping resolution at 300
     if(resolution > 300) resolution = 300
 
+    //limiting scales
+    if (landScale < 40) landScale = 40
+    if (biomeScale < 40) biomeScale = 40
+
     //generates heightmap
-    heightmap(elevation, 15, hilliness);
+    heightmap(elevation, 15, hilliness, landScale, seed);
 
     //generates humidity map    
-    heightmap(humidity, baseHumidity, 5, 150);
+    heightmap(humidity, baseHumidity, 6, biomeScale, seed);
 
     seaLevel = incline(baseHumidity - 50, 5);
 
