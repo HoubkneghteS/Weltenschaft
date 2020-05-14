@@ -6,7 +6,7 @@ var resolution = 256, //resolution of terrain
     hilliness = 25, //variable for hilliness of the terrain
     baseHumidity = 50, //base humidity for the biomes
     biomeScale = 150, //size for the biomes
-    landScale = 100; //size for the land
+    landScale = 120; //size for the land
 
 var elevation = [], //elevation heightmap
     humidity = []; //humidity heightmap
@@ -63,15 +63,15 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed){
         array[x] = [];
     }
 
-    const small = 0.03 * scale;
+    const small = 0.04 * scale;
 
-    //creates new heightmap from perlin noise
-    const map = new tumult.Perlin2(seed); 
+    //creates new heightmap from simplex noise
+    const map = new tumult.Simplex2(seed); 
     
-    //sets array values to that from perlin object
+    //sets array values to that from simplex object
     for (let x = 0; x < resolution; x++) {
         for (let y = 0; y < resolution; y++) {
-            array[x][y] = base + (7 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope;
+            array[x][y] = base + (4 * map.gen(x / small, y / small) + 60 * map.octavate(6, x / scale, y / scale)) * slope;
         }
     }
 }
