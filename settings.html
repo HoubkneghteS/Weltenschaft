@@ -9,11 +9,11 @@
 <body class="unselectable">
     <script defer src="translate.js" onload="setLang()"></script>
     <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
-    <input type="range" min="10" max="300" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
+    <input type="range" min="10" max="50" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
     <h2><span id="humidityHeader">Humidity</span> 💧</h2>
     <input type="range" min="-250" max="250" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
     <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
-    <input type="range" min="20" max="325" class="slider" id="resolution" onInput="settingsSet('resolution');">
+    <input type="range" min="20" max="300" class="slider" id="resolution" onInput="settingsSet('resolution');">
     <p id="demo"></p>
     <script type="text/javascript">
         const {ipcRenderer} = require("electron");

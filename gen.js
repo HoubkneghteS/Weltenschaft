@@ -1,8 +1,9 @@
-const {ipcRenderer} = require("electron");
+const {ipcRenderer} = require("electron"),
+    tumult = require('tumult');
 
 //these are the parameters of the terrain generation
-var resolution = 240, //resolution of terrain
-    hilliness = 175, //variable for hilliness of the terrain
+var resolution = 256, //resolution of terrain
+    hilliness = 25, //variable for hilliness of the terrain
     baseHumidity = 50; //base humidity for the biomes
 
 var elevation = [], //elevation heightmap
@@ -53,22 +54,18 @@ ipcRenderer.on("shortcut", (e, value) => {
 });
 
 //heightmap -- has equations for the heightmaps used in the terrain gen
-function heightmap(array, base = 0, slope = hilliness){
+function heightmap(array, base = 0, slope = 20, scale = 99){
+
     //setup 2d array for heightmaps
-    for (let i = 0; i, i < resolution; i++) {
-        array[i] = [];
+    for (let x = 0; x < resolution; x++) {
+        array[x] = [];
     }
 
-    //generates terrain heightmap for top layer
-    array[0][0] = incline(base, slope / 3);
-    for (let i = 1; i < resolution * 2; i++) {
-        array[0][i] = incline(array[0][i - 1], slope / 2);
-    }
-    //generates rest of the heightmap
-    for (let i = 1; i < resolution; i++) {
-        array[i][0] = incline(array[i - 1][0], slope);
-        for (let j = 1; j < resolution * 2; j++) {
-            array[i][j] = incline((array[i][j - 1] + array[i - 1][j + 1]) / 2, slope);
+    const map = new tumult.Simplex2(); 
+    
+    for (let x = 0; x < resolution; x++) {
+        for (let y = 0; y < resolution; y++) {
+            array[x][y] = base + (5 * map.gen(x / 3, y / 3) + 60 * map.octavate(6, x / scale, y / scale)) * slope;
         }
     }
 }
@@ -106,7 +103,7 @@ function poly(array, base = 0, slope = hilliness){
 function polygon(){
 
         poly(elevation);   
-        poly(humidity, baseHumidity, 40);
+        poly(humidity, baseHumidity, 60);
     
         seaLevel = 0
     
@@ -117,16 +114,16 @@ function polygon(){
 //Generate -- generates terrain
 function generate() {
 
-    //hardcapping resolution at 512
-    if(resolution > 512) resolution = 512
+    //hardcapping resolution at 300
+    if(resolution > 300) resolution = 300
 
     //generates heightmap
-    heightmap(elevation);
+    heightmap(elevation, 15, hilliness);
 
     //generates humidity map    
-    heightmap(humidity, baseHumidity, 40);
+    heightmap(humidity, baseHumidity, 5, 150);
 
-    seaLevel = incline(baseHumidity - 50, 10) / 2;
+    seaLevel = incline(baseHumidity - 50, 5);
 
     //draws terrain
     draw();
@@ -151,45 +148,45 @@ function draw(mode = drawMode) {
     ctx.clearRect(0, 0, width, height);
 
     //draws terrain
-    for (let i = 0; i < resolution; i++) {
-        for (let j = 0; j < resolution; j++) {
+    for (let x = 0; x < resolution; x++) {
+        for (let y = 0; y < resolution; y++) {
 
             switch (mode) {
                 default:
                 case "normal":
                     //default fill colors
-                    if(elevation[i][j] > seaLevel){
+                    if(elevation[x][y] > seaLevel){
                     ctx.fillStyle =
-                        elevation[i][j] > 1200 ? biomes.peak
-                        : elevation[i][j] > 1000 ? biomes.mountain
-                        : elevation[i][j] > 850 ? biomes.mountain2
-                        : elevation[i][j] > 750 ?
-                            humidity[i][j] > 0 ? biomes.mountain2
+                        elevation[x][y] > 1200 ? biomes.peak
+                        : elevation[x][y] > 1000 ? biomes.mountain
+                        : elevation[x][y] > 850 ? biomes.mountain2
+                        : elevation[x][y] > 750 ?
+                            humidity[x][y] > 0 ? biomes.mountain2
                             : biomes.mesa
-                        : elevation[i][j] > -100 ? 
-                            humidity[i][j] > 200 ? biomes.urwald
-                            : humidity[i][j] > 150 ? biomes.forest
-                            : humidity[i][j] > 0 ? biomes.plains
-                            : humidity[i][j] > -30 ? biomes.savannah
+                        : elevation[x][y] > -100 ? 
+                            humidity[x][y] > 200 ? biomes.urwald
+                            : humidity[x][y] > 150 ? biomes.forest
+                            : humidity[x][y] > 0 ? biomes.plains
+                            : humidity[x][y] > -30 ? biomes.savannah
                             : biomes.desert
-                        : elevation[i][j] > -500 ? 
-                            humidity[i][j] > 0 ? biomes.desert
+                        : elevation[x][y] > -500 ? 
+                            humidity[x][y] > 0 ? biomes.desert
                             : biomes.canyon
                         : biomes.desertabyss
                     //filling in water
-                    }else if (elevation[i][j] > seaLevel - 500){
+                    }else if (elevation[x][y] > seaLevel - 700){
                         ctx.fillStyle = "dodgerblue"; //water
                     }else {
                         ctx.fillStyle = "royalblue"; //abyss
                     }
                     break;
                 case "heightmap":
-                    var lightLevel = (elevation[i][j]+500) /7;
+                    var lightLevel = (elevation[x][y]+500) /7;
                     ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
                     break;
                 case "humidity":
-                    if(elevation[i][j] > seaLevel){
-                        var lightLevel = (humidity[i][j]+100) /2;
+                    if(elevation[x][y] > seaLevel){
+                        var lightLevel = (humidity[x][y]+100) /2;
                     }else{
                         //undersea is always blue
                         var lightLevel = '256';
@@ -199,12 +196,12 @@ function draw(mode = drawMode) {
             }
 
             //draws pixel
-            ctx.fillRect((width / resolution) * i, (height / resolution) * j, width / resolution + 1, height / resolution + 1);
+            ctx.fillRect((width / resolution) * x, (height / resolution) * y, width / resolution + 1, height / resolution + 1);
         }
     }
 
     //nice ;)
-    if (hilliness == 69) {
+    if (baseHumidity == 69) {
         ctx.fillStyle = ("black");
         ctx.fillText("nice", 69, 69);
     }

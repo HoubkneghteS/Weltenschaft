@@ -12,6 +12,7 @@
   "repository": "github:HoubkneghteS/Weltenschaft",
   "license": "MIT",
   "dependencies": {
-    "electron": "^8.2.5"
+    "electron": "^8.2.5",
+    "tumult": "^3.0.14"
   }
 }
