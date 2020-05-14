@@ -53,21 +53,21 @@ ipcRenderer.on("shortcut", (e, value) => {
     }
 });
 
-//heightmap -- generates 2d arrays using simplex noise
-function heightmap(array, base = 0, slope = 20, scale = 84){
+//heightmap -- generates 2d arrays using perlin noise
+function heightmap(array, base = 0, slope = 20, scale = 100){
 
     //setup 2d array for heightmaps
     for (let x = 0; x < resolution; x++) {
         array[x] = [];
     }
 
-    //creates new heightmap from simplex noise
-    const map = new tumult.Simplex2(); 
+    //creates new heightmap from perlin noise
+    const map = new tumult.Perlin2(); 
     
-    //sets array values to that from simplex object
+    //sets array values to that from perlin object
     for (let x = 0; x < resolution; x++) {
         for (let y = 0; y < resolution; y++) {
-            array[x][y] = base + (5 * map.gen(x / 4, y / 4) + 60 * map.octavate(6, x / scale, y / scale * 1.2)) * slope;
+            array[x][y] = base + (4 * map.gen(x / 3, y / 3) + 60 * map.octavate(6, x / scale, y / scale)) * slope;
         }
     }
 }
