@@ -11,8 +11,7 @@
   "author": "HoubkneghteS (Adam Simons)",
   "repository": "github:HoubkneghteS/Weltenschaft",
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
-    "electron": "^8.2.3"
+  "dependencies": {
+    "electron": "^8.2.5"
   }
 }
