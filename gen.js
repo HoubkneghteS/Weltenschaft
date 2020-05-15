@@ -97,25 +97,22 @@ function polygon(){
 }
 
 //heightmap -- generates 2d arrays using perlin noise
-function heightmap(array, base = 0, slope = 20, scale = 100, seed){
+function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
     array.length = 0; //clears any existing terrain
-
-    //setup 2d array for heightmaps
-    for (let x = 0; x < resolution; x++) {
-        array[x] = [];
-    }
 
     const small = 0.03 * scale;
 
     //creates new heightmap from perlin noise
     const map = new tumult.Perlin2(seed); 
     
-    //sets array values to that from perlin object
+    //etches perlin noise value onto the heightmap array in rows
     for (let x = 0; x < resolution; x++) {
+        let row = [];
         for (let y = 0; y < resolution; y++) {
-            array[x][y] = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope;
+            row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope);
         }
+        array.push(row);
     }
 }
 
@@ -159,9 +156,11 @@ function draw(mode = drawMode) {
     //clears previous terrain
     ctx.clearRect(0, 0, width, height);
 
+    let r = elevation[0].length;
+
     //draws terrain
-    for (let x = 0; x < resolution; x++) {
-        for (let y = 0; y < resolution; y++) {
+    for (let x = 0; x < r; x++) {
+        for (let y = 0; y < r; y++) {
 
             switch (mode) {
                 default:
@@ -208,7 +207,7 @@ function draw(mode = drawMode) {
             }
 
             //draws pixel
-            ctx.fillRect((width / resolution) * x, (height / resolution) * y, width / resolution + 1, height / resolution + 1);
+            ctx.fillRect((width / r) * x, (height / r) * y, width / r + 1, height / r + 1);
         }
     }
 
