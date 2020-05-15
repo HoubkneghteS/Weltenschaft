@@ -1,9 +1,9 @@
 const {ipcRenderer} = require("electron"),
-    tumult = require('tumult');
+    {Perlin2} = require('tumult');
 
 //these are the parameters of the terrain generation
 var resolution = 256, //resolution of terrain
-    hilliness = 30, //variable for hilliness of the terrain
+    hilliness = 30, //hilliness of the terrain
     baseHumidity = 50, //base humidity for the biomes
     biomeScale = 155, //size for the biomes
     landScale = 100; //size for the land
@@ -99,12 +99,10 @@ function polygon(){
 //heightmap -- generates 2d arrays using perlin noise
 function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
-    array.length = 0; //clears any existing terrain
-
     const small = 0.03 * scale;
 
     //creates new heightmap from perlin noise
-    const map = new tumult.Perlin2(seed); 
+    const map = new Perlin2(seed); 
     
     //etches perlin noise value onto the heightmap array in rows
     for (let x = 0; x < resolution; x++) {
@@ -118,7 +116,6 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 //Generate -- generates terrain
 function generate(seed) {
-
     //hardcapping resolution at 512
     if(resolution > 512) resolution = 512;
 
@@ -126,8 +123,12 @@ function generate(seed) {
     if (landScale < 50) landScale = 50;
     if (biomeScale < 50) biomeScale = 50;
 
+    //clears existing terrain
+    elevation = [];
+    humidity = [];
+
     //generates heightmap
-    heightmap(elevation, 15, hilliness, landScale, seed);
+    heightmap(elevation, 0, hilliness, landScale, seed);
 
     //generates humidity map    
     heightmap(humidity, baseHumidity, 6, biomeScale, seed);
@@ -186,13 +187,16 @@ function draw(mode = drawMode) {
                         : biomes.desertabyss
                     //filling in water
                     }else if (elevation[x][y] > seaLevel - 700){
-                        ctx.fillStyle = "dodgerblue"; //water
-                    }else {
-                        ctx.fillStyle = "royalblue"; //abyss
+                        ctx.fillStyle = biomes.water;
+                    }else if (elevation[x][y] > seaLevel - 1250){
+                        ctx.fillStyle = biomes.abyss;
+                    }else{
+                        ctx.fillStyle = biomes.trench;
                     }
                     break;
                 case "heightmap":
-                    var lightLevel = (elevation[x][y]+500) /7;
+                case "elevation":
+                    var lightLevel = (elevation[x][y] + 500) / 7;
                     ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
                     break;
                 case "humidity":

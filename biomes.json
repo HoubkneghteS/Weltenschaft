@@ -12,5 +12,6 @@
     "canyon": "coral",
     "desertabyss": "brown",
     "water": "dodgerblue",
-    "abyss": "royalblue"
+    "abyss": "#2869E1",
+    "trench": "#1849A1"
 }
