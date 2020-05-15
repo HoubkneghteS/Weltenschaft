@@ -23,8 +23,8 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 * Basic in-browser implementation
 
 ## Dependencies
-* ![Electron 8.2.5](https://github.com/electron/electron)
-* ![Tumult 3.0.14](https://github.com/ScottyFillups/tumult)
+* ![Electron](https://github.com/electron/electron) (App framework)
+* ![Tumult](https://github.com/ScottyFillups/tumult) (Noise library)
 
 ## License
 
