@@ -11,7 +11,7 @@ function setLang() {
         : JSON.parse(fs.readFileSync(`./locales/en.json`), 'utf8');
 
     //replaces text with the value found in the locale JSON
-    for (var string in loadedLanguage) {
+    for (let string in loadedLanguage) {
         if (document.getElementById(string)) {
             document.getElementById(string).innerHTML = loadedLanguage[string];
         }
