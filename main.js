@@ -27,12 +27,6 @@ app.on('ready', () => {
         mainWindow.show();
     });
 
-    if (!fs.existsSync('./lang.json')){
-        let lang = app.getLocale(); //gets locale and saves it to a const if there is no json already existant
-        if (lang != "de" && lang != "en") lang = "en" //default translation is english
-        fs.writeFileSync('lang.json', JSON.stringify(lang)); //saves to json
-    }
-
     mainWindow.loadFile('main.html');
 
     Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
