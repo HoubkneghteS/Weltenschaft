@@ -8,7 +8,7 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 
 ----
 
-![Weltenschaft 0.2.0](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
+![Weltenschaft 0.3.0](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
 
 ## Features
 * Random perlin-based elevation
