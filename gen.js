@@ -87,13 +87,13 @@ function poly(array, base = 0, slope = hilliness){
 
 function polygon(){
 
-        poly(elevation);   
-        poly(humidity, baseHumidity, 60);
-    
-        seaLevel = 0
-    
-        draw();
-        console.log("Hail Sierpinski")
+    poly(elevation);   
+    poly(humidity, baseHumidity, 60);
+
+    seaLevel = 0
+
+    draw();
+    console.log("Hail Sierpinski")
 }
 
 //heightmap -- generates 2d arrays using perlin noise
@@ -127,11 +127,8 @@ function generate(seed) {
     elevation = [];
     humidity = [];
 
-    //generates heightmap
-    heightmap(elevation, 0, hilliness, landScale, seed);
-
-    //generates humidity map    
-    heightmap(humidity, baseHumidity, 6, biomeScale, seed);
+    heightmap(elevation, 0, hilliness, landScale, seed); //generates heightmap 
+    heightmap(humidity, baseHumidity, 6, biomeScale, seed); //generates humidity map
 
     seaLevel = incline(baseHumidity - 50, 5);
 

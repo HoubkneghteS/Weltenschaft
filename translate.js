@@ -1,6 +1,6 @@
 const electron = require('electron'),
     fs = require('fs'),
-    lang = electron.remote.app.getLocale() ? electron.remote.app.getLocale() : "en";
+    lang = electron.remote.app.getLocale() || "en";
 
 function setLang() {
     document.getElementsByTagName("html").lang = lang; //sets content language to whatever language is being used
