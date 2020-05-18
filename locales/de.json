@@ -9,7 +9,9 @@
     "settings":"Einstellungen",
     "hillinessHeader":"Hügeligkeit",
     "humidityHeader":"Feuchtigkeit",
+    "seaLevelHeader":"Meeresspiegel",
     "resolutionHeader":"Kartengröße",
+    "resetSettings":"Zurücksetzen",
     "file":"Datei",
     "view":"Ansicht",
     "exit":"Schließen"

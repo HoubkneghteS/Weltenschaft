@@ -9,7 +9,9 @@
     "settings":"Settings",
     "hillinessHeader":"Hilliness",
     "humidityHeader":"Humidity",
+    "seaLevelHeader":"Sea Level",
     "resolutionHeader":"Map Size",
+    "resetSettings":"Reset",
     "file":"File",
     "view":"View",
     "exit":"Exit"

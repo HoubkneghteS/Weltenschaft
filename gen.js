@@ -11,12 +11,16 @@ var resolution = 256, //resolution of terrain
 var elevation = [], //elevation heightmap
     humidity = []; //humidity heightmap
 
-var drawMode, seaLevel;
+var seaLevel = 0;
+
+var drawMode;
 
 //Incline -- inclines by a random value
 function incline(base = 0, slope = hilliness) {
     return base + (Math.random() * slope - (slope / 2));
 }
+
+var old;
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, value) => {
@@ -28,20 +32,31 @@ ipcRenderer.on("setting", (e, value) => {
         case "hilliness":
             hilliness = newValue;
             break;
+        case "seaLevel":
+            seaLevel = newValue;
+
+            //prevents redrawing from happening too fast as it slows things down
+            if(new Date() - old > 100 || !old){
+                draw();
+                old = new Date();
+            }
+            break;
         case "baseHumidity":
             baseHumidity = newValue;
             break;
     }
 });
 
+
 //sends settings to settings screen when it's loaded
-ipcRenderer.on("loadSettings", (e) => {
+ipcRenderer.on("loadSettings", (e) =>
     ipcRenderer.send("sendSettings",
-        {"resolution": resolution,
-        "hilliness": hilliness,
-        "baseHumidity": baseHumidity
-        });
-});
+        {
+            "resolution": resolution,
+            "hilliness": hilliness,
+            "baseHumidity": baseHumidity,
+            "seaLevel": seaLevel
+}));
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, value) => {
@@ -129,8 +144,6 @@ function generate(seed) {
 
     heightmap(elevation, 0, hilliness, landScale, seed); //generates heightmap 
     heightmap(humidity, baseHumidity, 6, biomeScale, seed); //generates humidity map
-
-    seaLevel = incline(baseHumidity - 50, 5);
 
     //draws terrain
     draw();

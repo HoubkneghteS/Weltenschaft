@@ -107,9 +107,11 @@ ipcMain.on("setting", (e, value) => {
     mainWindow.webContents.send("setting", value);
 });
 
-//tells mainWindow to send values back to settingsWindow
+//sends settings from mainWindow into settingsWindow
 ipcMain.on("sendSettings", (e, value) =>{
-    settingsWindow.webContents.send("sendSettings", value)
+    if(settingsWindow){
+        settingsWindow.webContents.send("sendSettings", value)
+    }
 })
 
 //info window
