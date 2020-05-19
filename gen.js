@@ -20,7 +20,7 @@ function incline(base = 0, slope = hilliness) {
     return base + (Math.random() * slope - (slope / 2));
 }
 
-var old;
+var lastCall;
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, value) => {
@@ -35,10 +35,10 @@ ipcRenderer.on("setting", (e, value) => {
         case "seaLevel":
             seaLevel = newValue;
 
-            //prevents redrawing from happening too fast as it slows things down
-            if(new Date() - old > 100 || !old){
+            //prevents redrawing from happening too often as it slows things down
+            if(new Date() - lastCall > 95 || !lastCall){
                 draw();
-                old = new Date();
+                lastCall = new Date();
             }
             break;
         case "baseHumidity":
