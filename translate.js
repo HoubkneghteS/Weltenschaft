@@ -1,19 +1,22 @@
-const electron = require('electron'),
+const electron = require("electron"),
     fs = require('fs'),
-    //lang = electron.remote.app.getLocale() || "en";
+    app = electron.app || electron.remote.app,
+    lang = app.getLocale() || "en";
+
+//sets locale object from JSON
+const locale = fs.existsSync(`./locales/${lang}.json`)
+    ? JSON.parse(fs.readFileSync(`./locales/${lang}.json`), 'utf8')
+    : JSON.parse(fs.readFileSync(`./locales/en.json`), 'utf8');
+
+module.exports = locale;
 
 function setLang() {
     document.getElementsByTagName("html").lang = lang; //sets content language to whatever language is being used
 
-    //sets locale object from JSON
-    const loadedLanguage = fs.existsSync(`./locales/${lang}.json`)
-        ? JSON.parse(fs.readFileSync(`./locales/${lang}.json`), 'utf8')
-        : JSON.parse(fs.readFileSync(`./locales/en.json`), 'utf8');
-
     //replaces text with the value found in the locale JSON
-    for (let string in loadedLanguage) {
+    for (let string in locale) {
         if (document.getElementById(string)) {
-            document.getElementById(string).innerHTML = loadedLanguage[string];
+            document.getElementById(string).innerHTML = locale[string];
         }
     }
 }

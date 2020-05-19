@@ -9,8 +9,77 @@ app.allowRendererProcessReuse = true;
 
 var mainWindow, infoWindow, settingsWindow; //window setup
 
+var locale;
+
 //startup functions
 app.on('ready', () => {
+
+    locale = require("./translate.js"); //sets locale from translate.js
+
+    menuTemplate = [
+        {
+            label: locale.file,
+            submenu: [
+                {
+                    label: locale.info,
+                    click() {
+                        createInfoWindow();
+                    }
+                },
+                {
+                    label: locale.settings,
+                    accelerator: 'CmdOrCtrl+E',
+                    click() {
+                        createSettingsWindow();
+                    }
+                },
+                {
+                    label: locale.generate,
+                    accelerator: 'CmdOrCtrl+G',
+                    click() {
+                        mainWindow.webContents.send("shortcut", ["generate"]);
+                    }
+                },
+                {
+                    accelerator: 'CmdOrCtrl+Q',
+                    label: locale.exit,
+                    role: "quit"
+                }
+            ],
+        },
+        {
+            label: locale.view,
+            submenu: [
+                {
+                    label: "Debug",
+                    accelerator: 'CmdOrCtrl+I',
+                    role: "toggleDevTools"
+                },
+                { type: "separator"},
+                {
+                    label: locale.standardDraw,
+                    accelerator: 'CmdOrCtrl+1',
+                    click() {
+                        mainWindow.webContents.send("shortcut", ["draw", "normal"]);
+                    }
+                },
+                {
+                    label: locale.heightmap,
+                    accelerator: 'CmdOrCtrl+2',
+                    click() {
+                        mainWindow.webContents.send("shortcut", ["draw", "heightmap"]);
+                    }
+                },
+                {
+                    label: locale.humidity,
+                    accelerator: 'CmdOrCtrl+3',
+                    click() {
+                        mainWindow.webContents.send("shortcut", ["draw", "humidity"]);
+                    }
+                },
+            ]
+        }
+    ];
 
     mainWindow = new BrowserWindow({
         title: `Weltenschaft ${app.getVersion()}`,
@@ -38,69 +107,7 @@ app.on('ready', () => {
 });
 
 //create menu template
-const menuTemplate = [
-    {
-        label: 'File',
-        submenu: [
-            {
-                label: 'Info',
-                click() {
-                    createInfoWindow();
-                }
-            },
-            {
-                label: 'Settings',
-                accelerator: 'CmdOrCtrl+E',
-                click() {
-                    createSettingsWindow();
-                }
-            },
-            {
-                label: 'Generate',
-                accelerator: 'CmdOrCtrl+G',
-                click() {
-                    mainWindow.webContents.send("shortcut", ["generate"]);
-                }
-            },
-            {
-                accelerator: 'CmdOrCtrl+Q',
-                role: "quit"
-            }
-        ],
-    },
-    {
-        label: "View",
-        submenu: [
-            {
-                label: "Debug",
-                accelerator: 'CmdOrCtrl+I',
-                role: "toggleDevTools"
-            },
-            { type: "separator"},
-            {
-                label: "Draw Regular",
-                accelerator: 'CmdOrCtrl+1',
-                click() {
-                    mainWindow.webContents.send("shortcut", ["draw", "normal"]);
-                }
-            },
-            {
-                label: "Draw Heightmap",
-                accelerator: 'CmdOrCtrl+2',
-                click() {
-                    mainWindow.webContents.send("shortcut", ["draw", "heightmap"]);
-                }
-            },
-            {
-                label: "Draw Humidity",
-                accelerator: 'CmdOrCtrl+3',
-                click() {
-                    mainWindow.webContents.send("shortcut", ["draw", "humidity"]);
-                }
-            },
-        ]
-    }
-];
+var menuTemplate;
 
 //Detects settings and sends it to main window
 ipcMain.on("setting", (e, value) => {
@@ -120,7 +127,7 @@ function createInfoWindow() {
     if(infoWindow) return; //blocks multiple from being created
 
     infoWindow = new BrowserWindow({
-        title: "Weltenschaft Info",
+        title: locale.info,
         width: 375,
         height: 500,
         show: false,
@@ -157,7 +164,7 @@ function createSettingsWindow() {
     if(settingsWindow) return; //blocks multiple from being created
 
     settingsWindow = new BrowserWindow({
-        title: "Settings",
+        title: locale.settings,
         width: 375,
         height: 500,
         show: false,
