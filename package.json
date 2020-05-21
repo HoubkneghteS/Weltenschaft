@@ -1,18 +1,21 @@
 {
-  "name": "weltenschaft",
-  "productName": "Weltenschaft",
-  "version": "0.3.1",
-  "description": "Open-Source JS terrain generator",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "build": "electron-packager . --icon=assets/icons/weltenschaft.ico --out=release-builds --ignore=\\.gitignore --executable-name=weltenschaft --overwrite"
-  },
-  "author": "HoubkneghteS (Adam Simons)",
-  "repository": "github:HoubkneghteS/Weltenschaft",
-  "license": "MIT",
-  "dependencies": {
-    "electron": "^8.3.0",
-    "tumult": "^3.0.14"
-  }
+	"name": "weltenschaft",
+	"productName": "Weltenschaft",
+	"version": "0.3.1",
+	"description": "Open-Source JS terrain generator",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron .",
+		"build": "electron-packager . --icon=assets/icons/weltenschaft.ico --out=release-builds --ignore=\\.gitignore --executable-name=weltenschaft --overwrite"
+	},
+	"author": "HoubkneghteS (Adam Simons)",
+	"repository": "github:HoubkneghteS/Weltenschaft",
+	"license": "MIT",
+	"dependencies": {
+		"electron": "^8.3.0",
+		"tumult": "^3.0.14"
+	},
+	"devDependencies": {
+		"electron-packager": "^14.2.1"
+	}
 }
