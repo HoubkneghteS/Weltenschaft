@@ -4,7 +4,16 @@ const electron = require("electron"),
     lang = app.getLocale() || "en";
 
 //sets locale object from JSON
-const locale = require(`./locales/${lang}.json`) || require(`./locales/en.json`);
+var locale;
+if (fs.existsSync(`./locales/${lang}.json`)){
+    locale = JSON.parse(fs.readFileSync(`./locales/${lang}.json`));
+}else if(fs.existsSync(`./resources/app/locales/${lang}.json`)){
+    locale = JSON.parse(fs.readFileSync(`./resources/app/locales/${lang}.json`));
+}else if(fs.existsSync(`./locales/en.json`)){
+    locale = JSON.parse(fs.readFileSync(`en.json`));
+}else{
+    locale = JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
+}
 
 module.exports = locale;
 
