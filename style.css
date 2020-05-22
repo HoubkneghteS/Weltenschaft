@@ -1,73 +1,73 @@
 body {
-    font-family: verdana;
-    padding:10px;
-    background: #101010;
-    color: WhiteSmoke;
+	font-family: verdana;
+	padding:10px;
+	background: #101010;
+	color: WhiteSmoke;
     overflow: hidden;
 }
 
 canvas{
-    background: dodgerblue;
-    width: 600px;
-    height: 450px;
+	background: dodgerblue;
+	width: 600px;
+	height: 450px;
 }
 
 .slider {
-    width: 100%;
-    background-color: whitesmoke;
-    margin-bottom:10px;
-    outline: none;
-    height:4px;
-    -webkit-appearance: none;
-    cursor: default;
+	width: 100%;
+	background-color: whitesmoke;
+	margin-bottom:10px;
+	outline: none;
+	height:4px;
+	-webkit-appearance: none;
+	cursor: default;
 }
 
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
 }
 
 hr{
-    border:1px solid #0D3F9D; 
+	border:1px solid #0D3F9D; 
 }
 
 .unselectable {
-    user-select: none;
+	user-select: none;
 }
 
 .button-container {
-    width:650px;
+	width:650px;
 }
 
 button{
-    font-family: verdana;
-    font-size: 13px;
-    color:whitesmoke;
-    padding: 0.4em;
-    float: left;
-    padding-left: 16px;
-    padding-right: 16px;
+	font-family: verdana;
+	font-size: 13px;
+	color:whitesmoke;
+	padding: 0.4em;
+	float: left;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 button, .slider::-webkit-slider-thumb{
-    border: 1px solid #05193D;
-    transition-duration: 0.3s;
-    background:#0D3F9D;
-    outline: none;
+	border: 1px solid #05193D;
+	transition-duration: 0.3s;
+	background:#0D3F9D;
+	outline: none;
 }
 
 /*darkens buttons when hovered*/
 .slider::-webkit-slider-thumb:hover, button:hover{
-    background: #05193D;
-    cursor: pointer;
+	background: #05193D;
+	cursor: pointer;
 }
 
 /*larger window mode*/
 @media screen and (min-width: 1250px) {
 
-    canvas{
-        width: 1200px;
-        height: 900px;
-    }
+	canvas{
+		width: 1200px;
+		height: 900px;
+	}
 }

@@ -1,53 +1,55 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="style.css">
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
 
 </head>
+
 <body class="unselectable">
-    <script defer src="translate.js" onload="setLang()"></script>
-    <h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
-    <input type="range" min="15" max="50" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
-    <h2><span id="humidityHeader">Humidity</span> 💧</h2>
-    <input type="range" min="-250" max="250" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
-    <h2><span id="seaLevelHeader">Sea Level</span> 🌊</h2>
-    <input type="range" min="-300" max="300" class="slider" id="seaLevel" onInput="settingsSet('seaLevel');">
-    <h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
-    <input type="range" min="20" max="300" class="slider" id="resolution" onInput="settingsSet('resolution');">
-    <hr/>
-    <button id="resetSettings" onclick="reset();">Reset</button>
-    <script type="text/javascript">
-        const {ipcRenderer} = require("electron");
+	<script defer src="translate.js" onload="setLang()"></script>
+	<h2><span id="hillinessHeader">Hilliness</span> ⛰️</h2>
+	<input type="range" min="15" max="50" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
+	<h2><span id="humidityHeader">Humidity</span> 💧</h2>
+	<input type="range" min="-250" max="250" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
+	<h2><span id="seaLevelHeader">Sea Level</span> 🌊</h2>
+	<input type="range" min="-300" max="300" class="slider" id="seaLevel" onInput="settingsSet('seaLevel');">
+	<h2><span id="resolutionHeader">Map Size</span> 🗺️</h2>
+	<input type="range" min="20" max="300" class="slider" id="resolution" onInput="settingsSet('resolution');">
+	<hr />
+	<button id="resetSettings" onclick="reset();">Reset</button>
+	<script type="text/javascript">
+		const { ipcRenderer } = require("electron");
 
-        //loads settings from gen.js when sent and applies them to sliders
-        ipcRenderer.on("sendSettings", (e, value) => {
-            for(let key in value){
-                document.getElementById(key).value = value[key];
-            }
-        });
+		//loads settings from gen.js when sent and applies them to sliders
+		ipcRenderer.on("sendSettings", (e, value) => {
+			for (let key in value) {
+				document.getElementById(key).value = value[key];
+			}
+		});
 
-        //detects the change in setting
-        function settingsSet(setting) {
-            var value = [setting, document.getElementById(setting).value];
-            ipcRenderer.send("setting", value);
-        };
+		//detects the change in setting
+		function settingsSet(setting) {
+			var value = [setting, document.getElementById(setting).value];
+			ipcRenderer.send("setting", value);
+		};
 
-        //resets settings to their default value
-        function reset() {
-            let value = {
-                "resolution": 256,
-                "hilliness": 30,
-                "baseHumidity": 50,
-                "seaLevel": 0
-                }
+		//resets settings to their default value
+		function reset() {
+			let value = {
+				"resolution": 256,
+				"hilliness": 30,
+				"baseHumidity": 50,
+				"seaLevel": 0
+			}
 
-            for(let key in value){
-                document.getElementById(key).value = value[key];
-                settingsSet(key);
-            }
-        }
-    </script>
+			for (let key in value) {
+				document.getElementById(key).value = value[key];
+				settingsSet(key);
+			}
+		}
+	</script>
 </body>
 </html>

@@ -3,22 +3,22 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="author" content="HoubkneghteS (Adam Simons)">
-  <link rel="stylesheet" href="style.css">
+	<meta charset="utf-8">
+	<meta name="author" content="HoubkneghteS (Adam Simons)">
+	<link rel="stylesheet" href="style.css">
 
 </head>
 <body onload="generate();">
-  <script src="gen.js"></script>
-  <script defer src="translate.js" onload="setLang()"></script>
-  <canvas id="terrainbox"></canvas>
-  <hr/>
-  <div class="unselectable button-container">
-    <button id="generate" onclick="generate()">Generate</button>
-    <button id="standardDraw" onclick="draw('normal')">Draw Regular</button>
-    <button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
-    <button id="humidity" onclick="draw('humidity')">Draw Humidity</button>
-  </div>
+	<script src="gen.js"></script>
+	<script defer src="translate.js" onload="setLang()"></script>
+	<canvas id="terrainbox"></canvas>
+	<hr />
+	<div class="unselectable button-container">
+		<button id="generate" onclick="generate()">Generate</button>
+		<button id="standardDraw" onclick="draw('normal')">Draw Regular</button>
+		<button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
+		<button id="humidity" onclick="draw('humidity')">Draw Humidity</button>
+	</div>
 </body>
 
 </html>
