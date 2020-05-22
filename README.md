@@ -14,12 +14,12 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 * Random perlin-based elevation
 * 13 Humidity- and elevation-based biomes
 * 3 Draw modes
+* Full English and German translation
 
 ## Roadmap (To be added)
 * Cities, rivers, and other structures
 * Temperature
 * Saving & Loading worlds
-* Localizations (90% complete for English and German)
 * Basic in-browser implementation
 
 ## Dependencies
