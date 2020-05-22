@@ -2,9 +2,6 @@ const electron = require('electron');
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 
-//futureproofing (remember to remove this when electron 9.0 comes out)
-app.allowRendererProcessReuse = true;
-
 var mainWindow, infoWindow, settingsWindow; //window setup
 
 var locale;
