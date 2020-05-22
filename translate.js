@@ -1,7 +1,7 @@
 const electron = require("electron"),
 	fs = require('fs'),
 	app = electron.app || electron.remote.app,
-	lang = app.getLocale() || "en";
+	lang = app.getLocale() || "en"; //default language is english
 
 //sets locale object from JSON
 var locale;
