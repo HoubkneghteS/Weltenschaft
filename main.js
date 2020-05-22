@@ -1,6 +1,4 @@
-//modules
-const electron = require('electron'),
-    fs = require('fs');
+const electron = require('electron');
 
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 

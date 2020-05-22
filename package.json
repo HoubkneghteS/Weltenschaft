@@ -12,10 +12,10 @@
 	"repository": "github:HoubkneghteS/Weltenschaft",
 	"license": "MIT",
 	"dependencies": {
-		"electron": "^8.3.0",
 		"tumult": "^3.0.14"
 	},
 	"devDependencies": {
+		"electron": "^8.3.0",
 		"electron-packager": "^14.2.1"
 	}
 }
