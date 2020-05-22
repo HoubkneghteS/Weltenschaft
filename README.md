@@ -19,7 +19,7 @@ Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a
 * Cities, rivers, and other structures
 * Temperature
 * Saving & Loading worlds
-* Localizations (50% complete for English and German)
+* Localizations (90% complete for English and German)
 * Basic in-browser implementation
 
 ## Dependencies
