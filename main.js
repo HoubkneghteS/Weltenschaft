@@ -82,7 +82,8 @@ app.on('ready', () => {
 		minHeight: 600,
 		show: false,
 		webPreferences: {
-			nodeIntegration: true
+			nodeIntegration: true,
+			enableRemoteModule: true
 		}
 	});
 
@@ -127,7 +128,8 @@ function createInfoWindow() {
 		resizable: false,
 		autoHideMenuBar: true,
 		webPreferences: {
-			nodeIntegration: true
+			nodeIntegration: true,
+			enableRemoteModule: true
 		}
 	});
 
@@ -165,7 +167,8 @@ function createSettingsWindow() {
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
 		webPreferences: {
-			nodeIntegration: true
+			nodeIntegration: true,
+			enableRemoteModule: true
 		}
 	});
 
