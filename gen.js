@@ -167,7 +167,7 @@ function draw(mode = drawMode) {
 	//clears previous terrain
 	ctx.clearRect(0, 0, width, height);
 
-	let r = elevation[0].length;
+	let r = elevation.length;
 
 	//draws terrain
 	for (let x = 0; x < r; x++) {
@@ -179,7 +179,7 @@ function draw(mode = drawMode) {
 					//default fill colors
 					if (elevation[x][y] > seaLevel) {
 						ctx.fillStyle =
-							elevation[x][y] > 1200 ? biomes.peak
+							elevation[x][y] > 1250 ? biomes.peak
 								: elevation[x][y] > 1000 ? biomes.mountain
 								: elevation[x][y] > 850 ? biomes.mountain2
 								: elevation[x][y] > 750 ?
