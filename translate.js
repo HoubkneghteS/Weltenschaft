@@ -4,21 +4,23 @@ const electron = require("electron"),
 	lang = app.getLocale() || "en"; //default language is english
 
 //sets locale object from JSON
-var locale;
-if (fs.existsSync(`./locales/${lang}.json`)){
-	locale = JSON.parse(fs.readFileSync(`./locales/${lang}.json`));
-}else if(fs.existsSync(`./resources/app/locales/${lang}.json`)){
-	locale = JSON.parse(fs.readFileSync(`./resources/app/locales/${lang}.json`));
-}else if(fs.existsSync(`./locales/en.json`)){
-	locale = JSON.parse(fs.readFileSync(`en.json`));
-}else{
-	locale = JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
+function getLocaleObject(src = lang){
+	if (fs.existsSync(`./locales/${src}.json`)){
+		return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
+	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){
+		return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
+	}else if(fs.existsSync(`./locales/en.json`)){
+		return JSON.parse(fs.readFileSync(`en.json`));
+		console.warn(`Locale for language: ${src} not detected - using english`);
+	}else{
+		return JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
+		console.warn(`Locale for language: ${src} not detected - using english`);
+	}
 }
 
-module.exports = locale;
-
-function setLang() {
-	document.getElementsByTagName("html").lang = lang; //sets content language to whatever language is being used
+function setLang(language = lang) {
+	const locale = getLocaleObject(language);
+	document.getElementsByTagName("html").lang = language; //sets content language to whatever language is being used
 
 	//replaces text with the value found in the locale JSON
 	for (let string in locale) {
@@ -27,3 +29,6 @@ function setLang() {
 		}
 	}
 }
+
+//use in other js files
+module.exports = getLocaleObject();
