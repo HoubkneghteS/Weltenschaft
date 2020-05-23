@@ -10,11 +10,11 @@ function getLocaleObject(src = lang){
 	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){
 		return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
 	}else if(fs.existsSync(`./locales/en.json`)){
-		return JSON.parse(fs.readFileSync(`en.json`));
-		console.warn(`Locale for language: ${src} not detected - using english`);
+		console.warn(`Locale for language: ${src} not detected - using English`);
+		return JSON.parse(fs.readFileSync(`./locales/en.json`));
 	}else{
+		console.warn(`Locale for language: ${src} not detected - using English`);
 		return JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
-		console.warn(`Locale for language: ${src} not detected - using english`);
 	}
 }
 
