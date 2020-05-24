@@ -1,6 +1,4 @@
-const electron = require('electron');
-
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 var mainWindow, infoWindow, settingsWindow; //window setup
 
@@ -72,6 +70,11 @@ app.on('ready', () => {
 						mainWindow.webContents.send("shortcut", ["draw", "humidity"]);
 					}
 				},
+				{ type: 'separator' },
+      			{
+					label: locale.fullscreen,
+					role: 'togglefullscreen'
+				}
 			]
 		}
 	];
@@ -148,8 +151,9 @@ function createInfoWindow() {
 
 	//opens github and discord link in browser instead of in the app itself
 	infoWindow.webContents.on('new-window', (e, url) => {
+		const { shell } = require('electron')
 		e.preventDefault();
-		electron.shell.openExternal(url);
+		shell.openExternal(url);
 	});
 };
 
