@@ -1,10 +1,10 @@
 const electron = require("electron"),
-	fs = require('fs'),
 	app = electron.app || electron.remote.app,
 	lang = app.getLocale() || "en"; //default language is english
 
 //sets locale object from JSON
 function getLocaleObject(src = lang){
+	const fs = require('fs')
 	if (fs.existsSync(`./locales/${src}.json`)){
 		return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
 	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){

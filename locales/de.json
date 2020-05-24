@@ -13,5 +13,6 @@
 	"resetSettings":"Zurücksetzen",
 	"file":"Datei",
 	"view":"Ansicht",
-	"exit":"Schließen"
+	"exit":"Schließen",
+	"fullscreen": "Vollbild umschalten"
 }
