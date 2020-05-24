@@ -13,5 +13,6 @@
 	"resetSettings":"Reset",
 	"file":"File",
 	"view":"View",
-	"exit":"Exit"
+	"exit":"Exit",
+	"fullscreen": "Toggle Fullscreen"
 }
