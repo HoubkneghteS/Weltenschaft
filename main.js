@@ -81,7 +81,7 @@ app.on('ready', () => {
 
 	mainWindow = new BrowserWindow({
 		title: `Weltenschaft ${app.getVersion()}`,
-		minWidth: 640,
+		minWidth: 642,
 		minHeight: 600,
 		show: false,
 		webPreferences: {
