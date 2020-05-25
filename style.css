@@ -7,7 +7,7 @@ body {
 }
 
 canvas{
-	background: dodgerblue;
+	background: #2889FF;
 	width: 600px;
 	height: 450px;
 }
@@ -19,7 +19,7 @@ h2{
 
 .slider {
 	width: 100%;
-	background-color: whitesmoke;
+	background: whitesmoke;
 	margin-bottom:10px;
 	outline: none;
 	height:4px;
@@ -34,7 +34,7 @@ h2{
 }
 
 hr{
-	border:1px solid #0D3F9D; 
+	border:1px solid #1849A1; 
 }
 
 .unselectable {
@@ -46,18 +46,16 @@ hr{
 }
 
 button{
-	font-family: verdana;
-	font-size: 13px;
+	font: 13px verdana;
 	color:whitesmoke;
-	padding: 0.4em;
-	float: left;
 	padding: 0.5em 1em;
 }
 
 button, .slider::-webkit-slider-thumb{
+	border-radius: 5px;
 	border: 1px solid #05193D;
 	transition-duration: 0.3s;
-	background:#0D3F9D;
+	background:#1849A1;
 	outline: none;
 }
 
