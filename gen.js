@@ -131,6 +131,7 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 //Generate -- generates terrain
 function generate(seed) {
+	const start = new Date();
 	//hardcapping resolution at 512
 	if (resolution > 512) resolution = 512;
 
@@ -147,6 +148,8 @@ function generate(seed) {
 
 	//draws terrain
 	draw();
+
+	console.log(new Date() - start);
 }
 
 //Draw -- draws terrain to canvas 
@@ -221,7 +224,7 @@ function draw(mode = drawMode) {
 			}
 
 			//draws pixel
-			ctx.fillRect((width / r) * x, (height / r) * y, width / r + 1, height / r + 1);
+			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 		}
 	}
 
