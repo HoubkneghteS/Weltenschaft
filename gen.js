@@ -123,7 +123,7 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 	for (let x = 0; x < resolution; x++) {
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
-			row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(6, x / scale, y / scale)) * slope);
+			row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * slope);
 		}
 		array.push(row);
 	}
