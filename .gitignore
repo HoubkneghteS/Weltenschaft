@@ -1,13 +1,8 @@
-# Compiled binary addons (https://nodejs.org/api/addons.html)
+# Compiled binary addons
 release-builds
 
 # Dependency directories
 node_modules/
 
-
-# Output of 'npm pack'
-*.tgz
-
 # Lang json
 lang.json
-*.ini
