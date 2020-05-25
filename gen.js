@@ -131,7 +131,6 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 //Generate -- generates terrain
 function generate(seed) {
-	const start = new Date();
 	//hardcapping resolution at 512
 	if (resolution > 512) resolution = 512;
 
@@ -148,8 +147,6 @@ function generate(seed) {
 
 	//draws terrain
 	draw();
-
-	console.log(new Date() - start);
 }
 
 //Draw -- draws terrain to canvas 
