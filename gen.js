@@ -35,8 +35,10 @@ ipcRenderer.on("setting", (e, value) => {
 		case "seaLevel":
 			seaLevel = newValue;
 
+			let drawDelay = Math.round(elevation.length / 2.9);
+
 			//prevents redrawing from happening too often as it slows things down
-			if (new Date() - lastCall > 95 || !lastCall) {
+			if (new Date() - lastCall > drawDelay || !lastCall) {
 				draw();
 				lastCall = new Date();
 			}
