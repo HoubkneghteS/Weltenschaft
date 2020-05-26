@@ -133,8 +133,8 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 //Generate -- generates terrain
 function generate(seed) {
-	//hardcapping resolution at 512
-	if (resolution > 512) resolution = 512;
+	//softcapping resolution at 512
+	if (resolution > 512) console.warn("Warning - map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
 	//limiting scales
 	if (landScale < 50) landScale = 50;
