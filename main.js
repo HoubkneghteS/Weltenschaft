@@ -7,7 +7,7 @@ var locale;
 //startup functions
 app.on('ready', () => {
 
-	locale = require("./translate.js"); //sets locale from translate.js
+	locale = getLocaleObject(); //sets locale from translate.js
 
 	menuTemplate = [
 		{
@@ -86,7 +86,6 @@ app.on('ready', () => {
 		show: false,
 		webPreferences: {
 			nodeIntegration: true,
-			enableRemoteModule: true
 		}
 	});
 
@@ -133,7 +132,6 @@ function createInfoWindow() {
 		autoHideMenuBar: true,
 		webPreferences: {
 			nodeIntegration: true,
-			enableRemoteModule: true
 		}
 	});
 
@@ -174,7 +172,6 @@ function createSettingsWindow() {
 		parent: mainWindow, //always shows on top of main window
 		webPreferences: {
 			nodeIntegration: true,
-			enableRemoteModule: true
 		}
 	});
 
@@ -197,3 +194,24 @@ function createSettingsWindow() {
 if (process.platform == 'darwin') {
 	menuTemplate.unshift({});
 }
+
+//sets locale object from JSON
+function getLocaleObject(src = app.getLocale()){
+	const fs = require('fs')
+	if (fs.existsSync(`./locales/${src}.json`)){
+		return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
+	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){
+		return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
+	}else if(fs.existsSync(`./locales/en.json`)){
+		console.warn(`Locale for language: ${src} not detected - using English`);
+		return JSON.parse(fs.readFileSync(`./locales/en.json`));
+	}else{
+		console.warn(`Locale for language: ${src} not detected - using English`);
+		return JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
+	}
+}
+
+//sends locale to translate.js
+ipcMain.handle('getLang', async(e, language) => {
+	return getLocaleObject(language)
+});
