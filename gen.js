@@ -51,14 +51,14 @@ ipcRenderer.on("setting", (e, value) => {
 
 
 //sends settings to settings screen when it's loaded
-ipcRenderer.on("loadSettings", (e) =>
-	ipcRenderer.send("sendSettings",
+ipcRenderer.on("loadSettings", (e, id) =>
+	ipcRenderer.sendTo(id, "sendSettings",
 		{
 			"resolution": resolution,
 			"hilliness": hilliness,
 			"baseHumidity": baseHumidity,
 			"seaLevel": seaLevel
-		}));
+}));
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, value) => {
