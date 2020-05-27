@@ -30,7 +30,7 @@ app.on('ready', () => {
 					label: locale.generate,
 					accelerator: 'CmdOrCtrl+G',
 					click() {
-						mainWindow.webContents.send("shortcut", ["generate"]);
+						mainWindow.webContents.send("shortcut", "generate");
 					}
 				},
 				{
@@ -53,21 +53,21 @@ app.on('ready', () => {
 					label: locale.standardDraw,
 					accelerator: 'CmdOrCtrl+1',
 					click() {
-						mainWindow.webContents.send("shortcut", ["draw", "normal"]);
+						mainWindow.webContents.send("shortcut", "draw", "normal");
 					}
 				},
 				{
 					label: locale.heightmap,
 					accelerator: 'CmdOrCtrl+2',
 					click() {
-						mainWindow.webContents.send("shortcut", ["draw", "heightmap"]);
+						mainWindow.webContents.send("shortcut", "draw", "heightmap");
 					}
 				},
 				{
 					label: locale.humidity,
 					accelerator: 'CmdOrCtrl+3',
 					click() {
-						mainWindow.webContents.send("shortcut", ["draw", "humidity"]);
+						mainWindow.webContents.send("shortcut", "draw", "humidity");
 					}
 				},
 				{ type: 'separator' },
@@ -108,8 +108,8 @@ app.on('ready', () => {
 var menuTemplate;
 
 //Detects settings and sends it to main window
-ipcMain.on("setting", (e, value) => {
-	mainWindow.webContents.send("setting", value);
+ipcMain.on("setting", (e, ...args) => {
+	mainWindow.webContents.send("setting", args);
 });
 
 //info window
@@ -192,7 +192,7 @@ if (process.platform == 'darwin') {
 
 //sets locale object from JSON
 function getLocaleObject(src = app.getLocale()){
-	const fs = require('fs')
+	const fs = require('fs');
 	if (fs.existsSync(`./locales/${src}.json`)){
 		return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
 	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){
@@ -208,5 +208,5 @@ function getLocaleObject(src = app.getLocale()){
 
 //sends locale to translate.js
 ipcMain.handle('getLang', async(e, language) => {
-	return getLocaleObject(language)
+	return getLocaleObject(language);
 });

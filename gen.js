@@ -1,5 +1,4 @@
-const { ipcRenderer } = require("electron"),
-	{ Perlin2 } = require('tumult');
+const { ipcRenderer } = require("electron");
 
 //these are the parameters of the terrain generation
 var resolution = 256, //resolution of terrain
@@ -23,32 +22,21 @@ function incline(base = 0, slope = hilliness) {
 var lastCall;
 
 //detects setting change from the settings window and applies it
-ipcRenderer.on("setting", (e, value) => {
-	let newValue = parseInt(value[1]);
-	switch (value[0]) {
-		case "resolution":
-			resolution = newValue;
-			break;
-		case "hilliness":
-			hilliness = newValue;
-			break;
-		case "seaLevel":
-			seaLevel = newValue;
+ipcRenderer.on("setting", (e, args) => {
+	let newValue = parseInt(args[1]);
 
-			let drawDelay = Math.round(elevation.length / 2.9);
+	global[args[0]] = newValue; //applies new value
 
-			//prevents redrawing from happening too often as it slows things down
-			if (new Date() - lastCall > drawDelay || !lastCall) {
-				draw();
-				lastCall = new Date();
-			}
-			break;
-		case "baseHumidity":
-			baseHumidity = newValue;
-			break;
+	if(args[0] == "seaLevel"){
+		let drawDelay = Math.round(elevation.length / 2.9);
+
+		//prevents redrawing from happening too often as it slows things down
+		if (new Date() - lastCall > drawDelay || !lastCall) {
+			draw();
+			lastCall = new Date();
+		}	
 	}
 });
-
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, id) =>
@@ -61,13 +49,13 @@ ipcRenderer.on("loadSettings", (e, id) =>
 }));
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
-ipcRenderer.on("shortcut", (e, value) => {
-	switch (value[0]) {
+ipcRenderer.on("shortcut", (e, ...args) => {
+	switch (args[0]) {
 		case "generate":
 			generate();
 			break;
 		case "draw":
-			draw(value[1]);
+			draw(args[1]);
 			break;
 	}
 });
@@ -116,6 +104,8 @@ function polygon() {
 //heightmap -- generates 2d arrays using perlin noise
 function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
+	const {Perlin2} = require('tumult');
+
 	const small = 0.03 * scale;
 
 	//creates new heightmap from perlin noise
@@ -156,7 +146,7 @@ function draw(mode = drawMode) {
 
 	const canvas = document.getElementById('terrainbox'),
 		ctx = canvas.getContext('2d'),
-		biomes = require('./biomes.json')
+		biomes = require('./biomes.json');
 
 	//HD
 	canvas.width = 1200;
@@ -208,7 +198,7 @@ function draw(mode = drawMode) {
 					break;
 				case "heightmap":
 				case "elevation":
-					var lightLevel = (elevation[x][y] + 500) / 7;
+					var lightLevel = (elevation[x][y] + 1000) / 11;
 					ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
 					break;
 				case "humidity":

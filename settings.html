@@ -32,9 +32,8 @@
 
 		//detects the change in setting
 		function settingsSet(setting) {
-			var value = [setting, document.getElementById(setting).value];
-			ipcRenderer.send("setting", value);
-		};
+			ipcRenderer.send("setting", setting, document.getElementById(setting).value);
+		}
 
 		//resets settings to their default value
 		function reset() {
