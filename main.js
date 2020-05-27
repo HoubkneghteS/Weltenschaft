@@ -4,6 +4,9 @@ var mainWindow, infoWindow, settingsWindow; //window setup
 
 var locale;
 
+//create menu template
+var menuTemplate;
+
 //startup functions
 app.on('ready', () => {
 
@@ -79,6 +82,24 @@ app.on('ready', () => {
 		}
 	];
 
+	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
+
+	createMainWindow();
+
+	//quits all windows when closed
+	mainWindow.on('close', () => {
+		app.quit();
+	});
+});
+
+//Detects settings and sends it to main window
+ipcMain.on("setting", (e, ...args) => {
+	mainWindow.webContents.send("setting", args);
+});
+
+//main window
+function createMainWindow() {
+
 	mainWindow = new BrowserWindow({
 		title: `Weltenschaft ${app.getVersion()}`,
 		minWidth: 642,
@@ -96,21 +117,7 @@ app.on('ready', () => {
 
 	mainWindow.loadFile('main.html');
 
-	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
-
-	//quits all windows when closed
-	mainWindow.on('close', () => {
-		app.quit();
-	});
-});
-
-//create menu template
-var menuTemplate;
-
-//Detects settings and sends it to main window
-ipcMain.on("setting", (e, ...args) => {
-	mainWindow.webContents.send("setting", args);
-});
+}
 
 //info window
 function createInfoWindow() {
