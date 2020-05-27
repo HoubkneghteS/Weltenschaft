@@ -207,6 +207,4 @@ function getLocaleObject(src = app.getLocale()){
 }
 
 //sends locale to translate.js
-ipcMain.handle('getLang', async(e, language) => {
-	return getLocaleObject(language);
-});
+ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));
