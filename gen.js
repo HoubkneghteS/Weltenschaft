@@ -123,6 +123,9 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 //Generate -- generates terrain
 function generate(seed) {
+
+	console.time("generate"); //starts timer
+
 	//softcapping resolution at 512
 	if (resolution > 512) console.warn("Warning - map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
@@ -139,6 +142,8 @@ function generate(seed) {
 
 	//draws terrain
 	draw();
+
+	console.timeEnd("generate"); //stops timer
 }
 
 //Draw -- draws terrain to canvas 
