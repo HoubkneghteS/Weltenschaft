@@ -107,10 +107,6 @@ function draw(mode = drawMode) {
 		ctx = canvas.getContext('2d'),
 		biomes = require('./biomes.json');
 
-	//HD
-	canvas.width = 1200;
-	canvas.height = 900;
-
 	drawMode = mode || "normal"; //sets the draw mode to the input if given
 
 	const { width, height } = canvas;
