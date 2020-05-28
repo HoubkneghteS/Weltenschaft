@@ -14,11 +14,6 @@ var seaLevel = 0;
 
 var drawMode;
 
-//Incline -- inclines by a random value
-function incline(base = 0, slope = hilliness) {
-	return base + (Math.random() * slope - (slope / 2));
-}
-
 var lastCall;
 
 //detects setting change from the settings window and applies it
@@ -59,47 +54,6 @@ ipcRenderer.on("shortcut", (e, ...args) => {
 			break;
 	}
 });
-
-//P O L Y G O N S
-function poly(array, base = 0, slope = hilliness) {
-
-	//hardcapping resolution at 1024
-	if (resolution > 1024) resolution = 1024
-
-	for (let i = 0; i, i < resolution; i++) {
-		array[i] = [];
-	}
-	array[0][0] = incline(base, slope / 3);
-	for (let i = 1; i < resolution; i++) {
-		array[0][i] = incline(array[0][i - 1], slope);
-	}
-	if (Math.floor(Math.random() * 2) == 0) {
-		for (let i = 1; i < resolution; i++) {
-			array[i][0] = incline(array[i - 1][0], slope);
-			for (let j = 1; j < resolution; j++) {
-				array[i][j] = incline(array[i][j - 1] ^ array[i - 1][j] / (Math.random() * 100), slope);
-			}
-		}
-	} else {
-		for (let i = 1; i < resolution; i++) {
-			array[i][0] = incline(array[i - 1][0], slope);
-			for (let j = 1; j < resolution; j++) {
-				array[i][j] = incline(array[i][j - 1] * array[i - 1][j] / (Math.random() * 100), slope);
-			}
-		}
-	}
-}
-
-function polygon() {
-
-	poly(elevation);
-	poly(humidity, baseHumidity, 60);
-
-	seaLevel = 0
-
-	draw();
-	console.log("Hail Sierpinski")
-}
 
 //heightmap -- generates 2d arrays using perlin noise
 function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
