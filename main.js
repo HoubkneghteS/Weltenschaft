@@ -200,11 +200,13 @@ if (process.platform == 'darwin') {
 //sets locale object from JSON
 function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
-	if (fs.existsSync(`./locales/${src}.json`)){
-		return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
-	}else if(fs.existsSync(`./resources/app/locales/${src}.json`)){
-		return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
-	}else if(fs.existsSync(`./locales/en.json`)){
+
+	//searches places where the file could be
+	if (fs.existsSync(`./locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
+	if (fs.existsSync(`./resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
+
+	//if lang.json does not exist use english as default
+	if (fs.existsSync(`./locales/en.json`)){
 		console.warn(`Locale for language: ${src} not detected - using English`);
 		return JSON.parse(fs.readFileSync(`./locales/en.json`));
 	}else{
