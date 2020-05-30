@@ -151,7 +151,6 @@ function createInfoWindow() {
 	infoWindow = new BrowserWindow({...windowDefaults,
 		title: locale.info,
 		fullscreenable: false,
-		show: false,
 		resizable: false,
 		autoHideMenuBar: true,
 	});
@@ -185,7 +184,6 @@ function createSettingsWindow() {
 	settingsWindow = new BrowserWindow({...windowDefaults,
 		title: locale.settings,
 		fullscreenable: false,
-		show: false,
 		resizable: false,
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
