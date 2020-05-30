@@ -1,7 +1,5 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
-var mainWindow, infoWindow, settingsWindow; //window setup
-
 var locale,
 	menuTemplate;
 
@@ -115,17 +113,25 @@ function getLocaleObject(src = app.getLocale()){
 
 /* WINDOWS */
 
+var mainWindow, infoWindow, settingsWindow; //window setup
+
+const windowDefaults = {
+	width: 375,
+	height: 500,
+	show: false,
+	webPreferences: {
+		nodeIntegration: true,
+	}
+};
+
 //main window
 function createMainWindow() {
 
-	mainWindow = new BrowserWindow({
+	mainWindow = new BrowserWindow({...windowDefaults,
 		title: `Weltenschaft ${app.getVersion()}`,
 		minWidth: 642,
 		minHeight: 600,
-		show: false,
-		webPreferences: {
-			nodeIntegration: true,
-		}
+		width: 750,
 	});
 
 	//delays showing
@@ -134,7 +140,6 @@ function createMainWindow() {
 	});
 
 	mainWindow.loadFile('main.html');
-
 }
 
 //info window
@@ -142,17 +147,12 @@ function createInfoWindow() {
 
 	if (infoWindow) return; //blocks multiple from being created
 
-	infoWindow = new BrowserWindow({
+	infoWindow = new BrowserWindow({...windowDefaults,
 		title: locale.info,
-		width: 375,
-		height: 500,
 		fullscreenable: false,
 		show: false,
 		resizable: false,
 		autoHideMenuBar: true,
-		webPreferences: {
-			nodeIntegration: true,
-		}
 	});
 
 	//delays showing
@@ -181,18 +181,13 @@ function createSettingsWindow() {
 
 	if (settingsWindow) return; //blocks multiple from being created
 
-	settingsWindow = new BrowserWindow({
+	settingsWindow = new BrowserWindow({...windowDefaults,
 		title: locale.settings,
-		width: 375,
-		height: 500,
 		fullscreenable: false,
 		show: false,
 		resizable: false,
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
-		webPreferences: {
-			nodeIntegration: true,
-		}
 	});
 
 	//delays showing
