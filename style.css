@@ -41,6 +41,10 @@ hr{
 	user-select: none;
 }
 
+img.unselectable {
+	pointer-events: none;
+}
+
 .button-container {
 	width:650px;
 }

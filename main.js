@@ -151,6 +151,7 @@ function createInfoWindow() {
 		fullscreenable: false,
 		resizable: false,
 		autoHideMenuBar: true,
+		parent: mainWindow, //always shows on top of main window
 	});
 
 	//delays showing
