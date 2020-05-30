@@ -118,6 +118,7 @@ var mainWindow, infoWindow, settingsWindow; //window setup
 const windowDefaults = {
 	width: 375,
 	height: 500,
+	backgroundColor: "#101010",
 	show: false,
 	webPreferences: {
 		nodeIntegration: true,
