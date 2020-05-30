@@ -111,9 +111,6 @@ function draw(mode = drawMode) {
 
 	const { width, height } = canvas;
 
-	//clears previous terrain
-	ctx.clearRect(0, 0, width, height);
-
 	let r = elevation.length;
 
 	//draws terrain
@@ -152,17 +149,14 @@ function draw(mode = drawMode) {
 					}
 					break;
 				case "heightmap":
-				case "elevation":
 					var lightLevel = (elevation[x][y] + 1000) / 11;
 					ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
 					break;
 				case "humidity":
-					if (elevation[x][y] > seaLevel) {
-						var lightLevel = (humidity[x][y] + 100) / 2;
-					} else {
-						//undersea is always blue
-						var lightLevel = '256';
-					}
+					var lightLevel = (elevation[x][y] > seaLevel)
+						? (humidity[x][y] + 100) / 2
+						: 256; //undersea is always blue
+
 					ctx.fillStyle = `rgb(0, 0, ${lightLevel})`;
 					break;
 			}
