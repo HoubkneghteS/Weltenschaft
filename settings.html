@@ -23,19 +23,16 @@
 	<script type="text/javascript">
 		const { ipcRenderer } = require("electron");
 
-		//loads settings from gen.js when sent and applies them to sliders
 		ipcRenderer.on("sendSettings", (e, value) => {
 			for (let key in value) {
 				document.getElementById(key).value = value[key];
 			}
 		});
 
-		//detects the change in setting
 		function settingsSet(setting) {
 			ipcRenderer.send("setting", setting, document.getElementById(setting).value);
 		}
 
-		//resets settings to their default value
 		function reset() {
 			let value = {
 				"resolution": 256,

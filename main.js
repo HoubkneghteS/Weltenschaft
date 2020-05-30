@@ -3,7 +3,6 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 var locale,
 	menuTemplate;
 
-//startup functions
 app.on('ready', () => {
 
 	locale = getLocaleObject(); //sets locale from translate.js
@@ -84,16 +83,14 @@ app.on('ready', () => {
 
 });
 
-//mac compatibility
+//mac menu compatibility
 if (process.platform == 'darwin') {
 	menuTemplate.unshift({});
 }
 
-//sets locale object from JSON
 function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
 
-	//searches places where the file could be
 	if (fs.existsSync(`./locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
 	if (fs.existsSync(`./resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
 
@@ -106,7 +103,7 @@ function getLocaleObject(src = app.getLocale()){
 
 /* WINDOWS */
 
-var mainWindow, infoWindow, settingsWindow; //window setup
+var mainWindow, infoWindow, settingsWindow;
 
 const windowDefaults = {
 	width: 375,
@@ -118,7 +115,6 @@ const windowDefaults = {
 	}
 };
 
-//main window
 function createMainWindow() {
 
 	mainWindow = new BrowserWindow({...windowDefaults,
@@ -128,7 +124,6 @@ function createMainWindow() {
 		width: 750,
 	});
 
-	//delays showing
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
 	});
@@ -141,7 +136,6 @@ function createMainWindow() {
 	});
 }
 
-//info window
 function createInfoWindow() {
 
 	if (infoWindow) return; //blocks multiple from being created
@@ -159,10 +153,8 @@ function createInfoWindow() {
 		infoWindow.show();
 	});
 
-	// Load html into window
 	infoWindow.loadFile('info.html');
 
-	//clears memory when closed
 	infoWindow.on('close', () => {
 		infoWindow = null;
 	});
@@ -175,7 +167,6 @@ function createInfoWindow() {
 	});
 }
 
-//settings window
 function createSettingsWindow() {
 
 	if (settingsWindow) return; //blocks multiple from being created
@@ -188,16 +179,13 @@ function createSettingsWindow() {
 		parent: mainWindow, //always shows on top of main window
 	});
 
-	//delays showing
 	settingsWindow.once('ready-to-show', () => {
 		settingsWindow.show();
 		mainWindow.webContents.send("loadSettings", settingsWindow.webContents.id);
 	})
 
-	// Load html into window
 	settingsWindow.loadFile('settings.html');
 
-	//clears memory when closed
 	settingsWindow.on('close', () => {
 		settingsWindow = null;
 	});
@@ -210,5 +198,4 @@ ipcMain.on("setting", (e, ...args) => {
 	mainWindow.webContents.send("setting", args);
 });
 
-//sends locale to translate.js
 ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));

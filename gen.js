@@ -1,14 +1,13 @@
 const { ipcRenderer } = require("electron");
 
-//these are the parameters of the terrain generation
-var resolution = 256, //resolution of terrain
-	hilliness = 30, //hilliness of the terrain
-	baseHumidity = 50, //base humidity for the biomes
-	biomeScale = 155, //size for the biomes
-	landScale = 100; //size for the land
+var resolution = 256,
+	hilliness = 30,
+	baseHumidity = 50,
+	biomeScale = 155,
+	landScale = 100;
 
-var elevation = [], //elevation heightmap
-	humidity = []; //humidity heightmap
+var elevation = [],
+	humidity = [];
 
 var seaLevel = 0;
 
@@ -16,17 +15,13 @@ var drawMode;
 
 var lastCall;
 
-//heightmap -- generates 2d arrays using perlin noise
-function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
+function createHeightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
 	const {Perlin2} = require('tumult');
 
-	const small = 0.03 * scale;
+	const small = 0.03 * scale,
+		map = new Perlin2(seed);
 
-	//creates new heightmap from perlin noise
-	const map = new Perlin2(seed);
-
-	//etches perlin noise value onto the heightmap array in rows
 	for (let x = 0; x < resolution; x++) {
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
@@ -36,15 +31,13 @@ function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 	}
 }
 
-//Generate -- generates terrain
 function generate(seed) {
 
-	console.time("generate"); //starts timer
+	console.time("generate");
 
 	//softcapping resolution at 512
 	if (resolution > 512) console.warn("Warning - map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
-	//limiting scales
 	if (landScale < 50) landScale = 50;
 	if (biomeScale < 50) biomeScale = 50;
 
@@ -52,36 +45,32 @@ function generate(seed) {
 	elevation = [];
 	humidity = [];
 
-	heightmap(elevation, 0, hilliness, landScale, seed); //generates heightmap 
-	heightmap(humidity, baseHumidity, 6, biomeScale, seed); //generates humidity map
+	createHeightmap(elevation, 0, hilliness, landScale, seed);  
+	createHeightmap(humidity, baseHumidity, 6, biomeScale, seed);
 
-	//draws terrain
 	draw();
 
-	console.timeEnd("generate"); //stops timer
+	console.timeEnd("generate");
 }
 
-//Draw -- draws terrain to canvas 
 function draw(mode = drawMode) {
 
 	const canvas = document.getElementById('terrainbox'),
 		ctx = canvas.getContext('2d'),
 		biomes = require('./biomes.json');
 
-	drawMode = mode || "normal"; //sets the draw mode to the input if given
+	drawMode = mode || "normal";
 
 	const { width, height } = canvas;
 
 	let r = elevation.length;
 
-	//draws terrain
 	for (let x = 0; x < r; x++) {
 		for (let y = 0; y < r; y++) {
 
 			switch (mode) {
 				default:
 				case "normal":
-					//default fill colors
 					if (elevation[x][y] > seaLevel) {
 						ctx.fillStyle =
 							elevation[x][y] > 1250 ? biomes.peak
@@ -100,7 +89,6 @@ function draw(mode = drawMode) {
 									humidity[x][y] > 0 ? biomes.desert
 									: biomes.canyon
 									: biomes.desertabyss
-						//filling in water
 					} else if (elevation[x][y] > seaLevel - 700) {
 						ctx.fillStyle = biomes.water;
 					} else if (elevation[x][y] > seaLevel - 1250) {
@@ -122,7 +110,6 @@ function draw(mode = drawMode) {
 					break;
 			}
 
-			//draws pixel
 			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 		}
 	}
