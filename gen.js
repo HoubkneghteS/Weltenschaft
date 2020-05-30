@@ -16,45 +16,6 @@ var drawMode;
 
 var lastCall;
 
-//detects setting change from the settings window and applies it
-ipcRenderer.on("setting", (e, args) => {
-	let newValue = parseInt(args[1]);
-
-	global[args[0]] = newValue; //applies new value
-
-	if(args[0] == "seaLevel"){
-		let drawDelay = Math.round(elevation.length / 2.9);
-
-		//prevents redrawing from happening too often as it slows things down
-		if (new Date() - lastCall > drawDelay || !lastCall) {
-			draw();
-			lastCall = new Date();
-		}	
-	}
-});
-
-//sends settings to settings screen when it's loaded
-ipcRenderer.on("loadSettings", (e, id) =>
-	ipcRenderer.sendTo(id, "sendSettings",
-		{
-			"resolution": resolution,
-			"hilliness": hilliness,
-			"baseHumidity": baseHumidity,
-			"seaLevel": seaLevel
-}));
-
-//keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
-ipcRenderer.on("shortcut", (e, ...args) => {
-	switch (args[0]) {
-		case "generate":
-			generate();
-			break;
-		case "draw":
-			draw(args[1]);
-			break;
-	}
-});
-
 //heightmap -- generates 2d arrays using perlin noise
 function heightmap(array, base = 0, slope = 20, scale = 100, seed) {
 
@@ -172,3 +133,44 @@ function draw(mode = drawMode) {
 		ctx.fillText("nice", 69, 69);
 	}
 }
+
+/*INTERPROCESS COMMUNICATION*/
+
+//detects setting change from the settings window and applies it
+ipcRenderer.on("setting", (e, args) => {
+	let newValue = parseInt(args[1]);
+
+	global[args[0]] = newValue; //applies new value
+
+	if(args[0] == "seaLevel"){
+		let drawDelay = Math.round(elevation.length / 2.9);
+
+		//prevents redrawing from happening too often as it slows things down
+		if (new Date() - lastCall > drawDelay || !lastCall) {
+			draw();
+			lastCall = new Date();
+		}	
+	}
+});
+
+//sends settings to settings screen when it's loaded
+ipcRenderer.on("loadSettings", (e, winID) =>
+	ipcRenderer.sendTo(winID, "sendSettings",
+		{
+			"resolution": resolution,
+			"hilliness": hilliness,
+			"baseHumidity": baseHumidity,
+			"seaLevel": seaLevel
+}));
+
+//keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
+ipcRenderer.on("shortcut", (e, ...args) => {
+	switch (args[0]) {
+		case "generate":
+			generate();
+			break;
+		case "draw":
+			draw(args[1]);
+			break;
+	}
+});
