@@ -1,4 +1,4 @@
-async function setLang(language) {
+(async function setLang(language) {
 	const {ipcRenderer} = require('electron');
 	const locale = await ipcRenderer.invoke('getLang', language);
 	document.getElementsByTagName("html").lang = language; //sets content language to whatever language is being used
@@ -9,4 +9,4 @@ async function setLang(language) {
 			document.getElementById(string).innerHTML = locale[string];
 		}
 	}
-}
+})()
