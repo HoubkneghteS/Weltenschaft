@@ -110,6 +110,8 @@ const windowDefaults = {
 	height: 500,
 	backgroundColor: "#101010",
 	show: false,
+	fullscreenable: false,
+	resizable: false,
 	webPreferences: {
 		nodeIntegration: true,
 	}
@@ -119,6 +121,8 @@ function createMainWindow() {
 
 	mainWindow = new BrowserWindow({...windowDefaults,
 		title: `Weltenschaft ${app.getVersion()}`,
+		fullscreenable: true,
+		resizable: true,
 		minWidth: 642,
 		minHeight: 600,
 		width: 750,
@@ -142,13 +146,10 @@ function createInfoWindow() {
 
 	infoWindow = new BrowserWindow({...windowDefaults,
 		title: locale.info,
-		fullscreenable: false,
-		resizable: false,
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
 	});
 
-	//delays showing
 	infoWindow.once('ready-to-show', () => {
 		infoWindow.show();
 	});
@@ -173,8 +174,6 @@ function createSettingsWindow() {
 
 	settingsWindow = new BrowserWindow({...windowDefaults,
 		title: locale.settings,
-		fullscreenable: false,
-		resizable: false,
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
 	});
