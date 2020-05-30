@@ -82,10 +82,6 @@ app.on('ready', () => {
 
 	createMainWindow();
 
-	//quits all windows when closed
-	mainWindow.on('close', () => {
-		app.quit();
-	});
 });
 
 //mac compatibility
@@ -140,7 +136,12 @@ function createMainWindow() {
 		mainWindow.show();
 	});
 
-	mainWindow.loadFile('main.html');
+	mainWindow.loadFile('main.html');\
+	
+	//quits all windows when closed
+	mainWindow.on('close', () => {
+		app.quit();
+	});
 }
 
 //info window
