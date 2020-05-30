@@ -1,6 +1,6 @@
 :root {
-	--mid-blue: #1849A1;
-	--dark-blue: #05193D;
+	--ui-light: #1849A1;
+	--ui-dark: #05193D;
 }
 
 body {
@@ -39,7 +39,7 @@ h2{
 }
 
 hr{
-	border:1px solid var(--mid-blue); 
+	border:1px solid var(--ui-light); 
 }
 
 .unselectable {
@@ -62,15 +62,15 @@ button{
 
 button, .slider::-webkit-slider-thumb{
 	border-radius: 5px;
-	border: 1px solid var(--dark-blue);
+	border: 1px solid var(--ui-dark);
 	transition-duration: 0.3s;
-	background:var(--mid-blue);
+	background:var(--ui-light);
 	outline: none;
 }
 
 /*darkens buttons when hovered*/
 .slider::-webkit-slider-thumb:hover, button:hover{
-	background: var(--dark-blue);
+	background: var(--ui-dark);
 	cursor: pointer;
 }
 
