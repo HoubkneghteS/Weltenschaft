@@ -1,21 +1,22 @@
 const { ipcRenderer } = require("electron");
 
-var resolution = 256,
-	hilliness = 30,
-	baseHumidity = 50,
-	biomeScale = 155,
-	landScale = 100;
+const params = {
+	resolution: 256,
+	hilliness: 30,
+	baseHumidity: 50,
+	biomeScale: 155,
+	landScale: 100,
+	drawMode: 'normal'
+};
 
 var elevation = [],
 	humidity = [];
 
 var seaLevel = 0;
 
-var drawMode;
-
 var lastCall;
 
-function createHeightmap(array, base = 0, slope = 20, scale = 100, seed) {
+function createHeightmap(array, {base = 0, amplitude = 6, scale = 100, resolution = 256} = {}, seed) {
 
 	const {Perlin2} = require('tumult');
 
@@ -25,18 +26,18 @@ function createHeightmap(array, base = 0, slope = 20, scale = 100, seed) {
 	for (let x = 0; x < resolution; x++) {
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
-			row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * slope);
+			row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude);
 		}
 		array.push(row);
 	}
 }
 
-function generate(seed) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} = params, seed) {
 
 	console.time("generate");
 
 	//softcapping resolution at 512
-	if (resolution > 512) console.warn("Warning - map sizes above 512 not officially supported, any bugs related to this may not be fixed");
+	if (resolution > 512) console.warn("Map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
 	if (landScale < 50) landScale = 50;
 	if (biomeScale < 50) biomeScale = 50;
@@ -45,21 +46,21 @@ function generate(seed) {
 	elevation = [];
 	humidity = [];
 
-	createHeightmap(elevation, 0, hilliness, landScale, seed);  
-	createHeightmap(humidity, baseHumidity, 6, biomeScale, seed);
+	createHeightmap(elevation, {amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
+	createHeightmap(humidity, {base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
 	draw();
 
 	console.timeEnd("generate");
 }
 
-function draw(mode = drawMode) {
+function draw(mode = params.drawMode) {
 
 	const canvas = document.getElementById('terrainbox'),
 		ctx = canvas.getContext('2d'),
 		biomes = require('./biomes.json');
 
-	drawMode = mode || "normal";
+	params.drawMode = mode || "normal";
 
 	const { width, height } = canvas;
 
@@ -115,7 +116,7 @@ function draw(mode = drawMode) {
 	}
 
 	//nice ;)
-	if (baseHumidity == 69) {
+	if (params.baseHumidity == 69) {
 		ctx.fillStyle = ("black");
 		ctx.fillText("nice", 69, 69);
 	}
@@ -127,8 +128,6 @@ function draw(mode = drawMode) {
 ipcRenderer.on("setting", (e, args) => {
 	let newValue = parseInt(args[1]);
 
-	global[args[0]] = newValue; //applies new value
-
 	if(args[0] == "seaLevel"){
 		let drawDelay = Math.round(elevation.length / 2.9);
 
@@ -136,19 +135,22 @@ ipcRenderer.on("setting", (e, args) => {
 		if (new Date() - lastCall > drawDelay || !lastCall) {
 			draw();
 			lastCall = new Date();
-		}	
-	}
+		}
+		seaLevel = newValue;	
+	} else params[args[0]] = newValue;
 });
 
 //sends settings to settings screen when it's loaded
-ipcRenderer.on("loadSettings", (e, winID) =>
+ipcRenderer.on("loadSettings", (e, winID) => {
+
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
-			"resolution": resolution,
-			"hilliness": hilliness,
-			"baseHumidity": baseHumidity,
+			"resolution": params.resolution,
+			"hilliness": params.hilliness,
+			"baseHumidity": params.baseHumidity,
 			"seaLevel": seaLevel
-}));
+		});
+});
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {
