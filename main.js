@@ -69,7 +69,7 @@ app.on('ready', () => {
 					}
 				},
 				{ type: 'separator' },
-      			{
+				{
 					label: locale.fullscreen,
 					role: 'togglefullscreen'
 				}
