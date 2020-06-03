@@ -16,8 +16,9 @@ var seaLevel = 0;
 
 var lastCall;
 
-function createHeightmap(array, {base = 0, amplitude = 6, scale = 100, resolution = 256} = {}, seed) {
+function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256} = {}, seed) {
 
+	var array = [];
 	const {Perlin2} = require('tumult');
 
 	const small = 0.03 * scale,
@@ -30,6 +31,7 @@ function createHeightmap(array, {base = 0, amplitude = 6, scale = 100, resolutio
 		}
 		array.push(row);
 	}
+	return array;
 }
 
 function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} = params, seed) {
@@ -42,12 +44,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	if (landScale < 50) landScale = 50;
 	if (biomeScale < 50) biomeScale = 50;
 
-	//clears existing terrain
-	elevation = [];
-	humidity = [];
-
-	createHeightmap(elevation, {amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
-	createHeightmap(humidity, {base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
+	elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
+	humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
 	draw();
 
@@ -143,11 +141,13 @@ ipcRenderer.on("setting", (e, args) => {
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
 
+	let {resolution, hilliness, baseHumidity} = params;
+
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
-			"resolution": params.resolution,
-			"hilliness": params.hilliness,
-			"baseHumidity": params.baseHumidity,
+			"resolution": resolution,
+			"hilliness": hilliness,
+			"baseHumidity": baseHumidity,
 			"seaLevel": seaLevel
 		});
 });
