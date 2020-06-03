@@ -9,3 +9,6 @@ async function setLang(language) {
 		}
 	}
 }
+
+//is automatically called
+setLang();
