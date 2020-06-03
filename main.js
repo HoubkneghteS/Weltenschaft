@@ -43,7 +43,6 @@ app.on('ready', () => {
 			submenu: [
 				{
 					label: "Debug",
-					accelerator: 'CmdOrCtrl+I',
 					role: "toggleDevTools"
 				},
 				{ type: "separator" },

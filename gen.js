@@ -124,9 +124,10 @@ function draw(mode = params.drawMode) {
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
-	let newValue = parseInt(args[1]);
+	let settingToChange = args[0],
+		newValue = parseInt(args[1]);
 
-	if(args[0] == "seaLevel"){
+	if(settingToChange == "seaLevel"){
 		let drawDelay = Math.round(elevation.length / 2.9);
 
 		//prevents redrawing from happening too often as it slows things down
@@ -135,7 +136,7 @@ ipcRenderer.on("setting", (e, args) => {
 			lastCall = new Date();
 		}
 		seaLevel = newValue;	
-	} else params[args[0]] = newValue;
+	} else params[settingToChange] = newValue;
 });
 
 //sends settings to settings screen when it's loaded
