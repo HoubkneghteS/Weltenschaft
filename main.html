@@ -19,9 +19,10 @@
 		<button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
 		<button id="humidity" onclick="draw('humidity')">Draw Humidity</button>
 	</div>
-	<!--sets canvas resolution-->
+	<!--sets canvas properties-->
 	<script>
-		const canvas = document.getElementById('terrainbox');
+		const canvas = document.getElementById('terrainbox'),
+			ctx = canvas.getContext('2d');
 			canvas.width = 1200;
 			canvas.height = 900;
 	</script>

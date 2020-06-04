@@ -54,9 +54,7 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 
 function draw(mode = params.drawMode) {
 
-	const canvas = document.getElementById('terrainbox'),
-		ctx = canvas.getContext('2d'),
-		biomes = require('./biomes.json');
+	const biomes = require('./biomes.json');
 
 	params.drawMode = mode || "normal";
 
