@@ -5,13 +5,13 @@
 
 body {
 	font-family: verdana;
-	padding:0.3em;
+	padding: 5px;
 	background: #101010;
 	color: WhiteSmoke;
 	overflow: hidden;
 }
 
-canvas{
+#terrainbox{
 	background: #2889FF;
 	width: 600px;
 	height: 450px;
@@ -51,13 +51,18 @@ img.unselectable {
 }
 
 .button-container {
-	width:650px;
+	width:100%;
+	display: flex;
+	justify-content: left;
+	flex-wrap: nowrap;
+	max-width: 600px;
 }
 
 button{
 	font: 13px verdana;
 	color:whitesmoke;
-	padding: 0.5em 1em;
+	margin-right: 5px;
+	padding: 0.5em 1.1em;
 }
 
 button, .slider::-webkit-slider-thumb{
@@ -75,9 +80,9 @@ button, .slider::-webkit-slider-thumb{
 }
 
 /*larger window mode*/
-@media screen and (min-width: 1250px) {
+@media screen and (min-width: 1250px) and (min-height: 975px){
 
-	canvas{
+	#terrainbox{
 		width: 1200px;
 		height: 900px;
 	}
