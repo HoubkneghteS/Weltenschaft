@@ -1,13 +1,14 @@
 :root {
 	--ui-light: #1849A1;
 	--ui-dark: #05193D;
+	--ui-white: #EEE;
 }
 
 body {
 	font-family: verdana;
 	padding: 5px;
 	background: #101010;
-	color: WhiteSmoke;
+	color: var(--ui-white);
 	overflow: hidden;
 }
 
@@ -24,7 +25,7 @@ h2{
 
 .slider {
 	width: 100%;
-	background: whitesmoke;
+	background: var(--ui-white);
 	margin-bottom:10px;
 	outline: none;
 	height:4px;
@@ -60,7 +61,7 @@ img.unselectable {
 
 button{
 	font: 13px verdana;
-	color:whitesmoke;
+	color: var(--ui-white);
 	margin-right: 5px;
 	padding: 0.5em 1.1em;
 }
