@@ -1,12 +1,12 @@
 const { ipcRenderer } = require("electron");
 
 const params = {
-	resolution: 256,
-	hilliness: 30,
-	baseHumidity: 50,
-	biomeScale: 155,
-	landScale: 100,
-	drawMode: 'normal'
+	resolution: 256, //resolution of terrain array (n * n)
+	hilliness: 30, //amplitude of the elevation noise
+	baseHumidity: 50, //baseline for humidity
+	biomeScale: 155, //scale of humidity-based biomes
+	landScale: 100, //scale for landforms
+	drawMode: 'normal' //drawmode - valid values: normal, heightmap, humidity
 };
 
 var elevation = [],
