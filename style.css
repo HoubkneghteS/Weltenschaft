@@ -56,7 +56,7 @@ img.unselectable {
 	display: flex;
 	justify-content: left;
 	flex-wrap: nowrap;
-	max-width: 600px;
+	min-width: 600px;
 }
 
 button{
