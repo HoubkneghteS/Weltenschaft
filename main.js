@@ -1,8 +1,5 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
-var locale,
-	menuTemplate;
-
 app.on('ready', () => {
 
 	locale = getLocaleObject(); //sets locale from translate.js
