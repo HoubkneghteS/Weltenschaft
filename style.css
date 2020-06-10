@@ -14,8 +14,8 @@ body {
 
 #terrainbox{
 	background: #2889FF;
-	width: 600px;
-	height: 450px;
+	max-height: calc(100vh - 75px);
+	max-width: calc(100vw - 27px);
 }
 
 h2{
@@ -80,11 +80,19 @@ button, .slider::-webkit-slider-thumb{
 	cursor: pointer;
 }
 
-/*larger window mode*/
-@media screen and (min-width: 1250px) and (min-height: 975px){
+/*emojis for settings headers*/
+#hillinessHeader::before{
+	content: "⛰️ "
+}
 
-	#terrainbox{
-		width: 1200px;
-		height: 900px;
-	}
+#humidityHeader::before{
+	content: "💧 "
+}
+
+#seaLevelHeader::before{
+	content: "🌊 "
+}
+
+#resolutionHeader::before{
+	content: "🗺️ "
 }

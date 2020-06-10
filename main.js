@@ -120,8 +120,7 @@ function createMainWindow() {
 		fullscreenable: true,
 		resizable: true,
 		minWidth: 642,
-		minHeight: 600,
-		width: 750,
+		minHeight: 605,
 	});
 
 	mainWindow.once('ready-to-show', () => {

@@ -10,13 +10,13 @@
 
 <body class="unselectable">
 	<script src="translate.js"></script>
-	<h2>⛰️ <label for="hilliness" id="hillinessHeader">Hilliness</label></h2>
+	<h2><label for="hilliness" id="hillinessHeader">Hilliness</label></h2>
 	<input type="range" min="15" max="50" class="slider" id="hilliness" onInput="settingsSet('hilliness');">
-	<h2>💧 <label for="baseHumdity" id="humidityHeader">Humidity</label></h2>
+	<h2><label for="baseHumdity" id="humidityHeader">Humidity</label></h2>
 	<input type="range" min="-250" max="250" class="slider" id="baseHumidity" onInput="settingsSet('baseHumidity');">
-	<h2>🌊 <label for="seaLevel" id="seaLevelHeader">Sea Level</label></h2>
+	<h2><label for="seaLevel" id="seaLevelHeader">Sea Level</label></h2>
 	<input type="range" min="-300" max="300" class="slider" id="seaLevel" onInput="settingsSet('seaLevel');">
-	<h2>🗺️ <label for="resolution" id="resolutionHeader">Map Size</label></h2>
+	<h2><label for="resolution" id="resolutionHeader">Map Size</label></h2>
 	<input type="range" min="50" max="300" class="slider" id="resolution" onInput="settingsSet('resolution');">
 	<hr />
 	<button id="resetSettings" onclick="reset();">Reset</button>
