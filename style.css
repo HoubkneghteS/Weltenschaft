@@ -40,7 +40,8 @@ h2{
 }
 
 hr{
-	border:1px solid var(--ui-light); 
+	border:1.5px solid var(--ui-light); 
+	box-shadow: 2px 2px var(--ui-dark);
 }
 
 .unselectable {
@@ -72,6 +73,7 @@ button, .slider::-webkit-slider-thumb{
 	transition-duration: 0.3s;
 	background:var(--ui-light);
 	outline: none;
+	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
 /*darkens buttons when hovered*/
