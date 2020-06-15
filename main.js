@@ -86,15 +86,17 @@ if (process.platform == 'darwin') {
 
 function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
+	
+	const base = __dirname;
 
-	if (fs.existsSync(`./locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./locales/${src}.json`));
-	if (fs.existsSync(`./resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`./resources/app/locales/${src}.json`));
+	if (fs.existsSync(`${base}/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${base}/locales/${src}.json`));
+	if (fs.existsSync(`${base}/resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${base}/resources/app/locales/${src}.json`));
 
 	//if lang.json file does not exist use english as default
 	console.warn(`Locale for language: ${src} not detected - using English`);
 
-	if (fs.existsSync(`./locales/en.json`)) return JSON.parse(fs.readFileSync(`./locales/en.json`));
-	else return JSON.parse(fs.readFileSync(`./resources/app/locales/en.json`));
+	if (fs.existsSync(`${base}/locales/en.json`)) return JSON.parse(fs.readFileSync(`${base}/locales/en.json`));
+	else return JSON.parse(fs.readFileSync(`${base}/resources/app/locales/en.json`));
 }
 
 /* WINDOWS */

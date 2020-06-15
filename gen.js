@@ -118,6 +118,9 @@ function draw(mode = params.drawMode) {
 	}
 }
 
+/* SAVING AND LOADING WORLDS*/
+
+
 /*INTERPROCESS COMMUNICATION*/
 
 //detects setting change from the settings window and applies it
