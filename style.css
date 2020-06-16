@@ -45,6 +45,10 @@ hr{
 	box-shadow: 2px 2px var(--ui-dark);
 }
 
+.width-min{
+	min-width: 600.66px;
+}
+
 .unselectable {
 	user-select: none;
 }
