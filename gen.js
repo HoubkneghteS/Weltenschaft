@@ -33,7 +33,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	return array;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} = params, seed) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -45,6 +45,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 
 	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
 	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
+
+	world.seed = seed;
 
 	draw();
 
