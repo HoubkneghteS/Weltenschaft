@@ -1,4 +1,4 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, powerSaveBlocker } = require("electron");
 
 const params = {
 	resolution: 256, //resolution of terrain array (n * n)
@@ -122,6 +122,18 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
+var savedWorld;
+
+function saveWorld(){
+	savedWorld = {...world};
+}
+
+function loadWorld(){
+	for(key in savedWorld){
+		world[key] = savedWorld[key];
+	}
+	draw();
+}
 
 /*INTERPROCESS COMMUNICATION*/
 
