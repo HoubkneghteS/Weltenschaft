@@ -1,5 +1,3 @@
-const { ipcRenderer, powerSaveBlocker } = require("electron");
-
 const params = {
 	resolution: 256, //resolution of terrain array (n * n)
 	hilliness: 30, //amplitude of the elevation noise
@@ -136,6 +134,8 @@ function loadWorld(){
 }
 
 /*INTERPROCESS COMMUNICATION*/
+
+const { ipcRenderer } = require("electron");
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
