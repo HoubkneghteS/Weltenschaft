@@ -99,7 +99,7 @@ function draw(mode = params.drawMode) {
 					ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
 					break;
 				case "humidity":
-					var lightLevel = (elevation[x][y] > seaLevel)
+					lightLevel = (elevation[x][y] > seaLevel)
 						? (humidity[x][y] + 100) / 2
 						: 256; //undersea is always blue
 

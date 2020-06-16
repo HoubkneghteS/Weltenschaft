@@ -6,7 +6,7 @@
 
 body {
 	font-family: verdana;
-	padding: 5px;
+	margin: 12px;
 	background: #101010;
 	color: var(--ui-white);
 	overflow: hidden;
@@ -14,8 +14,9 @@ body {
 
 #terrainbox{
 	background: #2889FF;
-	max-height: calc(100vh - 75px);
-	max-width: calc(100vw - 27px);
+	max-height: calc(100vh - 73.5px);
+	max-width: calc(100vw - 25px);
+	min-width: 600.66px;
 }
 
 h2{
