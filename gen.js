@@ -9,10 +9,11 @@ const params = {
 	drawMode: 'normal' //drawmode - valid values: normal, heightmap, humidity
 };
 
-var elevation = [],
-	humidity = [];
-
-var seaLevel = 0;
+const world = {
+	elevation: [],
+	humidity: [],
+	seaLevel: 0
+};
 
 var lastCall;
 
@@ -44,8 +45,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	if (landScale < 50) landScale = 50;
 	if (biomeScale < 50) biomeScale = 50;
 
-	elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
-	humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
+	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
+	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
 	draw();
 
@@ -54,7 +55,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 
 function draw(mode = params.drawMode) {
 
-	const biomes = require('./biomes.json');
+	const biomes = require('./biomes.json'),
+		{elevation, humidity, seaLevel} = world;
 
 	params.drawMode = mode || "normal";
 
@@ -129,14 +131,14 @@ ipcRenderer.on("setting", (e, args) => {
 		newValue = parseInt(args[1]);
 
 	if(settingToChange == "seaLevel"){
-		let drawDelay = Math.round(elevation.length / 2.9);
+		let drawDelay = Math.round(world.elevation.length / 2.9);
 
 		//prevents redrawing from happening too often as it slows things down
 		if (new Date() - lastCall > drawDelay || !lastCall) {
 			draw();
 			lastCall = new Date();
 		}
-		seaLevel = newValue;	
+		world.seaLevel = newValue;	
 	} else params[settingToChange] = newValue;
 });
 
@@ -150,7 +152,7 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 			"resolution": resolution,
 			"hilliness": hilliness,
 			"baseHumidity": baseHumidity,
-			"seaLevel": seaLevel
+			"seaLevel": world.seaLevel
 		});
 });
 
