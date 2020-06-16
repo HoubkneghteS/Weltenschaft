@@ -9,5 +9,5 @@ async function setLang(language) {
 	}
 }
 
-//is automatically called
+//is automatically called on page load
 setLang();
