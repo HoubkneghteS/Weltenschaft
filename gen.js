@@ -149,11 +149,11 @@ async function loadWorld(){
 		console.warn("No sea level detected, defaulting to 0");
 		world.seaLevel = 0;
 	}
-	if(!world.humidity){
+	if(!world.humidity || !Array.isArray(world.humidity)){
 		console.warn("No humidity heightmap detected, defaulting to seed");
 		world.humidity = createHeightmap({ resolution: world.elevation.length }, world.seed)
 	}
-	if(!world.elevation){
+	if(!world.elevation || !Array.isArray(world.elevation)){
 		console.error("World data irreversably corrupted");
 		return;
 	}
