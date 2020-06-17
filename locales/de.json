@@ -15,5 +15,8 @@
 	"file":"Datei",
 	"view":"Ansicht",
 	"exit":"Schließen",
+	"save":"Speichern",
+	"load":"Laden",
+	"filetype":"Weltenschaft-Welt",
 	"fullscreen": "Vollbild umschalten"
 }

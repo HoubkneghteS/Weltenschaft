@@ -7,7 +7,7 @@ const params = {
 	drawMode: 'normal' //drawmode - valid values: normal, heightmap, humidity
 };
 
-const world = {
+var world = {
 	elevation: [],
 	humidity: [],
 	seaLevel: 0
@@ -122,15 +122,15 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-const savedWorld = {};
-
 function saveWorld(){
-	for(key in world){
-		savedWorld[key] = world[key];
-	}
+	ipcRenderer.send("saveWorld", world);
 }
 
-function loadWorld(){
+async function loadWorld(){
+	const savedWorld = await ipcRenderer.invoke("loadWorld");
+
+	world = {};
+
 	for(key in savedWorld){
 		world[key] = savedWorld[key];
 	}
@@ -180,6 +180,12 @@ ipcRenderer.on("shortcut", (e, ...args) => {
 			break;
 		case "draw":
 			draw(args[1]);
+			break;
+		case "save":
+			saveWorld();
+			break;
+		case "load":
+			loadWorld();
 			break;
 	}
 });

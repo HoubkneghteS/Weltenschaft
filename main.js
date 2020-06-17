@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
 
 app.on('ready', () => {
 
@@ -8,13 +8,6 @@ app.on('ready', () => {
 		{
 			label: locale.file,
 			submenu: [
-				{
-					label: locale.info,
-					accelerator: "F1",
-					click() {
-						createInfoWindow();
-					}
-				},
 				{
 					label: locale.settings,
 					accelerator: 'CmdOrCtrl+E',
@@ -30,6 +23,21 @@ app.on('ready', () => {
 					}
 				},
 				{
+					label: locale.save,
+					accelerator: 'CmdOrCtrl+S',
+					click() {
+						mainWindow.webContents.send("shortcut", "save");
+					}
+				},
+				{
+					label: locale.load,
+					accelerator: 'CmdOrCtrl+O',
+					click() {
+						mainWindow.webContents.send("shortcut", "load");
+					}
+				},
+				{ type: 'separator' },
+				{
 					accelerator: 'CmdOrCtrl+Q',
 					label: locale.exit,
 					role: "quit"
@@ -42,6 +50,13 @@ app.on('ready', () => {
 				{
 					label: "Debug",
 					role: "toggleDevTools"
+				},
+				{
+					label: locale.info,
+					accelerator: "F1",
+					click() {
+						createInfoWindow();
+					}
 				},
 				{ type: "separator" },
 				{
@@ -197,3 +212,29 @@ ipcMain.on("setting", (e, ...args) => {
 });
 
 ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));
+
+ipcMain.on("saveWorld", (e, world) => {
+	const fs = require('fs');
+	const path = dialog.showSaveDialogSync(mainWindow, {
+		filters: [
+			{ name: locale.filetype, extensions: ['ws'] }
+		]});
+
+	if (!path) return;
+
+	fs.writeFileSync(path.toString(), JSON.stringify(world));
+});
+
+ipcMain.handle("loadWorld", async (e) => {
+	const fs = require('fs');
+	const path = dialog.showOpenDialogSync(mainWindow, {
+		filters: [
+			{ name: locale.filetype, extensions: ['ws'] }
+		]});
+	
+	if (!path) return;
+
+	const world = await JSON.parse(fs.readFileSync(path.toString()));
+
+	return world;
+});
