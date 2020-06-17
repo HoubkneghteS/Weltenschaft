@@ -46,6 +46,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
 	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
+	if (!world.seaLevel) world.seaLevel = 0;
+
 	world.seed = seed;
 
 	draw();
