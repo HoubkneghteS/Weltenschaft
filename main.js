@@ -103,7 +103,6 @@ if (process.platform == 'darwin') {
 
 function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
-	
 	const base = __dirname;
 
 	if (fs.existsSync(`${base}/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${base}/locales/${src}.json`));
