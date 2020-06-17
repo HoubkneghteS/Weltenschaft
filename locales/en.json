@@ -15,8 +15,8 @@
 	"file":"File",
 	"view":"View",
 	"exit":"Exit",
-	"save":"Save",
-	"load":"Load",
+	"save":"Save World",
+	"load":"Load World",
 	"filetype":"Weltenschaft World",
 	"fullscreen": "Toggle Fullscreen"
 }

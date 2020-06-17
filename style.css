@@ -19,7 +19,6 @@ body {
 	background: #2889FF;
 	max-height: calc(100vh - 73.5px);
 	max-width: calc(100vw - 25px);
-	min-width: 600.66px;
 }
 
 h2{
@@ -48,7 +47,7 @@ hr{
 	box-shadow: 2px 2px var(--ui-dark);
 }
 
-.width-min{
+.wide{
 	min-width: 600.66px;
 }
 
@@ -64,14 +63,14 @@ img.unselectable {
 	width:100%;
 	display: flex;
 	justify-content: left;
-	flex-wrap: nowrap;
-	min-width: 600px;
+	flex-wrap: wrap;
 }
 
 button{
 	font: 13px verdana;
 	color: var(--ui-white);
 	margin-right: 5px;
+	margin-bottom: 5px;
 	padding: 0.5em 1.1em;
 }
 

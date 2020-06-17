@@ -11,13 +11,15 @@
 <body onload="generate()">
 	<script async src="gen.js"></script>
 	<script src="translate.js"></script>
-	<canvas id="terrainbox"></canvas>
-	<hr class="width-min"/>
-	<div class="unselectable button-container">
+	<canvas class="wide" id="terrainbox"></canvas>
+	<hr class="wide"/>
+	<div class="unselectable wide button-container">
 		<button id="generate" onclick="generate()">Generate</button>
 		<button id="standardDraw" onclick="draw('normal')">Draw Regular</button>
 		<button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
 		<button id="humidity" onclick="draw('humidity')">Draw Humidity</button>
+		<button id="save" onclick="saveWorld()">Save</button>
+		<button id="load" onclick="loadWorld('humidity')">Load</button>
 	</div>
 	<!--sets canvas properties-->
 	<script>
