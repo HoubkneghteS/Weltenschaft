@@ -131,6 +131,8 @@ function saveWorld(){
 async function loadWorld(){
 	const savedWorld = await ipcRenderer.invoke("loadWorld");
 
+	if (!savedWorld) return;
+
 	world = {};
 
 	for(key in savedWorld){
