@@ -7,11 +7,7 @@ const params = {
 	drawMode: 'normal' //drawmode - valid values: normal, heightmap, humidity
 };
 
-var world = {
-	elevation: [],
-	humidity: [],
-	seaLevel: 0
-};
+var world = {};
 
 var lastCall;
 
@@ -49,6 +45,9 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	if (!world.seaLevel) world.seaLevel = 0;
 
 	world.seed = seed;
+	world.size = resolution;
+
+	world.structures = {}
 
 	draw();
 
@@ -58,16 +57,14 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 function draw(mode = params.drawMode) {
 
 	const biomes = require('./biomes.json'),
-		{elevation, humidity, seaLevel} = world;
+		{elevation, humidity, seaLevel, size} = world;
 
 	params.drawMode = mode || "normal";
 
 	const { width, height } = canvas;
 
-	let r = elevation.length;
-
-	for (let x = 0; x < r; x++) {
-		for (let y = 0; y < r; y++) {
+	for (let x = 0; x < size; x++) {
+		for (let y = 0; y < size; y++) {
 
 			switch (mode) {
 				default:
@@ -111,7 +108,7 @@ function draw(mode = params.drawMode) {
 					break;
 			}
 
-			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			ctx.fillRect(Math.ceil((width / size) * x), Math.ceil((height / size) * y), Math.ceil(width / size), Math.ceil(height / size));
 		}
 	}
 
@@ -138,6 +135,12 @@ async function loadWorld(){
 	for(key in savedWorld){
 		world[key] = savedWorld[key];
 	}
+
+	//repairs worlds with missing data
+
+	if(!world.size) world.size = world.elevation.length;
+	if(!world.seed) world.seed = null;
+
 	draw();
 }
 
@@ -151,7 +154,7 @@ ipcRenderer.on("setting", (e, args) => {
 		newValue = parseInt(args[1]);
 
 	if(settingToChange == "seaLevel"){
-		let drawDelay = Math.round(world.elevation.length / 2.9);
+		let drawDelay = Math.round(world.size / 2.8);
 
 		//prevents redrawing from happening too often as it slows things down
 		if (new Date() - lastCall > drawDelay || !lastCall) {
