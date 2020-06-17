@@ -9,7 +9,10 @@ body {
 	margin: 12px;
 	background: #101010;
 	color: var(--ui-white);
-	overflow: hidden;
+}
+
+::-webkit-scrollbar {
+	width: 0 !important
 }
 
 #terrainbox{
