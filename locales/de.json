@@ -4,6 +4,7 @@
 	"standardDraw":"Gelände zeichnen",
 	"humidity":"Feuchtigkeit zeichnen",
 	"info":"Info",
+	"description":"Weltenschaft ist ein quelloffener Geländegenerator, der Electron.js verwendet",
 	"credits":"von HoubkneghteS (Adam Simons)",
 	"settings":"Optionen",
 	"hillinessHeader":"Hügeligkeit",

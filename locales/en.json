@@ -4,6 +4,7 @@
 	"standardDraw":"Draw Regular",
 	"humidity":"Draw Humidity",
 	"info":"Info",
+	"description":"Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program",
 	"credits":"by HoubkneghteS (Adam Simons)",
 	"settings":"Settings",
 	"hillinessHeader":"Hilliness",

@@ -5,7 +5,7 @@
 }
 
 body {
-	font-family: verdana;
+	font: 13px verdana;
 	margin: 12px;
 	background: #101010;
 	color: var(--ui-white);
@@ -85,6 +85,10 @@ button, .slider::-webkit-slider-thumb{
 .slider::-webkit-slider-thumb:hover, button:hover{
 	background: var(--ui-dark);
 	cursor: pointer;
+}
+
+#credits{
+	font-style: italic;
 }
 
 /*emojis for settings headers*/
