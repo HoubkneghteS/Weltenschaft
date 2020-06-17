@@ -142,6 +142,7 @@ async function loadWorld(){
 	//repairs worlds with missing data
 
 	if(!world.seed) world.seed = null;
+	if(!world.humidity) world.humidity = createHeightmap({ resolution: world.elevation.length }, world.seed = Math.random());
 
 	draw();
 }
