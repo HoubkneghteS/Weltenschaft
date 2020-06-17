@@ -22,6 +22,7 @@ app.on('ready', () => {
 						mainWindow.webContents.send("shortcut", "generate");
 					}
 				},
+				{ type: 'separator' },
 				{
 					label: locale.save,
 					accelerator: 'CmdOrCtrl+S',
