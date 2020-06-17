@@ -122,10 +122,12 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-var savedWorld;
+const savedWorld = {};
 
 function saveWorld(){
-	savedWorld = {...world};
+	for(key in world){
+		savedWorld[key] = world[key];
+	}
 }
 
 function loadWorld(){
