@@ -6,7 +6,7 @@
 
 body {
 	font: 13px verdana;
-	margin: 12px;
+	margin: 8px;
 	background: #101010;
 	color: var(--ui-white);
 }
@@ -17,8 +17,8 @@ body {
 
 #terrainbox{
 	background: #2889FF;
-	max-height: calc(100vh - 73.5px);
-	max-width: calc(100vw - 25px);
+	max-height: calc(100vh - 68.5px);
+	max-width: calc(100vw - 16px);
 }
 
 h2{
@@ -48,7 +48,7 @@ hr{
 }
 
 .wide{
-	min-width: 600.66px;
+	min-width: 610px;
 }
 
 .unselectable {
