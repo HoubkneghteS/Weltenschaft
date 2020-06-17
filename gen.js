@@ -141,8 +141,22 @@ async function loadWorld(){
 
 	//repairs worlds with missing data
 
-	if(!world.seed) world.seed = null;
-	if(!world.humidity) world.humidity = createHeightmap({ resolution: world.elevation.length }, world.seed = Math.random());
+	if(!world.seed) {
+		console.warn("No seed detected, defaulting to undefined");
+		world.seed = undefined;
+	}
+	if(!world.seaLevel){
+		console.warn("No sea level detected, defaulting to 0");
+		world.seaLevel = 0;
+	}
+	if(!world.humidity){
+		console.warn("No humidity heightmap detected, defaulting to seed");
+		world.humidity = createHeightmap({ resolution: world.elevation.length }, world.seed)
+	}
+	if(!world.elevation){
+		console.error("World data irreversably corrupted");
+		return;
+	}
 
 	draw();
 }
