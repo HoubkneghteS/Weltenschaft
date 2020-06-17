@@ -10,6 +10,7 @@ app.on('ready', () => {
 			submenu: [
 				{
 					label: locale.info,
+					accelerator: "F1",
 					click() {
 						createInfoWindow();
 					}
