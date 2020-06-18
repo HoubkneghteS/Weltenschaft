@@ -126,7 +126,7 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(compress = true){
+function saveWorld(compress = false){
 
 	if(compress) {
 		for(let x = 0; x < world.elevation.length; x++){
@@ -136,7 +136,7 @@ function saveWorld(compress = true){
 			}
 		}
 	}
-	
+
 	ipcRenderer.send("saveWorld", world);
 }
 
