@@ -4,7 +4,8 @@ const params = {
 	baseHumidity: 50, //baseline for humidity
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
-	drawMode: 'normal' //drawmode - valid values: normal, heightmap, humidity
+	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
+	compression: true //whether terraing gets compressed upon saving
 };
 
 var world = {};
@@ -126,9 +127,9 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(compress = false){
+function saveWorld(doCompression = params.compression){
 
-	if(compress) {
+	if(doCompression) {
 		for(let x = 0; x < world.elevation.length; x++){
 			for(let y = 0; y < world.elevation.length; y++){
 				world.elevation[x][y] = Math.round(world.elevation[x][y]);
