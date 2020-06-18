@@ -185,13 +185,13 @@ ipcRenderer.on("setting", (e, args) => {
 
 	if(settingToChange == "seaLevel"){
 		let drawDelay = Math.round(world.elevation.length / 2.8);
+		world.seaLevel = newValue;	
 
 		//prevents redrawing from happening too often as it slows things down
 		if (new Date() - lastCall > drawDelay || !lastCall) {
 			draw();
 			lastCall = new Date();
 		}
-		world.seaLevel = newValue;	
 	} else params[settingToChange] = newValue;
 });
 
