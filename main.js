@@ -49,7 +49,7 @@ app.on('ready', () => {
 			label: locale.view,
 			submenu: [
 				{
-					label: "Debug",
+					label: locale.console,
 					role: "toggleDevTools"
 				},
 				{
