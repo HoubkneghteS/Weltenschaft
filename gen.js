@@ -5,7 +5,7 @@ const params = {
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
-	compression: true //whether terraing gets compressed upon saving
+	compression: false //whether terraing gets compressed upon saving
 };
 
 var world = {};
