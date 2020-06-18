@@ -4,6 +4,7 @@ const params = {
 	baseHumidity: 50, //baseline for humidity
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
+	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
 	compression: false //whether terraing gets compressed upon saving
 };
@@ -30,7 +31,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	return array;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} = params, seed = Math.random()) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel} = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -45,11 +46,11 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
 	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
-	if (world.seaLevel === undefined) world.seaLevel = 0;
+	world.seaLevel = seaLevel;
 
 	world.seed = seed;
 
-	world.structures = {}
+	world.structures = {};
 
 	draw();
 
@@ -192,7 +193,8 @@ ipcRenderer.on("setting", (e, args) => {
 			draw();
 			lastCall = new Date();
 		}
-	} else params[settingToChange] = newValue;
+	}
+	params[settingToChange] = newValue;
 });
 
 //sends settings to settings screen when it's loaded
