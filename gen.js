@@ -6,7 +6,7 @@ const params = {
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
-	compression: false //whether terraing gets compressed upon saving
+	compression: false //whether terrain gets compressed upon being saved
 };
 
 var world = {};
