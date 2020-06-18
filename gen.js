@@ -47,7 +47,6 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
 	world.seaLevel = seaLevel;
-
 	world.seed = seed;
 
 	world.structures = {};
@@ -66,9 +65,8 @@ function draw(mode = params.drawMode) {
 	}
 
 	const biomes = require('./biomes.json'),
-		{elevation, humidity, seaLevel} = world;
-
-	const r = elevation.length;
+		{elevation, humidity, seaLevel} = world,
+		r = elevation.length;
 
 	params.drawMode = mode || "normal";
 
@@ -185,7 +183,7 @@ const { ipcRenderer } = require("electron");
 
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
-	let settingToChange = args[0],
+	const settingToChange = args[0],
 		newValue = parseInt(args[1]);
 
 	if(settingToChange == "seaLevel"){
@@ -204,7 +202,7 @@ ipcRenderer.on("setting", (e, args) => {
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
 
-	let {resolution, hilliness, baseHumidity} = params;
+	const {resolution, hilliness, baseHumidity} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{

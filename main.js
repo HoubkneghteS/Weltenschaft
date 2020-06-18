@@ -214,8 +214,8 @@ ipcMain.on("setting", (e, ...args) => {
 ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));
 
 ipcMain.on("saveWorld", (e, world) => {
-	const fs = require('fs');
-	const path = dialog.showSaveDialogSync(mainWindow, {
+	const fs = require('fs'),
+		path = dialog.showSaveDialogSync(mainWindow, {
 		filters: [
 			{ name: locale.filetype, extensions: ['ws'] }
 		]});
@@ -226,12 +226,12 @@ ipcMain.on("saveWorld", (e, world) => {
 });
 
 ipcMain.handle("loadWorld", async (e) => {
-	const fs = require('fs');
-	const path = dialog.showOpenDialogSync(mainWindow, {
-		filters: [
-			{ name: locale.filetype, extensions: ['ws'] }
-		]});
-	
+	const fs = require('fs'),
+		path = dialog.showOpenDialogSync(mainWindow, {
+			filters: [
+				{ name: locale.filetype, extensions: ['ws'] }
+			]});
+
 	if (!path) return;
 
 	const world = await JSON.parse(fs.readFileSync(path.toString()));
