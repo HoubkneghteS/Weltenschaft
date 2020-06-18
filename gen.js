@@ -44,7 +44,7 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale} =
 	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed);  
 	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
 
-	if (!world.seaLevel) world.seaLevel = 0;
+	if (world.seaLevel === undefined) world.seaLevel = 0;
 
 	world.seed = seed;
 
@@ -68,6 +68,8 @@ function draw(mode = params.drawMode) {
 
 	for (let x = 0; x < r; x++) {
 		for (let y = 0; y < r; y++) {
+
+			var redLevel, greenLevel, blueLevel;
 
 			switch (mode) {
 				default:
@@ -99,15 +101,15 @@ function draw(mode = params.drawMode) {
 					}
 					break;
 				case "heightmap":
-					var lightLevel = (elevation[x][y] + 1000) / 11;
-					ctx.fillStyle = `rgb(0, ${lightLevel}, 0)`;
+					greenLevel = (elevation[x][y] + 1000) / 11;
+					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
 					break;
 				case "humidity":
-					lightLevel = (elevation[x][y] > seaLevel)
+					blueLevel = (elevation[x][y] > seaLevel)
 						? (humidity[x][y] + 100) / 2
 						: 256; //undersea is always blue
 
-					ctx.fillStyle = `rgb(0, 0, ${lightLevel})`;
+						ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 					break;
 			}
 
@@ -124,7 +126,17 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(){
+function saveWorld(compress = true){
+
+	if(compress) {
+		for(let x = 0; x < world.elevation.length; x++){
+			for(let y = 0; y < world.elevation.length; y++){
+				world.elevation[x][y] = Math.round(world.elevation[x][y]);
+				world.humidity[x][y] = Math.round(world.humidity[x][y]);
+			}
+		}
+	}
+	
 	ipcRenderer.send("saveWorld", world);
 }
 
@@ -145,7 +157,7 @@ async function loadWorld(){
 		console.warn("No seed detected, defaulting to undefined");
 		world.seed = undefined;
 	}
-	if(!world.seaLevel){
+	if (world.seaLevel === undefined){
 		console.warn("No sea level detected, defaulting to 0");
 		world.seaLevel = 0;
 	}
