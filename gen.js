@@ -59,14 +59,18 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 
 function draw(mode = params.drawMode) {
 
+	if(!world.elevation || !Array.isArray(world.elevation) || !world.humidity || !Array.isArray(world.humidity)) {
+		console.error("Missing heightmap");
+		ctx.clearRect(0, 0, width, height);
+		return;
+	}
+
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world;
 
 	const r = elevation.length;
 
 	params.drawMode = mode || "normal";
-
-	const { width, height } = canvas;
 
 	for (let x = 0; x < r; x++) {
 		for (let y = 0; y < r; y++) {
