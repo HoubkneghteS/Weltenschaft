@@ -159,7 +159,7 @@ function createInfoWindow() {
 
 	infoWindow = new BrowserWindow({...windowDefaults,
 		title: locale.info,
-		height: 325,
+		height: 300,
 		autoHideMenuBar: true,
 		parent: mainWindow, //always shows on top of main window
 	});
