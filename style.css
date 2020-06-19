@@ -23,22 +23,20 @@ body {
 
 .dropup-container{
 	position: relative;
-	display: inline-block;
 }
 
 .dropup {
 	display: none;
 	position: absolute;
 	flex-direction: column;
-	justify-content: space-around;
 	background-color: var(--ui-dark);
 	min-width: 160px;
 	padding: 2px;
 	border-radius: 3px;
-	z-index: 1;
 	text-align: left;
 	left: 0px;
 	bottom: 50%;
+	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
 .dropup-container:hover .dropup{
@@ -46,7 +44,7 @@ body {
 }
 
 .dropup a {
-	line-height: 1.8em;
+	line-height: 1.6em;
 	padding:8px;
 	background-color: var(--ui-light);
 	transition-duration: 0.3s;
