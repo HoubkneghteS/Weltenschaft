@@ -38,7 +38,7 @@ body {
 	z-index: 1;
 	text-align: left;
 	left: 0px;
-	bottom: calc(2.2em / 2);
+	bottom: 50%;
 }
 
 .dropup-container:hover .dropup{
