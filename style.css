@@ -21,12 +21,12 @@ body {
 	max-width: calc(100vw - 16px);
 }
 
-.dropdown-container{
+.dropup-container{
 	position: relative;
 	display: inline-block;
 }
 
-.dropdown {
+.dropup {
 	display: none;
 	position: absolute;
 	flex-direction: column;
@@ -37,15 +37,15 @@ body {
 	border-radius: 3px;
 	z-index: 1;
 	text-align: left;
-	top: -135px;
 	left: 0px;
+	bottom: calc(2.2em / 2);
 }
 
-.dropdown-container:hover .dropdown {
+.dropup-container:hover .dropup{
 	display: flex;
 }
 
-.dropdown a {
+.dropup a {
 	line-height: 1.8em;
 	padding:8px;
 	background-color: var(--ui-light);
@@ -116,7 +116,7 @@ button, .slider::-webkit-slider-thumb{
 }
 
 /*darkens buttons when hovered*/
-.slider::-webkit-slider-thumb:hover, button:hover, .dropdown a:hover{
+.slider::-webkit-slider-thumb:hover, button:hover, .dropup a:hover{
 	background: var(--ui-dark);
 	cursor: pointer;
 }
