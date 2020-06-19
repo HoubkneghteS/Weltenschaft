@@ -1,13 +1,11 @@
 :root {
 	--ui-light: #1849A1;
 	--ui-dark: #05193D;
-	--ui-white: #EEE;
+	--ui-white: whitesmoke;
 }
 
 body {
 	font: 13px verdana;
-	margin: 8px;
-	background: #101010;
 	color: var(--ui-white);
 }
 
@@ -30,7 +28,7 @@ body {
 	position: absolute;
 	flex-direction: column;
 	background-color: var(--ui-dark);
-	min-width: 160px;
+	width: 170px;
 	padding: 2px;
 	border-radius: 3px;
 	text-align: left;
@@ -43,33 +41,9 @@ body {
 	display: flex;
 }
 
-.dropup a {
-	line-height: 1.6em;
-	padding:8px;
-	background-color: var(--ui-light);
-	transition-duration: 0.3s;
-}
-
-
 h2{
 	font-size:150%;
 	margin: 16px 0px 0px;
-}
-
-.slider {
-	width: 100%;
-	background: var(--ui-white);
-	margin-bottom:10px;
-	outline: none;
-	height:4px;
-	-webkit-appearance: none;
-	cursor: default;
-}
-
-.slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	width: 20px;
-	height: 20px;
 }
 
 hr{
@@ -98,19 +72,39 @@ img.unselectable {
 
 button{
 	font: 13px verdana;
-	color: var(--ui-white);
 	margin-right: 5px;
-	margin-bottom: 5px;
-	padding: 0.5em 1.1em;
 }
 
 button, .slider::-webkit-slider-thumb{
 	border-radius: 5px;
 	border: 1px solid var(--ui-dark);
+}
+
+button, .slider::-webkit-slider-thumb, .dropup a{
+	box-shadow: 1.5px 1.5px var(--ui-dark);
 	transition-duration: 0.3s;
 	background:var(--ui-light);
+	padding: 0.2em 1em;
+	line-height: 2em;
+	color: var(--ui-white);
 	outline: none;
-	box-shadow: 1.5px 1.5px var(--ui-dark);
+}
+
+.slider {
+	width: 100%;
+	background: var(--ui-white);
+	margin-bottom:10px;
+	outline: none;
+	height:4px;
+	-webkit-appearance: none;
+	cursor: default;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	padding: 0;
 }
 
 /*darkens buttons when hovered*/
