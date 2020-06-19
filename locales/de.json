@@ -1,5 +1,6 @@
 {
 	"generate":"Generieren",
+	"drawmodes":"Rendermodus",
 	"heightmap":"Höhenfeld zeichnen",
 	"standardDraw":"Gelände zeichnen",
 	"humidity":"Feuchtigkeit zeichnen",

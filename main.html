@@ -14,9 +14,13 @@
 	<hr class="wide"/>
 	<div class="unselectable wide button-container">
 		<button id="generate" onclick="generate()">Generate</button>
-		<button id="standardDraw" onclick="draw('normal')">Draw Regular</button>
-		<button id="heightmap" onclick="draw('heightmap')">Draw Heightmap</button>
-		<button id="humidity" onclick="draw('humidity')">Draw Humidity</button>
+		<button class="dropdown-container"><span id="drawmodes">Draw Modes</span>
+			<menu class="dropdown">
+				<a id="standardDraw" onclick="draw('normal')">Draw Regular</a>
+				<a id="heightmap" onclick="draw('heightmap')">Draw Heightmap</a>
+				<a id="humidity" onclick="draw('humidity')">Draw Humidity</a>		
+			</menu>
+		</button>
 		<button id="save" onclick="saveWorld()">Save</button>
 		<button id="load" onclick="loadWorld()">Open</button>
 	</div>

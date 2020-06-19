@@ -21,6 +21,38 @@ body {
 	max-width: calc(100vw - 16px);
 }
 
+.dropdown-container{
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown {
+	display: none;
+	position: absolute;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: var(--ui-dark);
+	min-width: 160px;
+	padding: 2px;
+	border-radius: 3px;
+	z-index: 1;
+	text-align: left;
+	top: -135px;
+	left: 0px;
+}
+
+.dropdown-container:hover .dropdown {
+	display: flex;
+}
+
+.dropdown a {
+	line-height: 1.8em;
+	padding:8px;
+	background-color: var(--ui-light);
+	transition-duration: 0.3s;
+}
+
+
 h2{
 	font-size:150%;
 	margin: 16px 0px 0px;
@@ -84,7 +116,7 @@ button, .slider::-webkit-slider-thumb{
 }
 
 /*darkens buttons when hovered*/
-.slider::-webkit-slider-thumb:hover, button:hover{
+.slider::-webkit-slider-thumb:hover, button:hover, .dropdown a:hover{
 	background: var(--ui-dark);
 	cursor: pointer;
 }

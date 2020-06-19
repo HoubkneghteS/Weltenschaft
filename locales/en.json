@@ -1,5 +1,6 @@
 {
 	"generate":"Generate",
+	"drawmodes":"Draw Modes",
 	"heightmap":"Draw Heightmap",
 	"standardDraw":"Draw Regular",
 	"humidity":"Draw Humidity",
