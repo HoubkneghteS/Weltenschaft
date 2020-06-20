@@ -23,8 +23,8 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	for (let x = 0; x < resolution; x++) {
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
-			row.push(Math.round(
-				( base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude) * roundFactor) / roundFactor );
+			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
+			row.push( Math.round( value * roundFactor / roundFactor ));
 		}
 		array.push(row);
 	}
@@ -44,8 +44,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 
 	world = {};
 
-	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution}, seed + 0.01);  
-	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution}, seed);
+	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor}, seed + 0.01);  
+	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor}, seed);
 
 	world.seaLevel = seaLevel;
 	world.seed = seed;
