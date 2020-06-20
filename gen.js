@@ -42,15 +42,13 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	if (landScale < 50) landScale = 50;
 	if (biomeScale < 50) biomeScale = 50;
 
-	world = {};
-
-	world.elevation = createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor}, seed + 0.01);  
-	world.humidity = createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor}, seed);
-
-	world.seaLevel = seaLevel;
-	world.seed = seed;
-
-	world.structures = {};
+	world = {
+		elevation: createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor}, seed + 0.01),
+		humidity: createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor}, seed),
+		seaLevel: seaLevel,
+		seed: seed,
+		structures: {},
+	};
 
 	draw();
 
