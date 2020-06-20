@@ -6,32 +6,34 @@ const params = {
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
-	compression: false //whether terrain gets compressed upon being saved
+	compression: false, //whether terrain gets compressed upon being saved
+	roundFactor: 100, //to which decimal place terrain array values are rounded
 };
 
 var world = {};
 
 var lastCall;
 
-function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256} = {}, seed) {
+function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 100} = {}, seed) {
 
 	var array = [];
-	const {Perlin2} = require('tumult');
-
-	const small = 0.03 * scale,
+	const {Perlin2} = require('tumult'),
+		small = 0.03 * scale,
 		map = new Perlin2(seed);
 
 	for (let x = 0; x < resolution; x++) {
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
-			row.push(base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude);
+			row.push(Math.round(
+				( base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude) * roundFactor) / roundFactor );
 		}
 		array.push(row);
 	}
+
 	return array;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel} = params, seed = Math.random()) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor} = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -130,18 +132,20 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(doCompression = params.compression){
+function saveWorld(doCompression = params.compression, roundFactor = 10){
+
+	const saveWorld = {...world}
 
 	if(doCompression) {
-		for(let x = 0; x < world.elevation.length; x++){
-			for(let y = 0; y < world.elevation.length; y++){
-				world.elevation[x][y] = Math.round(world.elevation[x][y]);
-				world.humidity[x][y] = Math.round(world.humidity[x][y]);
+		for(let x = 0; x < saveWorld.elevation.length; x++){
+			for(let y = 0; y < saveWorld.elevation.length; y++){
+				saveWorld.elevation[x][y] = Math.round(saveWorld.elevation[x][y] * roundFactor) / roundFactor;
+				saveWorld.humidity[x][y] = Math.round(saveWorld.humidity[x][y] * roundFactor) / roundFactor;
 			}
 		}
 	}
 
-	ipcRenderer.send("saveWorld", world);
+	ipcRenderer.send("saveWorld", saveWorld);
 }
 
 async function loadWorld(){
