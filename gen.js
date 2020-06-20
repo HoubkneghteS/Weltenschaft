@@ -95,7 +95,9 @@ function draw(mode = params.drawMode) {
 									humidity[x][y] > 0 ? biomes.desert
 									: biomes.canyon
 									: biomes.desertabyss
-					} else if (elevation[x][y] > seaLevel - 700) {
+					} else if (elevation[x][y] > seaLevel - 200) {
+						ctx.fillStyle = biomes.shore;
+					} else if (elevation[x][y] > seaLevel - 800) {
 						ctx.fillStyle = biomes.water;
 					} else if (elevation[x][y] > seaLevel - 1250) {
 						ctx.fillStyle = biomes.abyss;
