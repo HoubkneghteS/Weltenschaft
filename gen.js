@@ -132,7 +132,6 @@ function draw(mode = params.drawMode) {
 /* SAVING AND LOADING WORLDS*/
 
 function saveWorld(){
-
 	const saveWorld = {...world}
 
 	ipcRenderer.send("saveWorld", saveWorld);
