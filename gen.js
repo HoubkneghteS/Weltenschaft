@@ -6,7 +6,6 @@ const params = {
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
-	compression: false, //whether terrain gets compressed upon being saved
 	roundFactor: 100, //to which decimal place terrain array values are rounded
 };
 
@@ -132,18 +131,9 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(doCompression = params.compression, roundFactor = 10){
+function saveWorld(){
 
 	const saveWorld = {...world}
-
-	if(doCompression) {
-		for(let x = 0; x < saveWorld.elevation.length; x++){
-			for(let y = 0; y < saveWorld.elevation.length; y++){
-				saveWorld.elevation[x][y] = Math.round(saveWorld.elevation[x][y] * roundFactor) / roundFactor;
-				saveWorld.humidity[x][y] = Math.round(saveWorld.humidity[x][y] * roundFactor) / roundFactor;
-			}
-		}
-	}
 
 	ipcRenderer.send("saveWorld", saveWorld);
 }
