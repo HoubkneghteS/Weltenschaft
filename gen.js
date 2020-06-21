@@ -24,7 +24,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
 			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
-			row.push( Math.round( value * roundFactor / roundFactor ));
+			row.push( Math.round( value * roundFactor) / roundFactor );
 		}
 		array.push(row);
 	}
@@ -38,9 +38,6 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 
 	//softcapping resolution at 512
 	if (resolution > 512) console.warn("Map sizes above 512 not officially supported, any bugs related to this may not be fixed");
-
-	if (landScale < 50) landScale = 50;
-	if (biomeScale < 50) biomeScale = 50;
 
 	world = {
 		elevation: createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor}, seed + 0.01),
