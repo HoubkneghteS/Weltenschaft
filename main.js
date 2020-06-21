@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 app.on('ready', () => {
 
@@ -102,8 +102,8 @@ if (process.platform == 'darwin') {
 }
 
 function getLocaleObject(src = app.getLocale()){
-	const fs = require('fs');
-	const base = __dirname;
+	const fs = require('fs'),
+		base = __dirname;
 
 	if (fs.existsSync(`${base}/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${base}/locales/${src}.json`));
 	if (fs.existsSync(`${base}/resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${base}/resources/app/locales/${src}.json`));
@@ -215,6 +215,7 @@ ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));
 
 ipcMain.on("saveWorld", (e, world) => {
 	const fs = require('fs'),
+	{ dialog } = require('electron'),
 		path = dialog.showSaveDialogSync(mainWindow, {
 		filters: [
 			{ name: locale.filetype, extensions: ['ws'] }
@@ -227,6 +228,7 @@ ipcMain.on("saveWorld", (e, world) => {
 
 ipcMain.handle("loadWorld", async (e) => {
 	const fs = require('fs'),
+	{ dialog } = require('electron'),
 		path = dialog.showOpenDialogSync(mainWindow, {
 			filters: [
 				{ name: locale.filetype, extensions: ['ws'] }
