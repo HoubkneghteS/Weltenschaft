@@ -5,7 +5,7 @@ const params = {
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
-	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity
+	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
 	roundFactor: 100, //to which decimal place terrain array values are rounded
 };
 
@@ -111,15 +111,19 @@ function draw(mode = params.drawMode) {
 						ctx.fillStyle = biomes.trench;
 					}
 					break;
-				case "heightmap":
+				case "absolute":
 					greenLevel = (elevation[x][y] > seaLevel)
-						? (elevation[x][y] + 1000) / 12 + 5
+						? elevation[x][y] / 10 + 30
 						: 0;
 					blueLevel = (elevation[x][y] > seaLevel)
 						? 0
-						: (seaLevel - elevation[x][y]) / 8 + 25;
+						: (seaLevel - elevation[x][y]) / 10 + 30;
 
 					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
+					break;
+				case "elevation":
+					greenLevel = (elevation[x][y] + 1000) / 12;
+					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
 					break;
 				case "humidity":
 					blueLevel = (elevation[x][y] > seaLevel)
