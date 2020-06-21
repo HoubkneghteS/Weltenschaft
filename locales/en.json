@@ -1,9 +1,10 @@
 {
 	"generate":"Generate",
 	"drawmodes":"Draw Modes",
-	"heightmap":"Draw Heightmap",
+	"elevation":"Draw Elevation",
 	"standardDraw":"Draw Regular",
 	"humidity":"Draw Humidity",
+	"absolute":"Draw Absolute Elevation",
 	"info":"Info",
 	"description":"Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program",
 	"credits":"by HoubkneghteS (Adam Simons)",

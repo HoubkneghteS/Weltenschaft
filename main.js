@@ -68,15 +68,22 @@ app.on('ready', () => {
 					}
 				},
 				{
-					label: locale.heightmap,
+					label: locale.elevation,
 					accelerator: 'CmdOrCtrl+2',
 					click() {
-						mainWindow.webContents.send("shortcut", "draw", "heightmap");
+						mainWindow.webContents.send("shortcut", "draw", "elevation");
+					}
+				},
+				{
+					label: locale.absolute,
+					accelerator: 'CmdOrCtrl+3',
+					click() {
+						mainWindow.webContents.send("shortcut", "draw", "absolute");
 					}
 				},
 				{
 					label: locale.humidity,
-					accelerator: 'CmdOrCtrl+3',
+					accelerator: 'CmdOrCtrl+4',
 					click() {
 						mainWindow.webContents.send("shortcut", "draw", "humidity");
 					}

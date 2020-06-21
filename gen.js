@@ -111,7 +111,7 @@ function draw(mode = params.drawMode) {
 						ctx.fillStyle = biomes.trench;
 					}
 					break;
-				case "absolute":
+				case "elevation":
 					greenLevel = (elevation[x][y] > seaLevel)
 						? elevation[x][y] / 10 + 30
 						: 0;
@@ -121,7 +121,7 @@ function draw(mode = params.drawMode) {
 
 					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
 					break;
-				case "elevation":
+				case "absolute":
 					greenLevel = (elevation[x][y] + 1000) / 12;
 					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
 					break;

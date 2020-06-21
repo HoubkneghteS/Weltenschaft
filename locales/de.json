@@ -1,9 +1,10 @@
 {
 	"generate":"Generieren",
 	"drawmodes":"Rendermodus",
-	"heightmap":"Höhenfeld zeichnen",
+	"elevation":"Höhe zeichnen",
 	"standardDraw":"Gelände zeichnen",
 	"humidity":"Feuchtigkeit zeichnen",
+	"absolute":"Absolute Höhe zeichnen",
 	"info":"Info",
 	"description":"Weltenschaft ist ein quelloffener Geländegenerator, der Electron.js verwendet",
 	"credits":"von HoubkneghteS (Adam Simons)",

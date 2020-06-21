@@ -28,7 +28,7 @@ body {
 	position: absolute;
 	flex-direction: column;
 	background-color: var(--ui-dark);
-	width: 170px;
+	width: 200px;
 	padding: 2px;
 	border-radius: 3px;
 	text-align: left;
