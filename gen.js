@@ -122,8 +122,9 @@ function draw(mode = params.drawMode) {
 					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
 					break;
 				case "absolute":
-					greenLevel = (elevation[x][y] + 1000) / 12;
-					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
+					greenLevel = (elevation[x][y] + 1000) / 15;
+					redLevel = (elevation[x][y] + 1000) / 15;
+					ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
 					break;
 				case "humidity":
 					blueLevel = (elevation[x][y] > seaLevel)
