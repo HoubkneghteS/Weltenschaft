@@ -56,7 +56,6 @@ function draw(mode = params.drawMode) {
 
 	if(!world.elevation || !Array.isArray(world.elevation) || !world.humidity || !Array.isArray(world.humidity)) {
 		console.error("Missing heightmap");
-		ctx.clearRect(0, 0, width, height);
 		return;
 	}
 
@@ -71,6 +70,8 @@ function draw(mode = params.drawMode) {
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world,
 		r = elevation.length;
+
+	ctx.clearRect(0, 0, width, height);
 
 	params.drawMode = mode || "normal";
 
@@ -111,15 +112,21 @@ function draw(mode = params.drawMode) {
 					}
 					break;
 				case "heightmap":
-					greenLevel = (elevation[x][y] + 1000) / 11;
-					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
+					greenLevel = (elevation[x][y] > seaLevel)
+						? (elevation[x][y] + 1000) / 12 + 5
+						: 0;
+					blueLevel = (elevation[x][y] > seaLevel)
+						? 0
+						: (seaLevel - elevation[x][y]) / 8 + 25;
+
+					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
 					break;
 				case "humidity":
 					blueLevel = (elevation[x][y] > seaLevel)
 						? (humidity[x][y] + 100) / 2
 						: 256; //undersea is always blue
 
-						ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 					break;
 			}
 
@@ -138,7 +145,6 @@ function draw(mode = params.drawMode) {
 
 function saveWorld(){
 	const saveWorld = {...world}
-
 	ipcRenderer.send("saveWorld", saveWorld);
 }
 
@@ -176,7 +182,6 @@ async function loadWorld(){
 
 	draw();
 }
-
 /*INTERPROCESS COMMUNICATION*/
 
 const { ipcRenderer } = require("electron");
