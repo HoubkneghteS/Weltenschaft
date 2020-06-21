@@ -9,8 +9,19 @@ body {
 	color: var(--ui-white);
 }
 
+h2{
+	font-size:150%;
+	margin: 16px 0px 0px;
+}
+
+hr{
+	border:1.5px solid var(--ui-light); 
+	box-shadow: 2px 2px var(--ui-dark);
+}
+
 ::-webkit-scrollbar {
-	width: 0 !important
+	width: 0 !important;
+	height: 0 !important;
 }
 
 #terrainbox{
@@ -37,18 +48,8 @@ body {
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
-.dropup-container:hover .dropup{
+.dropup-container:hover .dropup, .dropup-container:focus .dropup {
 	display: flex;
-}
-
-h2{
-	font-size:150%;
-	margin: 16px 0px 0px;
-}
-
-hr{
-	border:1.5px solid var(--ui-light); 
-	box-shadow: 2px 2px var(--ui-dark);
 }
 
 .wide{
@@ -80,6 +81,11 @@ button, .slider::-webkit-slider-thumb{
 	border: 1px solid var(--ui-dark);
 }
 
+:focus{
+	border: 1px solid var(--ui-white);
+	outline: none;
+}
+
 button, .slider::-webkit-slider-thumb, .dropup a{
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 	transition-duration: 0.3s;
@@ -87,14 +93,12 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 	padding: 0.2em 1em;
 	line-height: 2em;
 	color: var(--ui-white);
-	outline: none;
 }
 
 .slider {
 	width: 100%;
 	background: var(--ui-white);
 	margin-bottom:10px;
-	outline: none;
 	height:4px;
 	-webkit-appearance: none;
 	cursor: default;
@@ -107,7 +111,7 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 	padding: 0;
 }
 
-/*darkens buttons when hovered*/
+/*darkens buttons and other components when hovered*/
 .slider::-webkit-slider-thumb:hover, button:hover, .dropup a:hover{
 	background: var(--ui-dark);
 	cursor: pointer;
