@@ -67,14 +67,6 @@ function draw(mode = params.drawMode) {
 		return;
 	}
 
-	const canvas = document.getElementById('terrainbox'),
-		ctx = canvas.getContext('2d');
-	
-	canvas.width = 1200;
-	canvas.height = 900;
-
-	const { width, height } = canvas;
-
 	const {elevation, humidity, seaLevel} = world,
 		r = elevation.length;
 
