@@ -68,61 +68,62 @@ function draw(mode = params.drawMode) {
 	let redLevel, greenLevel, blueLevel;
 
 	elevation.forEach((row, x) => {
-		row.forEach((element, y) => {
+		row.forEach((localElevation, y) => {
+			let localHumidity = humidity[x][y];
 			switch (mode) {
 				default:
 				case "normal":
-					if (elevation[x][y] > seaLevel) {
+					if (localElevation > seaLevel) {
 						ctx.fillStyle =
-							elevation[x][y] > 1250 ? biomes.peak
-								: elevation[x][y] > 1000 ? biomes.mountain
-								: elevation[x][y] > 850 ? biomes.mountain2
-								: elevation[x][y] > 750 ?
-									humidity[x][y] > 0 ? biomes.mountain2
+							localElevation > 1250 ? biomes.peak
+								: localElevation > 1000 ? biomes.mountain
+								: localElevation > 850 ? biomes.mountain2
+								: localElevation > 750 ?
+									localHumidity > 0 ? biomes.mountain2
 									: biomes.mesa
-								: elevation[x][y] > -100 ?
-									humidity[x][y] > 250 ? biomes.urwald
-									: humidity[x][y] > 150 ? biomes.forest
-									: humidity[x][y] > 0 ? biomes.plains
-									: humidity[x][y] > -30 ? biomes.savannah
+								: localElevation > -100 ?
+									localHumidity > 250 ? biomes.urwald
+									: localHumidity > 150 ? biomes.forest
+									: localHumidity > 0 ? biomes.plains
+									: localHumidity > -30 ? biomes.savannah
 									: biomes.desert
-								: elevation[x][y] > -500 ?
-									humidity[x][y] > 0 ? biomes.desert
+								: localElevation > -500 ?
+									localHumidity > 0 ? biomes.desert
 									: biomes.canyon
 									: biomes.desertabyss
-					} else if (elevation[x][y] > seaLevel - 200) {
+					} else if (localElevation > seaLevel - 200) {
 						ctx.fillStyle = biomes.shore;
-					} else if (elevation[x][y] > seaLevel - 800) {
+					} else if (localElevation > seaLevel - 800) {
 						ctx.fillStyle = biomes.water;
-					} else if (elevation[x][y] > seaLevel - 1250) {
+					} else if (localElevation > seaLevel - 1250) {
 						ctx.fillStyle = biomes.abyss;
 					} else {
 						ctx.fillStyle = biomes.trench;
 					}
 					break;
 				case "elevation":
-					greenLevel = (elevation[x][y] > seaLevel)
-						? elevation[x][y] / 10 + 30
+					greenLevel = (localElevation > seaLevel)
+						? localElevation / 10 + 30
 						: 0;
-					blueLevel = (elevation[x][y] > seaLevel)
+					blueLevel = (localElevation > seaLevel)
 						? 0
-						: (seaLevel - elevation[x][y]) / 10 + 30;
+						: (seaLevel - localElevation) / 10 + 30;
 
 					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
 					break;
 				case "absolute":
-					greenLevel = (elevation[x][y] + 1000) / 15;
-					redLevel = (elevation[x][y] + 1000) / 15;
+					greenLevel = (localElevation + 1000) / 15;
+					redLevel = (localElevation + 1000) / 15;
 					ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
 					break;
 				case "humidity":
-					blueLevel = (elevation[x][y] > seaLevel)
-						? (humidity[x][y] + 100) / 2
+					blueLevel = (localElevation > seaLevel)
+						? (localHumidity + 100) / 2
 						: 256; //undersea is always blue
 
 					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 					break;
-			}
+				}
 			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 		});
 	});
