@@ -11,8 +11,6 @@ const params = {
 
 var world = {};
 
-var lastCall;
-
 function loopThroughHeightmap(callback){
 	world.elevation.forEach((row, x) => {
 		row.forEach((element, y) => {
@@ -61,6 +59,13 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 }
 
 function draw(mode = params.drawMode) {
+
+	const drawDelay = Math.round((world.elevation.length ** 2) / 500);
+
+	//prevents redrawing from happening too often as it slows things down
+	if (new Date() - draw.lastCall < drawDelay) return;
+
+	draw.lastCall = new Date();
 
 	if(!world.elevation || !Array.isArray(world.elevation) || !world.humidity || !Array.isArray(world.humidity)) {
 		console.error("Missing heightmap");
@@ -232,14 +237,8 @@ ipcRenderer.on("setting", (e, args) => {
 		newValue = parseInt(args[1]);
 
 	if(settingToChange == "seaLevel"){
-		const drawDelay = Math.round((world.elevation.length ** 2) / 600);
 		world.seaLevel = newValue;	
-
-		//prevents redrawing from happening too often as it slows things down
-		if (new Date() - lastCall > drawDelay || !lastCall) {
-			draw();
-			lastCall = new Date();
-		}
+		draw();
 	}
 	params[settingToChange] = newValue;
 });
