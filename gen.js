@@ -69,7 +69,6 @@ function draw(mode = params.drawMode) {
 
 	elevation.forEach((row, x) => {
 		row.forEach((element, y) => {
-
 			switch (mode) {
 				default:
 				case "normal":
@@ -124,16 +123,9 @@ function draw(mode = params.drawMode) {
 					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 					break;
 			}
-
 			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 		});
 	});
-
-	//nice ;)
-	if (params.baseHumidity == 69) {
-		ctx.fillStyle = ("black");
-		ctx.fillText("nice", 69, 69);
-	}
 }
 
 /* SAVING AND LOADING WORLDS*/
