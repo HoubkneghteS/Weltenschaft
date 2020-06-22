@@ -11,8 +11,6 @@ const params = {
 
 var world = {};
 
-var lastCall;
-
 function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 100} = {}, seed) {
 
 	var array = [];
@@ -58,14 +56,6 @@ function draw(mode = params.drawMode) {
 		console.error("Missing heightmap");
 		return;
 	}
-
-	const canvas = document.getElementById('terrainbox'),
-		ctx = canvas.getContext('2d');
-	
-	canvas.width = 1200;
-	canvas.height = 900;
-
-	const { width, height } = canvas;
 
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world,
@@ -196,17 +186,18 @@ ipcRenderer.on("setting", (e, args) => {
 	const settingToChange = args[0],
 		newValue = parseInt(args[1]);
 
+	params[settingToChange] = newValue;
+
 	if(settingToChange == "seaLevel"){
-		let drawDelay = Math.round(world.elevation.length / 2.8);
+		const drawDelay = Math.round(world.elevation.length ** 2 / 500);
 		world.seaLevel = newValue;	
 
 		//prevents redrawing from happening too often as it slows things down
-		if (new Date() - lastCall > drawDelay || !lastCall) {
+		if (new Date() - draw.lastCall > drawDelay || !draw.lastCall) {
 			draw();
-			lastCall = new Date();
+			draw.lastCall = new Date();
 		}
 	}
-	params[settingToChange] = newValue;
 });
 
 //sends settings to settings screen when it's loaded

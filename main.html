@@ -24,6 +24,15 @@
 		</button>
 		<button id="save" onclick="saveWorld()">Save World</button>
 		<button id="load" onclick="loadWorld()">Open World</button>
+		<script>
+			const canvas = document.getElementById('terrainbox'),
+				ctx = canvas.getContext('2d');
+
+			canvas.width = 1200;
+			canvas.height = 900;
+
+			const { width, height } = canvas;
+		</script>
 	</div>
 </body>
 
