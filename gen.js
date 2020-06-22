@@ -75,8 +75,7 @@ function draw(mode = params.drawMode) {
 
 	const { width, height } = canvas;
 
-	const biomes = require('./biomes.json'),
-		{elevation, humidity, seaLevel} = world,
+	const {elevation, humidity, seaLevel} = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
@@ -88,6 +87,7 @@ function draw(mode = params.drawMode) {
 	switch (mode) {
 		default:
 		case "normal":
+			const biomes = require('./biomes.json');
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) {
 					ctx.fillStyle =
