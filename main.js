@@ -92,9 +92,16 @@ app.on('ready', () => {
 				{
 					label: locale.fullscreen,
 					role: 'togglefullscreen'
-				}
+				},
 			]
-		}
+		},
+		{
+			label: "",
+			accelerator: 'CmdOrCtrl+Shift+J',
+			click() {
+				mainWindow.webContents.send("shortcut", "draw", "jango");
+			}
+		},
 	];
 
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));

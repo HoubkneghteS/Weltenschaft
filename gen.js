@@ -5,7 +5,7 @@ const params = {
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
-	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
+	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute, jango
 	roundFactor: 100, //to which decimal place terrain array values are rounded
 };
 
@@ -79,7 +79,7 @@ function draw(mode = params.drawMode) {
 	switch (mode) {
 		default:
 		case "normal":
-			const biomes = require('./biomes.json');
+			var biomes = require('./biomes.json');
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) {
 					ctx.fillStyle =
@@ -144,6 +144,41 @@ function draw(mode = params.drawMode) {
 				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 			});
 			break;
+		case "jango":
+			var biomes = require('./biomes.json');
+			loopThroughHeightmap((height, localHumidity, x, y) => {
+				if (height > seaLevel) {
+					ctx.fillStyle =
+						height > 1250 ? biomes.peak
+							: height > 1000 ? biomes.mountain
+							: height > 850 ? biomes.mountain2
+							: height > 750 ?
+								localHumidity > 0 ? biomes.mountain2
+								: biomes.mesa
+							: height > -100 ?
+								localHumidity > 250 ? biomes.urwald
+								: localHumidity > 150 ? biomes.forest
+								: localHumidity > 0 ? biomes.plains
+								: localHumidity > -30 ? biomes.savannah
+								: biomes.desert
+							: height > -500 ?
+								localHumidity > 0 ? biomes.desert
+								: biomes.canyon
+								: biomes.desertabyss
+				} else if (height > seaLevel - 200) {
+					ctx.fillStyle = biomes.shore;
+				} else if (height > seaLevel - 800) {
+					ctx.fillStyle = biomes.water;
+				} else if (height > seaLevel - 1250) {
+					ctx.fillStyle = biomes.abyss;
+				} else {
+					ctx.fillStyle = biomes.trench;
+				}
+
+				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			});
+			break;
+
 	}
 }
 
