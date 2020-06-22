@@ -13,6 +13,14 @@ var world = {};
 
 var lastCall;
 
+function loopThroughHeightmap(callback){
+	world.elevation.forEach((row, x) => {
+		row.forEach((element, y) => {
+			callback(element, world.humidity[x][y], x, y);
+		});
+	});
+}
+
 function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 100} = {}, seed) {
 
 	var array = [];
@@ -77,72 +85,73 @@ function draw(mode = params.drawMode) {
 
 	let redLevel, greenLevel, blueLevel;
 
-	elevation.forEach((row, x) => {
-		row.forEach((element, y) => {
+	switch (mode) {
+		default:
+		case "normal":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				if (localElevation > seaLevel) {
+					ctx.fillStyle =
+						localElevation > 1250 ? biomes.peak
+							: localElevation > 1000 ? biomes.mountain
+							: localElevation > 850 ? biomes.mountain2
+							: localElevation > 750 ?
+								localHumidity > 0 ? biomes.mountain2
+								: biomes.mesa
+							: localElevation > -100 ?
+								localHumidity > 250 ? biomes.urwald
+								: localHumidity > 150 ? biomes.forest
+								: localHumidity > 0 ? biomes.plains
+								: localHumidity > -30 ? biomes.savannah
+								: biomes.desert
+							: localElevation > -500 ?
+								localHumidity > 0 ? biomes.desert
+								: biomes.canyon
+								: biomes.desertabyss
+				} else if (localElevation > seaLevel - 200) {
+					ctx.fillStyle = biomes.shore;
+				} else if (localElevation > seaLevel - 800) {
+					ctx.fillStyle = biomes.water;
+				} else if (localElevation > seaLevel - 1250) {
+					ctx.fillStyle = biomes.abyss;
+				} else {
+					ctx.fillStyle = biomes.trench;
+				}
 
-			switch (mode) {
-				default:
-				case "normal":
-					if (elevation[x][y] > seaLevel) {
-						ctx.fillStyle =
-							elevation[x][y] > 1250 ? biomes.peak
-								: elevation[x][y] > 1000 ? biomes.mountain
-								: elevation[x][y] > 850 ? biomes.mountain2
-								: elevation[x][y] > 750 ?
-									humidity[x][y] > 0 ? biomes.mountain2
-									: biomes.mesa
-								: elevation[x][y] > -100 ?
-									humidity[x][y] > 250 ? biomes.urwald
-									: humidity[x][y] > 150 ? biomes.forest
-									: humidity[x][y] > 0 ? biomes.plains
-									: humidity[x][y] > -30 ? biomes.savannah
-									: biomes.desert
-								: elevation[x][y] > -500 ?
-									humidity[x][y] > 0 ? biomes.desert
-									: biomes.canyon
-									: biomes.desertabyss
-					} else if (elevation[x][y] > seaLevel - 200) {
-						ctx.fillStyle = biomes.shore;
-					} else if (elevation[x][y] > seaLevel - 800) {
-						ctx.fillStyle = biomes.water;
-					} else if (elevation[x][y] > seaLevel - 1250) {
-						ctx.fillStyle = biomes.abyss;
-					} else {
-						ctx.fillStyle = biomes.trench;
-					}
-					break;
-				case "elevation":
-					greenLevel = (elevation[x][y] > seaLevel)
-						? elevation[x][y] / 10 + 30
-						: 0;
-					blueLevel = (elevation[x][y] > seaLevel)
-						? 0
-						: (seaLevel - elevation[x][y]) / 10 + 30;
+				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			});
+			break;
+		case "elevation":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				greenLevel = (localElevation > seaLevel)
+				? localElevation / 10 + 30
+				: 0;
+				blueLevel = (localElevation > seaLevel)
+					? 0
+					: (seaLevel - localElevation) / 10 + 30;
 
-					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
-					break;
-				case "absolute":
-					greenLevel = (elevation[x][y] + 1000) / 15;
-					redLevel = (elevation[x][y] + 1000) / 15;
-					ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
-					break;
-				case "humidity":
-					blueLevel = (elevation[x][y] > seaLevel)
-						? (humidity[x][y] + 100) / 2
-						: 256; //undersea is always blue
+				ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
+				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			});
+			break;
+		case "absolute":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				greenLevel = (localElevation + 1000) / 15;
+				redLevel = (localElevation + 1000) / 15;
+				
+				ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;	
+				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			});
+			break;
+		case "humidity":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				blueLevel = (localElevation > seaLevel)
+					? (localHumidity + 100) / 2
+					: 256; //undersea is always blue
 
-					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
-					break;
-			}
-
-			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
-		});
-	});
-
-	//nice ;)
-	if (params.baseHumidity == 69) {
-		ctx.fillStyle = ("black");
-		ctx.fillText("nice", 69, 69);
+				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+				ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+			});
+			break;
 	}
 }
 
