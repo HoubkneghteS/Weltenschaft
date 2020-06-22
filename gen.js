@@ -75,10 +75,10 @@ function draw(mode = params.drawMode) {
 
 	params.drawMode = mode || "normal";
 
-	for (let x = 0; x < r; x++) {
-		for (let y = 0; y < r; y++) {
+	let redLevel, greenLevel, blueLevel;
 
-			var redLevel, greenLevel, blueLevel;
+	elevation.forEach((row, x) => {
+		row.forEach((element, y) => {
 
 			switch (mode) {
 				default:
@@ -136,8 +136,8 @@ function draw(mode = params.drawMode) {
 			}
 
 			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
-		}
-	}
+		});
+	});
 
 	//nice ;)
 	if (params.baseHumidity == 69) {
