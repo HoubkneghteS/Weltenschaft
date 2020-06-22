@@ -88,14 +88,6 @@ app.on('ready', () => {
 						mainWindow.webContents.send("shortcut", "draw", "humidity");
 					}
 				},
-				{
-					label:"",
-					visible: false,
-					accelerator: 'CmdOrCtrl+Shift+J',
-					click() {
-						mainWindow.webContents.send("shortcut", "draw", "jango");
-					}
-				},
 				{ type: 'separator' },
 				{
 					label: locale.fullscreen,
