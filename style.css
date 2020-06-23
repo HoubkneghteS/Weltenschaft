@@ -41,6 +41,10 @@ hr{
     left: 0;
 }
 
+#waterbox{
+	opacity: 0.9;
+}
+
 .dropup-container{
 	position: relative;
 }
