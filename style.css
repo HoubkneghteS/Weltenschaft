@@ -32,13 +32,10 @@ hr{
 
 .wrapper canvas {
 	position: absolute;
-	display: block;
-	object-fit: scale-down;
+	object-fit: contain;
 	object-position: 0px 50%;
 	height: 100%;
 	width: 100%;
-    top: 0;
-    left: 0;
 }
 
 #waterbox{
