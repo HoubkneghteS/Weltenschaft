@@ -59,7 +59,7 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	console.timeEnd("generate");
 }
 
-/*DRAWING*/
+/*DRAWING TERRAIN TO CANVAS*/
 
 function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
 
