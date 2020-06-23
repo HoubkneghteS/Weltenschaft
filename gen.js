@@ -9,7 +9,7 @@ const params = {
 	roundFactor: 100, //to which decimal place terrain array values are rounded
 };
 
-var world = {};
+var world;
 
 function loopThroughHeightmap(callback, targetWorld = world){
 	targetWorld.elevation.forEach((row, x) => {
@@ -231,7 +231,7 @@ ipcRenderer.on("setting", (e, args) => {
 	params[settingToChange] = newValue;
 
 	if(settingToChange == "seaLevel"){
-		const drawDelay = Math.round(world.elevation.length ** 2 / 550);
+		const drawDelay = Math.round(world.elevation.length ** 2 / 540);
 		world.seaLevel = newValue;	
 
 		//prevents redrawing from happening too often as it slows things down
