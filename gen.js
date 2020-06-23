@@ -168,7 +168,7 @@ function draw(mode = params.drawMode) {
 	params.drawMode = mode || "normal";
 
 	drawLand(mode, "terrainbox");
-	drawWater(mode, "waterbox")
+	drawWater(mode, "waterbox");
 }
 
 /* SAVING AND LOADING WORLDS*/
