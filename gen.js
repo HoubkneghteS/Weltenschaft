@@ -160,8 +160,10 @@ function drawWater(mode = params.drawMode, canvasId = "waterbox"){
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 				break;
 			case "absolute":
+				//absolute drawmode does not render water but I'm still putting it here so it matches
 				return;
-			case "humidity":ctx.fillStyle = `rgb(0, 0, 256)`;
+			case "humidity":
+				ctx.fillStyle = `rgb(0, 0, 256)`;
 				break;
 		}
 		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), boxWidth, boxHeight);
