@@ -24,10 +24,21 @@ hr{
 	height: 0 !important;
 }
 
-#terrainbox{
-	background: #2889FF;
-	max-height: calc(100vh - 68.5px);
-	max-width: calc(100vw - 16px);
+.wrapper {
+	position: relative;
+	height: calc(100vh - 68.5px);
+	width: calc(100vw - 16px);
+}
+
+.wrapper canvas {
+	position: absolute;
+	display: block;
+	object-fit: scale-down;
+	object-position: 0px 50%;
+	height: 100%;
+	width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .dropup-container{

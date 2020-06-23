@@ -50,20 +50,20 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	console.timeEnd("generate");
 }
 
-function draw(mode = params.drawMode) {
+/*DRAWING*/
 
-	if(!world.elevation || !Array.isArray(world.elevation) || !world.humidity || !Array.isArray(world.humidity)) {
-		console.error("Missing heightmap");
-		return;
-	}
+function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
+
+	const canvas = document.getElementById(canvasId),
+	ctx = canvas.getContext('2d');
+
+	const { width, height } = canvas;
 
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
-
-	params.drawMode = mode || "normal";
 
 	let redLevel, greenLevel, blueLevel;
 
@@ -73,25 +73,67 @@ function draw(mode = params.drawMode) {
 			switch (mode) {
 				default:
 				case "normal":
-					if (localElevation > seaLevel) {
-						ctx.fillStyle =
-							localElevation > 1250 ? biomes.peak
-								: localElevation > 1000 ? biomes.mountain
-								: localElevation > 850 ? biomes.mountain2
-								: localElevation > 750 ?
-									localHumidity > 0 ? biomes.mountain2
-									: biomes.mesa
-								: localElevation > -100 ?
-									localHumidity > 250 ? biomes.urwald
-									: localHumidity > 150 ? biomes.forest
-									: localHumidity > 0 ? biomes.plains
-									: localHumidity > -30 ? biomes.savannah
-									: biomes.desert
-								: localElevation > -500 ?
-									localHumidity > 0 ? biomes.desert
-									: biomes.canyon
-									: biomes.desertabyss
-					} else if (localElevation > seaLevel - 200) {
+					ctx.fillStyle =
+						localElevation > 1250 ? biomes.peak
+							: localElevation > 1000 ? biomes.mountain
+							: localElevation > 850 ? biomes.mountain2
+							: localElevation > 750 ?
+								localHumidity > 0 ? biomes.mountain2
+								: biomes.mesa
+							: localElevation > -100 ?
+								localHumidity > 250 ? biomes.urwald
+								: localHumidity > 150 ? biomes.forest
+								: localHumidity > 0 ? biomes.plains
+								: localHumidity > -30 ? biomes.savannah
+								: biomes.desert
+							: localElevation > -500 ?
+								localHumidity > 0 ? biomes.desert
+								: biomes.canyon
+								: biomes.desertabyss
+					break;
+				case "elevation":
+					greenLevel = localElevation / 10 + 30
+
+					ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
+					break;
+				case "absolute":
+					greenLevel = (localElevation + 1000) / 15;
+					redLevel = (localElevation + 1000) / 15;
+					ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
+					break;
+				case "humidity":
+					blueLevel = (localHumidity + 100) / 2
+
+					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+					break;
+				}
+			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+		});
+	});
+}
+
+function drawWater(mode = params.drawMode, canvasId = "waterbox"){
+
+	const canvas = document.getElementById(canvasId),
+	ctx = canvas.getContext('2d');
+
+	const { width, height } = canvas;
+
+	const biomes = require('./biomes.json'),
+		{elevation, humidity, seaLevel} = world,
+		r = elevation.length;
+
+	ctx.clearRect(0, 0, width, height);
+
+	let redLevel, greenLevel, blueLevel;
+
+	elevation.forEach((row, x) => {
+		row.forEach((localElevation, y) => {
+			if (localElevation > seaLevel) return;
+			switch (mode) {
+				default:
+				case "normal":
+					if (localElevation > seaLevel - 200) {
 						ctx.fillStyle = biomes.shore;
 					} else if (localElevation > seaLevel - 800) {
 						ctx.fillStyle = biomes.water;
@@ -102,31 +144,27 @@ function draw(mode = params.drawMode) {
 					}
 					break;
 				case "elevation":
-					greenLevel = (localElevation > seaLevel)
-						? localElevation / 10 + 30
-						: 0;
-					blueLevel = (localElevation > seaLevel)
-						? 0
-						: (seaLevel - localElevation) / 10 + 30;
-
-					ctx.fillStyle = `rgb(0, ${greenLevel}, ${blueLevel})`;
-					break;
-				case "absolute":
-					greenLevel = (localElevation + 1000) / 15;
-					redLevel = (localElevation + 1000) / 15;
-					ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
-					break;
-				case "humidity":
-					blueLevel = (localElevation > seaLevel)
-						? (localHumidity + 100) / 2
-						: 256; //undersea is always blue
+					blueLevel = (seaLevel - localElevation) / 10 + 30;
 
 					ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+					break;
+				case "absolute":
+					return;
+				case "humidity":ctx.fillStyle = `rgb(0, 0, 256)`;
 					break;
 				}
 			ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
 		});
 	});
+
+}
+
+function draw(mode = params.drawMode) {
+
+	params.drawMode = mode || "normal";
+
+	drawLand(mode, "terrainbox");
+	drawWater(mode, "waterbox")
 }
 
 /* SAVING AND LOADING WORLDS*/
@@ -182,13 +220,13 @@ ipcRenderer.on("setting", (e, args) => {
 	params[settingToChange] = newValue;
 
 	if(settingToChange == "seaLevel"){
-		const drawDelay = Math.round(world.elevation.length ** 2 / 500);
+		const drawDelay = Math.round(world.elevation.length ** 2 / 512);
 		world.seaLevel = newValue;	
 
 		//prevents redrawing from happening too often as it slows things down
-		if (new Date() - draw.lastCall > drawDelay || !draw.lastCall) {
-			draw();
-			draw.lastCall = new Date();
+		if (new Date() - drawWater.lastCall > drawDelay || !drawWater.lastCall) {
+			drawWater();
+			drawWater.lastCall = new Date();
 		}
 	}
 });

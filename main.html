@@ -10,13 +10,16 @@
 <body onload="generate()">
 	<script src="translate.js"></script>
 	<script defer src="gen.js"></script>
-	<canvas class="wide" id="terrainbox"></canvas>
+	<div class="wide wrapper">
+		<canvas id="terrainbox"></canvas>
+		<canvas id="waterbox"></canvas>	
+	</div>
 	<hr class="wide"/>
 	<div class="unselectable wide button-container">
 		<button id="generate" onclick="generate()">Generate</button>
 		<button class="dropup-container"><span id="drawmodes">Draw Modes</span>
 			<menu class="dropup">
-				<a id="standardDraw" onclick="draw('normal')">Draw Regular</a>
+				<a id="standardDraw"onclick="draw('normal')">Draw Regular</a>
 				<a id="elevation" onclick="draw('elevation')">Draw Elevation</a>
 				<a id="absolute" onclick="draw('absolute')">Draw Absolute Elevation</a>
 				<a id="humidity" onclick="draw('humidity')">Draw Humidity</a>
@@ -25,13 +28,13 @@
 		<button id="save" onclick="saveWorld()">Save World</button>
 		<button id="load" onclick="loadWorld()">Open World</button>
 		<script>
-			const canvas = document.getElementById('terrainbox'),
-				ctx = canvas.getContext('2d');
+			const canvas = document.getElementById('terrainbox');
+			const canvas2 = document.getElementById('waterbox');
 
 			canvas.width = 1200;
 			canvas.height = 900;
-
-			const { width, height } = canvas;
+			canvas2.width = 1200;
+			canvas2.height = 900;
 		</script>
 	</div>
 </body>
