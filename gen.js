@@ -74,6 +74,9 @@ function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
 
 	ctx.clearRect(0, 0, width, height);
 
+	const boxWidth = Math.ceil(width / r);
+	const boxHeight = Math.ceil(height / r);
+
 	let redLevel, greenLevel, blueLevel;
 
 	loopThroughHeightmap((localElevation, localHumidity, x, y) => {
@@ -114,8 +117,7 @@ function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 				break;
 			}
-		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
-
+		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), boxWidth, boxHeight);
 	});
 }
 
@@ -131,6 +133,9 @@ function drawWater(mode = params.drawMode, canvasId = "waterbox"){
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
+
+	const boxWidth = Math.ceil(width / r);
+	const boxHeight = Math.ceil(height / r);
 
 	let redLevel, greenLevel, blueLevel;
 
@@ -159,7 +164,7 @@ function drawWater(mode = params.drawMode, canvasId = "waterbox"){
 			case "humidity":ctx.fillStyle = `rgb(0, 0, 256)`;
 				break;
 		}
-		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), Math.ceil(width / r), Math.ceil(height / r));
+		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), boxWidth, boxHeight);
 	});
 }
 
