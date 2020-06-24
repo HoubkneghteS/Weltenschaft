@@ -22,7 +22,7 @@ function loopThroughHeightmap(callback, targetWorld = world){
 
 function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 100} = {}, seed) {
 
-	var array = [];
+	var heightmap = [];
 	const {Perlin2} = require('tumult'),
 		small = 0.03 * scale,
 		map = new Perlin2(seed);
@@ -33,10 +33,10 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
 			row.push( Math.round( value * roundFactor) / roundFactor );
 		}
-		array.push(row);
+		heightmap.push(row);
 	}
 
-	return array;
+	return heightmap;
 }
 
 function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor} = params, seed = Math.random()) {
