@@ -6,7 +6,7 @@ const params = {
 	landScale: 100, //scale for landforms
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
-	roundFactor: 100, //to which decimal place terrain array values are rounded
+	roundFactor: 10, //to which decimal place terrain array values are rounded
 };
 
 var world;
@@ -20,7 +20,7 @@ function loopThroughHeightmap(callback, targetWorld = world){
 	});
 }
 
-function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 100} = {}, seed) {
+function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 10} = {}, seed) {
 
 	var heightmap = [];
 	const {Perlin2} = require('tumult'),
