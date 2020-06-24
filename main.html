@@ -28,13 +28,11 @@
 		<button id="save" onclick="saveWorld()">Save World</button>
 		<button id="load" onclick="loadWorld()">Open World</button>
 		<script>
-			const canvas = document.getElementById('terrainbox');
-			const canvas2 = document.getElementById('waterbox');
-
-			canvas.width = 1200;
-			canvas.height = 900;
-			canvas2.width = 1200;
-			canvas2.height = 900;
+			//sets width and height of all the canvases on the screen
+			document.querySelectorAll('canvas').forEach((canvas) => {
+				canvas.width = 1200;
+				canvas.height = 900;
+			});
 		</script>
 	</div>
 </body>

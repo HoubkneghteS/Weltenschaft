@@ -14,8 +14,8 @@ var world;
 function loopThroughHeightmap(callback, targetWorld = world){
 	targetWorld.elevation.forEach((row, x) => {
 		row.forEach((localElevation, y) => {
-			let localHumidity = targetWorld.humidity[x][y]
-			callback(localElevation, localHumidity, x, y)
+			let localHumidity = targetWorld.humidity[x][y];
+			callback(localElevation, localHumidity, x, y);
 		});
 	});
 }
@@ -61,12 +61,10 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 
 /*DRAWING TERRAIN TO CANVAS*/
 
-function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
+function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")){
 
-	const canvas = document.getElementById(canvasId),
-	ctx = canvas.getContext('2d');
-
-	const { width, height } = canvas;
+	const ctx = targetCanvas.getContext('2d'),
+		{ width, height } = targetCanvas;
 
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world,
@@ -117,16 +115,14 @@ function drawLand(mode = params.drawmode, canvasId = "terrainbox"){
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 				break;
 			}
-		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), boxWidth, boxHeight);
+		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
 	});
 }
 
-function drawWater(mode = params.drawMode, canvasId = "waterbox"){
+function drawWater(mode = params.drawMode, targetCanvas = document.getElementById("waterbox")){
 
-	const canvas = document.getElementById(canvasId),
-	ctx = canvas.getContext('2d');
-
-	const { width, height } = canvas;
+	const ctx = targetCanvas.getContext('2d'),
+		{ width, height } = targetCanvas;
 
 	const biomes = require('./biomes.json'),
 		{elevation, humidity, seaLevel} = world,
@@ -166,16 +162,15 @@ function drawWater(mode = params.drawMode, canvasId = "waterbox"){
 				ctx.fillStyle = `rgb(0, 0, 256)`;
 				break;
 		}
-		ctx.fillRect(Math.ceil((width / r) * x), Math.ceil((height / r) * y), boxWidth, boxHeight);
+		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
 	});
 }
 
 function draw(mode = params.drawMode) {
-
 	params.drawMode = mode || "normal";
 
-	drawLand(mode, "terrainbox");
-	drawWater(mode, "waterbox");
+	drawLand(mode, document.getElementById("terrainbox"));
+	drawWater(mode, document.getElementById("waterbox"));
 }
 
 /* SAVING AND LOADING WORLDS*/
@@ -244,7 +239,6 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-
 	const {resolution, hilliness, baseHumidity} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
@@ -258,18 +252,6 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {
-	switch (args[0]) {
-		case "generate":
-			generate();
-			break;
-		case "draw":
-			draw(args[1]);
-			break;
-		case "save":
-			saveWorld();
-			break;
-		case "load":
-			loadWorld();
-			break;
-	}
+	//calls function with name args[0] with argument args[1]
+	window[args[0]](args[1]);
 });
