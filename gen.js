@@ -226,7 +226,7 @@ ipcRenderer.on("setting", (e, args) => {
 	params[settingToChange] = newValue;
 
 	if(settingToChange == "seaLevel"){
-		const drawDelay = Math.round(world.elevation.length ** 2 / 540);
+		const drawDelay = Math.round(world.elevation.length ** 2 / 550);
 		world.seaLevel = newValue;	
 
 		//prevents redrawing from happening too often as it slows things down
