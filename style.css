@@ -100,7 +100,7 @@ button, .slider::-webkit-slider-thumb{
 
 button, .slider::-webkit-slider-thumb, .dropup a{
 	box-shadow: 1.5px 1.5px var(--ui-dark);
-	transition-duration: 0.3s;
+	transition-duration: 0.2s;
 	background:var(--ui-light);
 	padding: 0.2em 1em;
 	line-height: 2em;
