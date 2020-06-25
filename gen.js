@@ -4,6 +4,7 @@ const params = {
 	baseHumidity: 50, //baseline for humidity
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
+	granularScale: 0.03, //size of granular octave relative to the land and biomeScale
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
 	roundFactor: 10, //to which decimal place terrain array values are rounded
@@ -20,11 +21,11 @@ function loopThroughHeightmap(callback, targetWorld = world){
 	});
 }
 
-function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 10} = {}, seed) {
+function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03} = {}, seed) {
 
 	var heightmap = [];
 	const {Perlin2} = require('tumult'),
-		small = 0.03 * scale,
+		small = granularScale * scale,
 		map = new Perlin2(seed);
 
 	for (let x = 0; x < resolution; x++) {
@@ -39,7 +40,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	return heightmap;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor} = params, seed = Math.random()) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale} = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -47,8 +48,8 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	if (resolution > 512) console.warn("Map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
 	world = {
-		elevation: createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor}, seed + 0.01),
-		humidity: createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor}, seed),
+		elevation: createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor, granularScale: granularScale}, seed + 0.01),
+		humidity: createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor, granularScale: granularScale}, seed),
 		seaLevel: seaLevel,
 		seed: seed,
 		structures: {},
