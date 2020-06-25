@@ -11,7 +11,7 @@ body {
 
 h2{
 	font-size:150%;
-	margin: 16px 0px 0px;
+	margin: 16px 0 0;
 }
 
 hr{
@@ -33,7 +33,7 @@ hr{
 .wrapper canvas {
 	position: absolute;
 	object-fit: contain;
-	object-position: 0px 50%;
+	object-position: 0 50%;
 	height: 100%;
 	width: 100%;
 }
@@ -50,12 +50,12 @@ hr{
 	display: none;
 	position: absolute;
 	flex-direction: column;
-	background-color: var(--ui-dark);
+	background: var(--ui-dark);
 	width: 200px;
 	padding: 2px;
 	border-radius: 3px;
 	text-align: left;
-	left: 0px;
+	left: 0;
 	bottom: 50%;
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
@@ -110,8 +110,8 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 .slider {
 	width: 100%;
 	background: var(--ui-white);
-	margin-bottom:10px;
-	height:4px;
+	margin-bottom: 10px;
+	height: 4px;
 	-webkit-appearance: none;
 	cursor: default;
 }
