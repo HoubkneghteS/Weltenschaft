@@ -185,11 +185,7 @@ async function loadWorld(){
 
 	if (!savedWorld) return;
 
-	world = {};
-
-	for(key in savedWorld){
-		world[key] = savedWorld[key];
-	}
+	world = {...savedWorld};
 
 	//repairs worlds with missing data
 
