@@ -27,14 +27,14 @@ app.on('ready', () => {
 					label: locale.save,
 					accelerator: 'CmdOrCtrl+S',
 					click() {
-						mainWindow.webContents.send("shortcut", "save");
+						mainWindow.webContents.send("shortcut", "saveWorld");
 					}
 				},
 				{
 					label: locale.load,
 					accelerator: 'CmdOrCtrl+O',
 					click() {
-						mainWindow.webContents.send("shortcut", "load");
+						mainWindow.webContents.send("shortcut", "loadWorld");
 					}
 				},
 				{ type: 'separator' },
