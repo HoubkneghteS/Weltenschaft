@@ -55,15 +55,15 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 			scale: landScale,
 			resolution: resolution,
 			roundFactor: roundFactor,
-			granularScale: granularScale},
+			granularScale: granularScale },
 			seed + 0.01),
 		humidity: createHeightmap(
-			{base: baseHumidity,
-			scale: biomeScale,
+			{ base: baseHumidity,
+			scale: biomeScale,s
 			resolution: resolution,
 			roundFactor: roundFactor,
-			granularScale:
-			granularScale}, seed),
+			granularScale: granularScale }
+			, seed),
 		seaLevel: seaLevel,
 		seed: seed,
 		structures: {},
