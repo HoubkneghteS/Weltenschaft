@@ -24,6 +24,15 @@ app.on('ready', () => {
 						mainWindow.webContents.send("shortcut", "generate");
 					}
 				},
+				{
+					label: "polygon",
+					visible: false,
+					accelerator: 'CmdOrCtrl+Shift+P',
+					click() {
+						mainWindow.webContents.send("shortcut", "polygon");
+					}
+				},
+
 				{ type: 'separator' },
 				{
 					label: locale.save,

@@ -60,6 +60,11 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	console.timeEnd("generate");
 }
 
+function polygon(){
+	generate({...params, granularScale: 0.000000001});
+	console.log("HAIL SIERPINSKI");
+}
+
 /*DRAWING TERRAIN TO CANVAS*/
 
 function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")){
