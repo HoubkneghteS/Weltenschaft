@@ -1,6 +1,7 @@
 const params = {
 	resolution: 256, //resolution of terrain array (n * n)
 	hilliness: 30, //amplitude of the elevation noise
+	baseElevation: 0, //baseline for elevation
 	baseHumidity: 50, //baseline for humidity
 	biomeScale: 155, //scale of humidity-based biomes
 	landScale: 100, //scale for landforms
@@ -40,7 +41,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	return heightmap;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale} = params, seed = Math.random()) {
+function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation} = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -48,8 +49,21 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	if (resolution > 512) console.warn("Map sizes above 512 not officially supported, any bugs related to this may not be fixed");
 
 	world = {
-		elevation: createHeightmap({amplitude: hilliness, scale: landScale, resolution: resolution, roundFactor: roundFactor, granularScale: granularScale}, seed + 0.01),
-		humidity: createHeightmap({base: baseHumidity, scale: biomeScale, resolution: resolution, roundFactor: roundFactor, granularScale: granularScale}, seed),
+		elevation: createHeightmap(
+			{ base: baseElevation,
+			amplitude: hilliness,
+			scale: landScale,
+			resolution: resolution,
+			roundFactor: roundFactor,
+			granularScale: granularScale},
+			seed + 0.01),
+		humidity: createHeightmap(
+			{base: baseHumidity,
+			scale: biomeScale,
+			resolution: resolution,
+			roundFactor: roundFactor,
+			granularScale:
+			granularScale}, seed),
 		seaLevel: seaLevel,
 		seed: seed,
 		structures: {},
