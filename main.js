@@ -1,6 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
-var locale;
+var locale, menuTemplate;
 
 app.on('ready', () => {
 
@@ -234,7 +234,7 @@ ipcMain.on("saveWorld", (e, world) => {
 	fs.writeFileSync(path.toString(), JSON.stringify(world));
 });
 
-ipcMain.handle("loadWorld", async (e) => {
+ipcMain.handle("loadWorld", async () => {
 	const fs = require('fs'),
 	{ dialog } = require('electron'),
 		path = dialog.showOpenDialogSync(mainWindow, {
