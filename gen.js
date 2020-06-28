@@ -66,7 +66,7 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 			, seed),
 		seaLevel: seaLevel,
 		seed: seed,
-		structures: {},
+		structures: [],
 	};
 
 	draw();
