@@ -59,7 +59,7 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 			seed + 0.01),
 		humidity: createHeightmap(
 			{ base: baseHumidity,
-			scale: biomeScale,s
+			scale: biomeScale,
 			resolution: resolution,
 			roundFactor: roundFactor,
 			granularScale: granularScale }
