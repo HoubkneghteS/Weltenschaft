@@ -55,7 +55,7 @@ hr{
 	border-radius: 3px;
 	text-align: left;
 	left: 0;
-	bottom: 50%;
+	bottom: 100%;
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
