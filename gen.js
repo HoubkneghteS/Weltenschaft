@@ -13,7 +13,7 @@ const params = {
 
 var world;
 
-function loopThroughHeightmap(callback, targetWorld = world){
+function loopThroughHeightmap(callback, targetWorld = world) {
 	targetWorld.elevation.forEach((row, x) => {
 		row.forEach((localElevation, y) => {
 			let localHumidity = targetWorld.humidity[x][y];
@@ -22,10 +22,10 @@ function loopThroughHeightmap(callback, targetWorld = world){
 	});
 }
 
-function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03} = {}, seed) {
+function createHeightmap({ base = 0, amplitude = 6, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
 
 	var heightmap = [];
-	const {Perlin2} = require('tumult'),
+	const { Perlin2 } = require('tumult'),
 		small = granularScale * scale,
 		map = new Perlin2(seed);
 
@@ -33,7 +33,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 		let row = [];
 		for (let y = 0; y < resolution; y++) {
 			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
-			row.push( Math.round( value * roundFactor) / roundFactor );
+			row.push(Math.round(value * roundFactor) / roundFactor);
 		}
 		heightmap.push(row);
 	}
@@ -41,7 +41,7 @@ function createHeightmap({base = 0, amplitude = 6, scale = 100, resolution = 256
 	return heightmap;
 }
 
-function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation} = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -50,20 +50,24 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 
 	world = {
 		elevation: createHeightmap(
-			{ base: baseElevation,
-			amplitude: hilliness,
-			scale: landScale,
-			resolution: resolution,
-			roundFactor: roundFactor,
-			granularScale: granularScale },
+			{
+				base: baseElevation,
+				amplitude: hilliness,
+				scale: landScale,
+				resolution: resolution,
+				roundFactor: roundFactor,
+				granularScale: granularScale
+			},
 			seed + 0.01),
 		humidity: createHeightmap(
-			{ base: baseHumidity,
-			scale: biomeScale,
-			resolution: resolution,
-			roundFactor: roundFactor,
-			granularScale: granularScale }
-			, seed),
+			{
+				base: baseHumidity,
+				scale: biomeScale,
+				resolution: resolution,
+				roundFactor: roundFactor,
+				granularScale: granularScale
+			},
+			seed),
 		seaLevel: seaLevel,
 		seed: seed,
 		structures: [],
@@ -74,20 +78,20 @@ function generate({resolution, hilliness, baseHumidity, biomeScale, landScale, s
 	console.timeEnd("generate");
 }
 
-function polygon(){
-	generate({...params, granularScale: 0.000000001});
+function polygon() {
+	generate({ ...params, granularScale: 0.000000001 });
 	console.log("HAIL SIERPINSKI");
 }
 
 /*DRAWING TERRAIN TO CANVAS*/
 
-function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")){
+function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")) {
 
 	const ctx = targetCanvas.getContext('2d'),
 		{ width, height } = targetCanvas;
 
 	const biomes = require('./biomes.json'),
-		{elevation, humidity, seaLevel} = world,
+		{ elevation, humidity, seaLevel } = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
@@ -104,20 +108,20 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 				ctx.fillStyle =
 					localElevation > 1250 ? biomes.peak
 						: localElevation > 1000 ? biomes.mountain
-						: localElevation > 850 ? biomes.mountain2
-						: localElevation > 750 ?
-							localHumidity > 0 ? biomes.mountain2
-							: biomes.mesa
-						: localElevation > -100 ?
-							localHumidity > 250 ? biomes.urwald
-							: localHumidity > 150 ? biomes.forest
-							: localHumidity > 0 ? biomes.plains
-							: localHumidity > -30 ? biomes.savannah
-							: biomes.desert
-						: localElevation > -500 ?
-							localHumidity > 0 ? biomes.desert
-							: biomes.canyon
-							: biomes.desertabyss
+							: localElevation > 850 ? biomes.mountain2
+								: localElevation > 750 ?
+									localHumidity > 0 ? biomes.mountain2
+										: biomes.mesa
+									: localElevation > -100 ?
+										localHumidity > 250 ? biomes.urwald
+											: localHumidity > 150 ? biomes.forest
+												: localHumidity > 0 ? biomes.plains
+													: localHumidity > -30 ? biomes.savannah
+														: biomes.desert
+										: localElevation > -500 ?
+											localHumidity > 0 ? biomes.desert
+												: biomes.canyon
+											: biomes.desertabyss
 				break;
 			case "elevation":
 				greenLevel = localElevation / 10 + 30
@@ -134,18 +138,18 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
 				break;
-			}
+		}
 		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
 	});
 }
 
-function drawWater(mode = params.drawMode, targetCanvas = document.getElementById("waterbox")){
+function drawWater(mode = params.drawMode, targetCanvas = document.getElementById("waterbox")) {
 
 	const ctx = targetCanvas.getContext('2d'),
 		{ width, height } = targetCanvas;
 
 	const biomes = require('./biomes.json'),
-		{elevation, humidity, seaLevel} = world,
+		{ elevation, humidity, seaLevel } = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
@@ -195,35 +199,35 @@ function draw(mode = params.drawMode) {
 
 /* SAVING AND LOADING WORLDS*/
 
-function saveWorld(){
-	const saveWorld = {...world}
+function saveWorld() {
+	const saveWorld = { ...world }
 	ipcRenderer.send("saveWorld", saveWorld);
 }
 
-async function loadWorld(){
+async function loadWorld() {
 	const savedWorld = await ipcRenderer.invoke("loadWorld");
 
 	if (!savedWorld) return;
 
-	world = {...savedWorld};
+	world = { ...savedWorld };
 
 	//repairs worlds with missing data
 
-	let {seed, seaLevel, humidity, elevation} = world;
+	let { seed, seaLevel, humidity, elevation } = world;
 
-	if(!seed) {
+	if (!seed) {
 		console.warn("No seed detected, defaulting to undefined");
 		world.seed = undefined;
 	}
-	if (seaLevel === undefined){
+	if (seaLevel === undefined) {
 		console.warn("No sea level detected, defaulting to 0");
 		world.seaLevel = 0;
 	}
-	if(!humidity || !Array.isArray(humidity)){
+	if (!humidity || !Array.isArray(humidity)) {
 		console.warn("No humidity heightmap detected, defaulting to seed");
 		world.humidity = createHeightmap({ resolution: elevation.length }, seed)
 	}
-	if(!elevation || !Array.isArray(elevation)){
+	if (!elevation || !Array.isArray(elevation)) {
 		console.error("World data irreversably corrupted");
 		return;
 	}
@@ -241,9 +245,9 @@ ipcRenderer.on("setting", (e, args) => {
 
 	params[settingToChange] = newValue;
 
-	if(settingToChange == "seaLevel"){
+	if (settingToChange == "seaLevel") {
 		const drawDelay = Math.round(world.elevation.length ** 2 / 550);
-		world.seaLevel = newValue;	
+		world.seaLevel = newValue;
 
 		//prevents redrawing from happening too often as it slows things down
 		if (new Date() - drawWater.lastCall > drawDelay || !drawWater.lastCall) {
@@ -255,7 +259,7 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const {resolution, hilliness, baseHumidity} = params;
+	const { resolution, hilliness, baseHumidity } = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
