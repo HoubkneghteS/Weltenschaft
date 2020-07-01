@@ -18,7 +18,7 @@
 	<input type="range" min="50" max="512" class="slider" id="resolution" onInput="settingsSet('resolution');">
 	<hr />
 	<button id="resetSettings" onclick="reset();">Reset</button>
-	<script type="text/javascript">
+	<script>
 		const { ipcRenderer } = require("electron");
 
 		ipcRenderer.on("sendSettings", (e, value) => {
