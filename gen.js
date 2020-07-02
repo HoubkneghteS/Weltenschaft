@@ -124,13 +124,14 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 											: biomes.desertabyss
 				break;
 			case "elevation":
-				greenLevel = localElevation / 10 + 30
+				greenLevel = localElevation / 10 + 30;
 
 				ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
 				break;
 			case "absolute":
 				greenLevel = (localElevation + 1000) / 15;
 				redLevel = (localElevation + 1000) / 15;
+
 				ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
 				break;
 			case "humidity":
@@ -164,15 +165,10 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 		switch (mode) {
 			default:
 			case "normal":
-				if (localElevation > seaLevel - 200) {
-					ctx.fillStyle = biomes.shore;
-				} else if (localElevation > seaLevel - 800) {
-					ctx.fillStyle = biomes.water;
-				} else if (localElevation > seaLevel - 1250) {
-					ctx.fillStyle = biomes.abyss;
-				} else {
-					ctx.fillStyle = biomes.trench;
-				}
+				if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
+				else if (localElevation > seaLevel - 800) ctx.fillStyle = biomes.water;
+				else if (localElevation > seaLevel - 1250) ctx.fillStyle = biomes.abyss;
+				else ctx.fillStyle = biomes.trench;
 				break;
 			case "elevation":
 				blueLevel = (seaLevel - localElevation) / 10 + 30;
@@ -183,7 +179,7 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 				//absolute drawmode does not render water but I'm still putting it here so it matches
 				return;
 			case "humidity":
-				ctx.fillStyle = `rgb(0, 0, 256)`;
+				ctx.fillStyle = '#00F';
 				break;
 		}
 		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
