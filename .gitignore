@@ -9,3 +9,6 @@ lang.json
 
 #ESLint config
 .eslintrc.json
+
+#debug stuff
+.vscode
