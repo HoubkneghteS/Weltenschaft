@@ -228,7 +228,10 @@ ipcMain.on("setting", (e, ...args) => {
 	mainWindow.webContents.send("setting", args);
 });
 
-ipcMain.handle('getLang', async(e, language) => getLocaleObject(language));
+ipcMain.handle('getLang', async(e, language) => {
+	if (!language) return locale
+	return getLocaleObject(language)
+});
 
 ipcMain.on("saveWorld", (e, world) => {
 	const fs = require('fs'),
