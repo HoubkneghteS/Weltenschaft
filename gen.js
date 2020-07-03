@@ -103,8 +103,6 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 	const boxWidth = Math.ceil(width / r);
 	const boxHeight = Math.ceil(height / r);
 
-	let redLevel, greenLevel, blueLevel;
-
 	switch (mode) {
 		default:
 		case "normal":
@@ -131,26 +129,20 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 			break;
 		case "elevation":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				greenLevel = localElevation / 10 + 30;
-
-				ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
+				ctx.fillStyle = `rgb(0, ${localElevation / 10 + 30}, 0)`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
 		case "absolute":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				greenLevel = (localElevation + 1000) / 15;
-				redLevel = (localElevation + 1000) / 15;
-
-				ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
+				let zLevel = (localElevation + 1000) / 15;
+				ctx.fillStyle = `rgb(${zLevel}, ${zLevel}, 0)`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
 		case "humidity":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				blueLevel = (localHumidity + 100) / 2
-
-				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+				ctx.fillStyle = `rgb(0, 0, ${(localHumidity + 100) / 2})`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
@@ -171,9 +163,6 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 	const boxWidth = Math.ceil(width / r);
 	const boxHeight = Math.ceil(height / r);
 
-	let redLevel, greenLevel, blueLevel;
-
-
 	switch (mode) {
 		default:
 		case "normal":
@@ -189,9 +178,8 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 		case "elevation":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return;
-				blueLevel = (seaLevel - localElevation) / 10 + 30;
 
-				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
+				ctx.fillStyle = `rgb(0, 0, ${(seaLevel - localElevation) / 10 + 30})`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
