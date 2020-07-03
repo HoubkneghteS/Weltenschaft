@@ -85,8 +85,8 @@ function polygon() {
 
 /*DRAWING TERRAIN TO CANVAS*/
 
-function drawPixel(ctx, boxWidth, boxHeight, x, y){
-	ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
+function drawPixel(ctx, width, height, x, y){
+	ctx.fillRect(width * x, height * y, width, height);
 }
 
 function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")) {
