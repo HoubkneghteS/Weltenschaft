@@ -155,7 +155,7 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 		{ width, height } = targetCanvas;
 
 	const biomes = require('./biomes.json'),
-		{ elevation, humidity, seaLevel } = world,
+		{ elevation, seaLevel } = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
@@ -240,6 +240,7 @@ async function loadWorld() {
 
 	draw();
 }
+
 /*INTERPROCESS COMMUNICATION*/
 
 const { ipcRenderer } = require("electron");
