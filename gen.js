@@ -85,11 +85,15 @@ function polygon() {
 
 /*DRAWING TERRAIN TO CANVAS*/
 
+function drawPixel(ctx, boxWidth, boxHeight, x, y){
+	ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
+}
+
 function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")) {
 
 	const ctx = targetCanvas.getContext('2d'),
 		{ width, height } = targetCanvas;
-
+		
 	const biomes = require('./biomes.json'),
 		{ elevation, humidity, seaLevel } = world,
 		r = elevation.length;
@@ -101,13 +105,13 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 
 	let redLevel, greenLevel, blueLevel;
 
-	loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-		switch (mode) {
-			default:
-			case "normal":
+	switch (mode) {
+		default:
+		case "normal":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				ctx.fillStyle =
-					localElevation > 1250 ? biomes.peak
-						: localElevation > 1000 ? biomes.mountain
+					localElevation > 1300 ? biomes.peak
+						: localElevation > 1100 ? biomes.mountain
 							: localElevation > 850 ? biomes.mountain2
 								: localElevation > 750 ?
 									localHumidity > 0 ? biomes.mountain2
@@ -121,27 +125,36 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 										: localElevation > -500 ?
 											localHumidity > 0 ? biomes.desert
 												: biomes.canyon
-											: biomes.desertabyss
-				break;
-			case "elevation":
+											: biomes.desertabyss;
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+				});
+			break;
+		case "elevation":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				greenLevel = localElevation / 10 + 30;
 
 				ctx.fillStyle = `rgb(0, ${greenLevel}, 0)`;
-				break;
-			case "absolute":
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+		case "absolute":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				greenLevel = (localElevation + 1000) / 15;
 				redLevel = (localElevation + 1000) / 15;
 
 				ctx.fillStyle = `rgb(${redLevel}, ${greenLevel}, 0)`;
-				break;
-			case "humidity":
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+		case "humidity":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				blueLevel = (localHumidity + 100) / 2
 
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
-				break;
-		}
-		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
-	});
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+	}
 }
 
 function drawWater(mode = params.drawMode, targetCanvas = document.getElementById("waterbox")) {
@@ -160,30 +173,39 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 
 	let redLevel, greenLevel, blueLevel;
 
-	loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-		if (localElevation > seaLevel) return;
-		switch (mode) {
-			default:
-			case "normal":
+
+	switch (mode) {
+		default:
+		case "normal":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				if (localElevation > seaLevel) return;
 				if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
 				else if (localElevation > seaLevel - 800) ctx.fillStyle = biomes.water;
 				else if (localElevation > seaLevel - 1250) ctx.fillStyle = biomes.abyss;
 				else ctx.fillStyle = biomes.trench;
-				break;
-			case "elevation":
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+		case "elevation":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				if (localElevation > seaLevel) return;
 				blueLevel = (seaLevel - localElevation) / 10 + 30;
 
 				ctx.fillStyle = `rgb(0, 0, ${blueLevel})`;
-				break;
-			case "absolute":
-				//absolute drawmode does not render water but I'm still putting it here so it matches
-				return;
-			case "humidity":
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+		case "absolute":
+			//absolute drawmode does not render water but I'm still putting it here so it matches
+			return;
+		case "humidity":
+			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+				if (localElevation > seaLevel) return;
 				ctx.fillStyle = '#00F';
-				break;
-		}
-		ctx.fillRect(boxWidth * x, boxHeight * y, boxWidth, boxHeight);
-	});
+				drawPixel(ctx, boxWidth, boxHeight, x, y);
+			});
+			break;
+	}
 }
 
 function draw(mode = params.drawMode) {
