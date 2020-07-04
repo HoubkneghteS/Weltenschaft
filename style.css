@@ -87,7 +87,7 @@ button{
 	margin-right: 5px;
 }
 
-button, .slider::-webkit-slider-thumb{
+button, ::-webkit-slider-thumb{
 	border-radius: 5px;
 	border: 1px solid var(--ui-dark);
 }
@@ -97,7 +97,7 @@ button, .slider::-webkit-slider-thumb{
 	outline: none;
 }
 
-button, .slider::-webkit-slider-thumb, .dropup a{
+button, ::-webkit-slider-thumb, .dropup a{
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 	transition-duration: 0.2s;
 	background:var(--ui-light);
@@ -106,7 +106,7 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 	color: var(--ui-white);
 }
 
-.slider {
+input[type=range] {
 	width: 100%;
 	background: var(--ui-white);
 	margin-bottom: 10px;
@@ -115,7 +115,7 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 	cursor: default;
 }
 
-.slider::-webkit-slider-thumb {
+::-webkit-slider-thumb {
 	-webkit-appearance: none;
 	width: 20px;
 	height: 20px;
@@ -123,7 +123,7 @@ button, .slider::-webkit-slider-thumb, .dropup a{
 }
 
 /*darkens buttons and other components when hovered*/
-.slider::-webkit-slider-thumb:hover, button:hover, .dropup a:hover{
+::-webkit-slider-thumb:hover, button:hover, .dropup a:hover{
 	background: var(--ui-dark);
 	cursor: pointer;
 }
