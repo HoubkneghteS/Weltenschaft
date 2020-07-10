@@ -17,6 +17,8 @@
 	<h2><label for="resolution" id="resolutionHeader">Map Size</label></h2>
 	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');">
 	<hr />
+	<span id="showmore" onclick="toggleShow()">Show more</span>
+	<hr />
 	<button id="resetSettings" onclick="reset();">Reset</button>
 	<script>
 		const { ipcRenderer } = require("electron");
@@ -43,6 +45,15 @@
 				document.getElementById(key).value = value[key];
 				settingsSet(key);
 			}
+		}
+
+		function toggleShow(){
+			if(document.getElementById("showmore")){
+				document.getElementById("showmore").id = "showless";
+			}else{
+				document.getElementById("showless").id = "showmore";
+			}
+			setLang();
 		}
 	</script>
 </body>

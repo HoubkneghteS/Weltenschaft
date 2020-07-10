@@ -21,5 +21,7 @@
 	"load":"Abrir Mundo",
 	"filetype":"Mundo Weltenschaft",
 	"fullscreen": "Alternar pantalla completa",
-	"console": "Alternar consola"
+	"console": "Alternar consola",
+	"showmore": "Mostrar más",
+	"showless": "Muestra menos"
 }

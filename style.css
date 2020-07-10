@@ -134,17 +134,26 @@ input[type=range] {
 
 /*emojis for settings headers*/
 #hillinessHeader::before{
-	content: "⛰️ "
+	content: "⛰️ ";
 }
 
 #humidityHeader::before{
-	content: "💧 "
+	content: "💧 ";
 }
 
 #seaLevelHeader::before{
-	content: "🌊 "
+	content: "🌊 ";
 }
 
 #resolutionHeader::before{
-	content: "🗺️ "
+	content: "🗺️ ";
+}
+
+/*arrows for showmore and showless*/
+#showmore::after{
+	content: " ▼";
+}
+
+#showless::after{
+	content: " ▲";
 }

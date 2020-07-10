@@ -21,5 +21,7 @@
 	"load":"Welt öffnen",
 	"filetype":"Weltenschaft-Welt",
 	"fullscreen": "Vollbild umschalten",
-	"console": "Konsole umschalten"
+	"console": "Konsole umschalten",
+	"showmore": "Mehr anzeigen",
+	"showless": "Weniger anzeigen"
 }
