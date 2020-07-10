@@ -18,6 +18,10 @@
 	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');">
 	<hr />
 	<span id="showmore" onclick="toggleShow()">Show more</span>
+	<div id="advanced" style="display:none">
+		<p>test</p>
+		<button>test</button>
+	</div>
 	<hr />
 	<button id="resetSettings" onclick="reset();">Reset</button>
 	<script>
@@ -50,8 +54,10 @@
 		function toggleShow(){
 			if(document.getElementById("showmore")){
 				document.getElementById("showmore").id = "showless";
+				document.getElementById("advanced").style.display = "block";
 			}else{
 				document.getElementById("showless").id = "showmore";
+				document.getElementById("advanced").style.display = "none";
 			}
 			setLang();
 		}
