@@ -100,8 +100,8 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 
 	ctx.clearRect(0, 0, width, height);
 
-	const boxWidth = Math.ceil(width / r);
-	const boxHeight = Math.ceil(height / r);
+	const boxWidth = Math.ceil(width / r),
+		boxHeight = Math.ceil(height / r);
 
 	switch (mode) {
 		default:
@@ -125,7 +125,7 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 												: biomes.canyon
 											: biomes.desertabyss;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
-				});
+			});
 			break;
 		case "elevation":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
@@ -160,8 +160,8 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 
 	ctx.clearRect(0, 0, width, height);
 
-	const boxWidth = Math.ceil(width / r);
-	const boxHeight = Math.ceil(height / r);
+	const boxWidth = Math.ceil(width / r),
+		boxHeight = Math.ceil(height / r);
 
 	switch (mode) {
 		default:
