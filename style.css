@@ -149,6 +149,10 @@ input[type=range] {
 	content: "🗺️ ";
 }
 
+#granularHeader::before{
+	content: "🧱 ";
+}
+
 /*arrows for showmore and showless*/
 #showmore::after{
 	content: " ▼";

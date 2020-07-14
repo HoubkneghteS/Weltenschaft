@@ -20,15 +20,8 @@
 	<span id="showmore" onclick="toggleShow()">Show more</span>
 	<div id="advanced" style="display:none">
 		<h3>Advanced Settings</h3>
-		<input type="range"/>
-		<button>test</button>
-		<button>test</button>
-		<button>test</button>
-		<button>test</button>
-		<button>test</button>
-		<input type="range"/>
-		<button>test</button>
-		<button>test</button>
+		<h2><label for="granularScale" id="granularHeader">Granular Scale</label></h2>
+		<input type="range" min="0.015" max="0.075" step="0.005" id="granularScale" onInput="settingsSet('granularScale')"/>
 	</div>
 	<hr />
 	<button id="resetSettings" onclick="reset();">Reset</button>
@@ -50,6 +43,7 @@
 				resolution: 256,
 				hilliness: 30,
 				baseHumidity: 50,
+				granularScale: 0.03,
 				seaLevel: 0
 			}
 

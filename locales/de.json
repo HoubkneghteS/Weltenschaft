@@ -13,6 +13,7 @@
 	"humidityHeader":"Feuchtigkeit",
 	"seaLevelHeader":"Meeresspiegel",
 	"resolutionHeader":"Kartengröße",
+	"granularHeader": "Granularität",
 	"resetSettings":"Zurücksetzen",
 	"file":"Datei",
 	"view":"Ansicht",
