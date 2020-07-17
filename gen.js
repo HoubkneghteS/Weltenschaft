@@ -1,6 +1,7 @@
 const params = {
 	resolution: 256, //resolution of terrain array (n * n)
-	hilliness: 30, //amplitude of the elevation noise
+	hilliness: 30, //amplitude of the elevation heightmap
+	humidityRange: 6, //amplitude for the humidity heightmap
 	baseElevation: 0, //baseline for elevation
 	baseHumidity: 50, //baseline for humidity
 	biomeScale: 155, //scale of humidity-based biomes
@@ -41,7 +42,7 @@ function createHeightmap({ base = 0, amplitude = 6, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function generate({ resolution, hilliness, baseHumidity, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation } = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -62,6 +63,7 @@ function generate({ resolution, hilliness, baseHumidity, biomeScale, landScale, 
 		humidity: createHeightmap(
 			{
 				base: baseHumidity,
+				amplitude: humidityRange,
 				scale: biomeScale,
 				resolution: resolution,
 				roundFactor: roundFactor,
