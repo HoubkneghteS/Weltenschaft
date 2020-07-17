@@ -153,6 +153,10 @@ input[type=range] {
 	content: "🧱 ";
 }
 
+#humidityRangeHeader::before{
+	content: "🌵 ";
+}
+
 /*arrows for showmore and showless*/
 #showmore::after{
 	content: " ▼";

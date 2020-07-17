@@ -191,7 +191,7 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 		case "humidity":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return;
-				ctx.fillStyle = '#00F';
+				ctx.fillStyle = '#07F';
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
@@ -268,12 +268,13 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const { resolution, hilliness, baseHumidity, granularScale} = params;
+	const { resolution, hilliness, baseHumidity, humidityRange, granularScale} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
 			"resolution": resolution,
 			"hilliness": hilliness,
+			"humidityRange": humidityRange,
 			"granularScale": granularScale,
 			"baseHumidity": baseHumidity,
 			"seaLevel": world.seaLevel
