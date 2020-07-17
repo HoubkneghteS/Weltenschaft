@@ -228,6 +228,10 @@ ipcMain.on("setting", (e, ...args) => {
 	mainWindow.webContents.send("setting", args);
 });
 
+ipcMain.on("polygon", () => {
+	mainWindow.webContents.send("shortcut", "polygon");
+});
+
 ipcMain.handle('getLang', async(e, language) => {
 	if (!language) return locale
 	return getLocaleObject(language)
