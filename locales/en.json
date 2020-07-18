@@ -14,6 +14,8 @@
 	"seaLevelHeader":"Sea Level",
 	"resolutionHeader":"Map Size",
 	"granularHeader": "Granular Scale",
+	"humidityRangeHeader": "Humidity Range",
+	"advancedSettings": "Advanced Settings",
 	"resetSettings":"Reset",
 	"file":"File",
 	"view":"View",

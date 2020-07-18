@@ -14,6 +14,8 @@
 	"seaLevelHeader":"Nivel del mar",
 	"resolutionHeader":"Tamaño del mapa",
 	"granularHeader": "Granularidad",
+	"humidityRangeHeader": "Humidity Range",
+	"advancedSettings": "Configuración avanzada",
 	"resetSettings":"Reajustar",
 	"file":"Archivo",
 	"view":"Ver",
