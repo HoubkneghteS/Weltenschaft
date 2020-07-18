@@ -133,35 +133,13 @@ input[type=range] {
 }
 
 /*emojis for settings headers*/
-#hillinessHeader::before{
-	content: "⛰️ ";
-}
-
-#humidityHeader::before{
-	content: "💧 ";
-}
-
-#seaLevelHeader::before{
-	content: "🌊 ";
-}
-
-#resolutionHeader::before{
-	content: "🗺️ ";
-}
-
-#granularHeader::before{
-	content: "🧱 ";
-}
-
-#humidityRangeHeader::before{
-	content: "🌵 ";
-}
+#hillinessHeader::before{ content: "⛰️ "}
+#humidityHeader::before{ content: "💧 "}
+#seaLevelHeader::before{ content: "🌊 "}
+#resolutionHeader::before{ content: "🗺️ "}
+#granularHeader::before{ content: "🧱 "}
+#humidityRangeHeader::before{ content: "🌵 "}
 
 /*arrows for showmore and showless*/
-#showmore::after{
-	content: " ▼";
-}
-
-#showless::after{
-	content: " ▲";
-}
+#showmore::after{ content: " ▼"}
+#showless::after{ content: " ▲"}
