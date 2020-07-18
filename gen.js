@@ -14,10 +14,10 @@ const params = {
 
 var world;
 
-function loopThroughHeightmap(callback, targetWorld = world) {
-	targetWorld.elevation.forEach((row, x) => {
+function loopThroughHeightmap(callback) {
+	world.elevation.forEach((row, x) => {
 		row.forEach((localElevation, y) => {
-			let localHumidity = targetWorld.humidity[x][y];
+			let localHumidity = world.humidity[x][y];
 			callback(localElevation, localHumidity, x, y);
 		});
 	});
