@@ -97,7 +97,7 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 		{ width, height } = targetCanvas;
 		
 	const biomes = require('./biomes.json'),
-		{ elevation, humidity, seaLevel } = world,
+		{ elevation } = world,
 		r = elevation.length;
 
 	ctx.clearRect(0, 0, width, height);
