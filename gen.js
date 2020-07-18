@@ -24,7 +24,6 @@ function loopThroughHeightmap(callback, targetWorld = world) {
 }
 
 function createHeightmap({ base = 0, amplitude, scale, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
-s
 	var heightmap = [];
 	const { Perlin2 } = require('tumult'),
 		small = granularScale * scale,
