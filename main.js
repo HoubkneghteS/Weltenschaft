@@ -111,7 +111,6 @@ app.on('ready', () => {
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 	createMainWindow();
-
 });
 
 //mac menu compatibility
@@ -256,7 +255,7 @@ ipcMain.handle("loadWorld", async () => {
 		path = dialog.showOpenDialogSync(mainWindow, {
 			filters: [
 				{ name: locale.filetype, extensions: ['ws'] }
-			]});
+		]});
 
 	if (!path) return;
 
