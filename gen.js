@@ -282,6 +282,8 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {
-	//calls function with name args[0] with argument args[1]
-	window[args[0]](args[1]);
+	let shortcut = args[0],
+		shortcutArgs = args.slice(1);
+		
+	window[shortcut](...shortcutArgs);
 });
