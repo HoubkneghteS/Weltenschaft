@@ -186,7 +186,7 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 			break;
 		case "absolute":
 			//absolute drawmode does not render water but I'm still putting it here so it matches
-			return;
+			return
 		case "humidity":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return;
@@ -236,7 +236,7 @@ async function loadWorld() {
 	}
 	if (!elevation || !Array.isArray(elevation)) {
 		console.error("World data irreversably corrupted");
-		return;
+		return
 	}
 
 	draw();
@@ -284,6 +284,6 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 ipcRenderer.on("shortcut", (e, ...args) => {
 	let shortcut = args[0],
 		shortcutArgs = args.slice(1);
-		
+
 	window[shortcut](...shortcutArgs);
 });
