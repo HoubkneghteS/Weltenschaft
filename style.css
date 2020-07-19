@@ -137,6 +137,7 @@ input[type=range] {
 #humidityHeader::before{ content: "💧 "}
 #seaLevelHeader::before{ content: "🌊 "}
 #resolutionHeader::before{ content: "🗺️ "}
+#advancedSettings::before{ content: "⚙️ "}
 #granularHeader::before{ content: "🧱 "}
 #humidityRangeHeader::before{ content: "🌵 "}
 
