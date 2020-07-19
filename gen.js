@@ -93,15 +93,11 @@ function drawPixel(ctx, width, height, x, y){
 function drawLand(mode = params.drawmode) {
 
 	const ctx = document.getElementById("terrainbox").getContext('2d'),
-		{ width, height } = document.getElementById("terrainbox");
-		
-	const biomes = require('./biomes.json'),
+		{ width, height } = document.getElementById("terrainbox"),
+		biomes = require('./biomes.json'),
 		{ elevation } = world,
-		r = elevation.length;
-
-	ctx.clearRect(0, 0, width, height);
-
-	const boxWidth = Math.ceil(width / r),
+		r = elevation.length,
+		boxWidth = Math.ceil(width / r),
 		boxHeight = Math.ceil(height / r);
 
 	switch (mode) {
@@ -153,16 +149,14 @@ function drawLand(mode = params.drawmode) {
 function drawWater(mode = params.drawMode) {
 
 	const ctx = document.getElementById("waterbox").getContext('2d'),
-		{ width, height } = document.getElementById("waterbox");
-
-	const biomes = require('./biomes.json'),
+		{ width, height } = document.getElementById("waterbox"),
+		biomes = require('./biomes.json'),
 		{ elevation, seaLevel } = world,
-		r = elevation.length;
+		r = elevation.length,
+		boxWidth = Math.ceil(width / r),
+		boxHeight = Math.ceil(height / r);
 
 	ctx.clearRect(0, 0, width, height);
-
-	const boxWidth = Math.ceil(width / r),
-		boxHeight = Math.ceil(height / r);
 
 	switch (mode) {
 		default:
@@ -282,7 +276,7 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {
-	let shortcut = args[0],
+	const shortcut = args[0],
 		shortcutArgs = args.slice(1);
 
 	window[shortcut](...shortcutArgs);
