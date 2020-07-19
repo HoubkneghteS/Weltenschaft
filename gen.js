@@ -90,10 +90,10 @@ function drawPixel(ctx, width, height, x, y){
 	ctx.fillRect(width * x, height * y, width, height);
 }
 
-function drawLand(mode = params.drawmode, targetCanvas = document.getElementById("terrainbox")) {
+function drawLand(mode = params.drawmode) {
 
-	const ctx = targetCanvas.getContext('2d'),
-		{ width, height } = targetCanvas;
+	const ctx = document.getElementById("terrainbox").getContext('2d'),
+		{ width, height } = document.getElementById("terrainbox");
 		
 	const biomes = require('./biomes.json'),
 		{ elevation } = world,
@@ -150,10 +150,10 @@ function drawLand(mode = params.drawmode, targetCanvas = document.getElementById
 	}
 }
 
-function drawWater(mode = params.drawMode, targetCanvas = document.getElementById("waterbox")) {
+function drawWater(mode = params.drawMode) {
 
-	const ctx = targetCanvas.getContext('2d'),
-		{ width, height } = targetCanvas;
+	const ctx = document.getElementById("waterbox").getContext('2d'),
+		{ width, height } = document.getElementById("waterbox");
 
 	const biomes = require('./biomes.json'),
 		{ elevation, seaLevel } = world,
@@ -200,8 +200,8 @@ function drawWater(mode = params.drawMode, targetCanvas = document.getElementByI
 function draw(mode = params.drawMode) {
 	params.drawMode = mode || "normal";
 
-	drawLand(mode, document.getElementById("terrainbox"));
-	drawWater(mode, document.getElementById("waterbox"));
+	drawLand(mode);
+	drawWater(mode);
 }
 
 /* SAVING AND LOADING WORLDS*/
