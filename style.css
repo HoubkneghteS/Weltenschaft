@@ -63,9 +63,7 @@ hr{
 	display: flex;
 }
 
-.wide{
-	min-width: 608px;
-}
+.wide{ min-width: 610px;}
 
 .unselectable {
 	user-select: none;
