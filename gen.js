@@ -94,7 +94,6 @@ function drawLand(mode = params.drawmode) {
 
 	const ctx = document.getElementById("terrainbox").getContext('2d'),
 		{ width, height } = document.getElementById("terrainbox"),
-		biomes = require('./biomes.json'),
 		{ elevation } = world,
 		r = elevation.length,
 		boxWidth = Math.ceil(width / r),
@@ -103,6 +102,7 @@ function drawLand(mode = params.drawmode) {
 	switch (mode) {
 		default:
 		case "normal":
+			const biomes = require('./biomes.json');
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > 1300) ctx.fillStyle = biomes.peak;
 				else if (localElevation > 1100) ctx.fillStyle = biomes.mountain;
@@ -151,7 +151,6 @@ function drawWater(mode = params.drawMode) {
 
 	const ctx = document.getElementById("waterbox").getContext('2d'),
 		{ width, height } = document.getElementById("waterbox"),
-		biomes = require('./biomes.json'),
 		{ elevation, seaLevel } = world,
 		r = elevation.length,
 		boxWidth = Math.ceil(width / r),
@@ -162,6 +161,7 @@ function drawWater(mode = params.drawMode) {
 	switch (mode) {
 		default:
 		case "normal":
+			const biomes = require('./biomes.json')
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return;
 				else if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
