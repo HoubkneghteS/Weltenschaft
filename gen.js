@@ -104,23 +104,24 @@ function drawLand(mode = params.drawmode) {
 		default:
 		case "normal":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				ctx.fillStyle =
-					localElevation > 1300 ? biomes.peak
-						: localElevation > 1100 ? biomes.mountain
-							: localElevation > 850 ? biomes.mountain2
-								: localElevation > 750 ?
-									localHumidity > 0 ? biomes.mountain2
-										: biomes.mesa
-									: localElevation > -100 ?
-										localHumidity > 250 ? biomes.urwald
-											: localHumidity > 150 ? biomes.forest
-												: localHumidity > 0 ? biomes.plains
-													: localHumidity > -30 ? biomes.savannah
-														: biomes.desert
-										: localElevation > -500 ?
-											localHumidity > 0 ? biomes.desert
-												: biomes.canyon
-											: biomes.desertabyss;
+				if (localElevation > 1300) ctx.fillStyle = biomes.peak;
+				else if (localElevation > 1100) ctx.fillStyle = biomes.mountain;
+				else if (localElevation > 850) ctx.fillStyle = biomes.mountain2;
+				else if (localElevation > 750) {
+					ctx.fillStyle = localHumidity > 0 ? biomes.mountain2 : biomes.mesa;
+				}
+				else if (localElevation > -100){
+					ctx.fillStyle = localHumidity > 250 ? biomes.urwald
+						: localHumidity > 150 ? biomes.forest
+							: localHumidity > 0 ? biomes.plains
+								: localHumidity > -30 ? biomes.savannah
+									: biomes.desert;
+				}
+				else if (localElevation > -500){
+					ctx.fillStyle = localHumidity > 0 ? biomes.desert : biomes.canyon;
+				}
+				else ctx.fillStyle = biomes.desertabyss;
+
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
@@ -163,7 +164,7 @@ function drawWater(mode = params.drawMode) {
 		case "normal":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return;
-				if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
+				else if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
 				else if (localElevation > seaLevel - 800) ctx.fillStyle = biomes.water;
 				else if (localElevation > seaLevel - 1250) ctx.fillStyle = biomes.abyss;
 				else ctx.fillStyle = biomes.trench;
@@ -172,7 +173,7 @@ function drawWater(mode = params.drawMode) {
 			break;
 		case "elevation":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				if (localElevation > seaLevel) return;
+				if (localElevation > seaLevel) return
 
 				ctx.fillStyle = `rgb(0, 0, ${(seaLevel - localElevation) / 10 + 30})`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
@@ -183,8 +184,8 @@ function drawWater(mode = params.drawMode) {
 			return
 		case "humidity":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				if (localElevation > seaLevel) return;
-				ctx.fillStyle = '#0AF';
+				if (localElevation > seaLevel) return
+				ctx.fillStyle = '#07F';
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
 			break;
@@ -248,7 +249,7 @@ ipcRenderer.on("setting", (e, args) => {
 	params[settingToChange] = newValue;
 
 	if (settingToChange == "seaLevel") {
-		const drawDelay = (world.elevation.length ** 2 / 560) | 0;
+		const drawDelay = (world.elevation.length ** 2 / 600) | 0;
 		world.seaLevel = newValue;
 
 		//prevents redrawing from happening too often as it slows things down
