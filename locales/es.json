@@ -17,6 +17,7 @@
 	"humidityRangeHeader": "Rango de humedad",
 	"advancedSettings": "Configuración avanzada",
 	"resetSettings":"Reajustar",
+	"randomize": "Random Settings",
 	"file":"Archivo",
 	"view":"Ver",
 	"exit":"Salir",
