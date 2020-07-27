@@ -97,12 +97,12 @@ function drawLand(mode = params.drawmode) {
 		{ elevation } = world,
 		r = elevation.length,
 		boxWidth = Math.ceil(width / r),
-		boxHeight = Math.ceil(height / r);
+		boxHeight = Math.ceil(height / r),
+		biomes = require('./biomes.json');
 
 	switch (mode) {
 		default:
 		case "normal":
-			const biomes = require('./biomes.json');
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > 1300) ctx.fillStyle = biomes.peak;
 				else if (localElevation > 1100) ctx.fillStyle = biomes.mountain;
@@ -154,16 +154,16 @@ function drawWater(mode = params.drawMode) {
 		{ elevation, seaLevel } = world,
 		r = elevation.length,
 		boxWidth = Math.ceil(width / r),
-		boxHeight = Math.ceil(height / r);
+		boxHeight = Math.ceil(height / r),
+		biomes = require('./biomes.json');
 
 	ctx.clearRect(0, 0, width, height);
 
 	switch (mode) {
 		default:
 		case "normal":
-			const biomes = require('./biomes.json')
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-				if (localElevation > seaLevel) return;
+				if (localElevation > seaLevel) return
 				else if (localElevation > seaLevel - 200) ctx.fillStyle = biomes.shore;
 				else if (localElevation > seaLevel - 800) ctx.fillStyle = biomes.water;
 				else if (localElevation > seaLevel - 1250) ctx.fillStyle = biomes.abyss;
@@ -202,20 +202,20 @@ function draw(mode = params.drawMode) {
 /* SAVING AND LOADING WORLDS*/
 
 function saveWorld() {
-	const saveWorld = { ...world }
+	const saveWorld = { ...world };
 	ipcRenderer.send("saveWorld", saveWorld);
 }
 
 async function loadWorld() {
 	const savedWorld = await ipcRenderer.invoke("loadWorld");
 
-	if (!savedWorld) return;
+	if (!savedWorld) return
 
 	world = { ...savedWorld };
 
 	//repairs worlds with missing data
 
-	let { seed, seaLevel, humidity, elevation } = world;
+	const { seed, seaLevel, humidity, elevation } = world;
 
 	if (!seed) {
 		console.warn("No seed detected, defaulting to undefined");
