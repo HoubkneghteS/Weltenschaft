@@ -59,6 +59,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				granularScale: granularScale
 			},
 			seed + 0.01),
+		//elevation uses a different seed than humidity so that the heightmaps don't look identical
 		humidity: createHeightmap(
 			{
 				base: baseHumidity,
