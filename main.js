@@ -122,13 +122,11 @@ function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
 
 	if (fs.existsSync(`${__dirname}/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${__dirname}/locales/${src}.json`));
-	if (fs.existsSync(`${__dirname}/resources/app/locales/${src}.json`)) return JSON.parse(fs.readFileSync(`${__dirname}/resources/app/locales/${src}.json`));
 
 	//if lang.json file does not exist use english as default
 	console.warn(`Locale for language: ${src} not detected - using English`);
 
 	if (fs.existsSync(`${__dirname}/locales/en.json`)) return JSON.parse(fs.readFileSync(`${__dirname}/locales/en.json`));
-	else return JSON.parse(fs.readFileSync(`${__dirname}/resources/app/locales/en.json`));
 }
 
 /* WINDOWS */
