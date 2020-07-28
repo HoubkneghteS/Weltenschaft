@@ -6,7 +6,8 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"build": "electron-packager . --icon=assets/icons/weltenschaft.ico --out=release-builds --ignore=\\.gitignore --executable-name=Weltenschaft --overwrite"
+		"prepare": "cd c:\\Users\\Admin\\AppData\\Local\\Temp && del electron-packager",
+		"pack": "electron-packager . --icon=assets/icons/weltenschaft.ico --out=release-builds --ignore=\\.gitignore --executable-name=Weltenschaft --overwrite"
 	},
 	"author": "HoubkneghteS (Adam Simons)",
 	"repository": "github:HoubkneghteS/Weltenschaft",
