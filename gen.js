@@ -24,18 +24,16 @@ function loopThroughHeightmap(callback) {
 }
 
 function createHeightmap({ base = 0, amplitude, scale, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
-	var heightmap = [];
 	const { Perlin2 } = require('tumult'),
 		small = granularScale * scale,
 		map = new Perlin2(seed);
 
+	var heightmap = Array(resolution).fill().map(() => Array(resolution).fill(0));
 	for (let x = 0; x < resolution; x++) {
-		let row = [];
 		for (let y = 0; y < resolution; y++) {
 			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
-			row.push(Math.round(value * roundFactor) / roundFactor);
+			heightmap[x][y] = Math.round(value * roundFactor) / roundFactor;
 		}
-		heightmap.push(row);
 	}
 
 	return heightmap;
