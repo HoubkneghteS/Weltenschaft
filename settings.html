@@ -30,5 +30,19 @@
 		<button id="resetSettings" onclick="reset();">Reset</button>
 		<button id="randomize" onclick="randomize();">Random Settings</button>	
 	</div>
+	<script defer src="settings.js"></script>
+	<script defer>
+		function toggleShow(){
+			if(document.getElementById("showmore")){
+				document.getElementById("showmore").id = "showless";
+				document.getElementById("advanced").style.display = "block";
+			}else{
+				document.getElementById("showless").id = "showmore";
+				document.getElementById("advanced").style.display = "none";
+			}
+			//changes showmore/showless when the id changes
+			setLang();
+		}
+	</script>
 </body>
 </html>
