@@ -126,7 +126,7 @@ function getLocaleObject(src = app.getLocale()){
 	//if lang.json file does not exist use english as default
 	console.warn(`Locale for language: ${src} not detected - using English`);
 
-	if (fs.existsSync(`${__dirname}/locales/en.json`)) return JSON.parse(fs.readFileSync(`${__dirname}/locales/en.json`));
+	return JSON.parse(fs.readFileSync(`${__dirname}/locales/en.json`));
 }
 
 /* WINDOWS */
