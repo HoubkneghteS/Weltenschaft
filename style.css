@@ -130,6 +130,9 @@ input[type=range] {
 	font-style: italic;
 }
 
+#showmore:hover{ cursor: pointer; }
+#showless:hover{ cursor: pointer; }
+
 /*emojis for settings headers*/
 #hillinessHeader::before{ content: "⛰️ "}
 #humidityHeader::before{ content: "💧 "}
