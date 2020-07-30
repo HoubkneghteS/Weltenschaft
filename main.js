@@ -136,7 +136,7 @@ var mainWindow, infoWindow, settingsWindow;
 const windowDefaults = {
 	width: 375,
 	height: 500,
-	backgroundColor: "#101010",
+	backgroundColor: "#111",
 	show: false,
 	fullscreenable: false,
 	resizable: false,
