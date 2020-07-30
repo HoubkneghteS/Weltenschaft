@@ -226,7 +226,15 @@ async function loadWorld() {
 	}
 	if (!humidity || !Array.isArray(humidity)) {
 		console.warn("No humidity heightmap detected, defaulting to seed");
-		world.humidity = createHeightmap({ resolution: elevation.length }, seed)
+		const {baseHumidity, humidityRange, biomeScale, roundFactor, granularScale} = params;
+		world.humidity = createHeightmap({
+			base: baseHumidity,
+			amplitude: humidityRange,
+			scale: biomeScale,
+			resolution: elevation.length,
+			roundFactor: roundFactor,
+			granularScale: granularScale
+		}, seed);
 	}
 	if (!elevation || !Array.isArray(elevation)) {
 		console.error("World data irreversably corrupted");
