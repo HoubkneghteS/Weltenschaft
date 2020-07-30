@@ -37,9 +37,7 @@ hr{
 	width: 100%;
 }
 
-#waterbox{
-	opacity: 0.9;
-}
+#waterbox{ opacity: 0.9;}
 
 .dropup-container{
 	position: relative;
@@ -65,13 +63,9 @@ hr{
 
 .wide{ min-width: 610px;}
 
-.unselectable {
-	user-select: none;
-}
+.unselectable { user-select: none;}
 
-img.unselectable {
-	pointer-events: none;
-}
+img.unselectable {pointer-events: none;}
 
 .button-container {
 	width:100%;
