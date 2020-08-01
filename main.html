@@ -7,7 +7,7 @@
 	<meta name="author" content="HoubkneghteS (Adam Simons)">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body onload="generate()">
+<body onload="generate()" class="unselectable">
 	<script src="translate.js"></script>
 	<script defer src="gen.js"></script>
 	<div class="wide wrapper">
@@ -15,7 +15,7 @@
 		<canvas id="waterbox"></canvas>
 	</div>
 	<hr class="wide" />
-	<div class="unselectable wide button-container">
+	<div class="wide button-container">
 		<button id="generate" onclick="generate()">Generate</button>
 		<button class="dropup-container"><span id="drawmodes">Draw Modes</span>
 			<div class="dropup">
