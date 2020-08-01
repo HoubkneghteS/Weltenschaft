@@ -19,9 +19,7 @@ hr{
 	box-shadow: 2px 2px var(--ui-dark);
 }
 
-::-webkit-scrollbar {
-	display: none !important;
-}
+::-webkit-scrollbar { display: none !important;}
 
 .wrapper {
 	position: relative;
@@ -37,11 +35,9 @@ hr{
 	width: 100%;
 }
 
-#waterbox{ opacity: 0.9;}
+#waterbox{ opacity: 0.9; }
 
-.dropup-container{
-	position: relative;
-}
+.dropup-container{ position: relative;}
 
 .dropup {
 	display: none;
@@ -57,9 +53,7 @@ hr{
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
-.dropup-container:hover .dropup, .dropup-container:focus .dropup {
-	display: flex;
-}
+.dropup-container:hover .dropup, .dropup-container:focus .dropup { display: flex;}
 
 .wide{ min-width: 610px;}
 
@@ -120,12 +114,10 @@ input[type=range] {
 	cursor: pointer;
 }
 
-#credits{
-	font-style: italic;
-}
+#credits{ font-style: italic;}
 
-#showmore:hover{ cursor: pointer; }
-#showless:hover{ cursor: pointer; }
+#showmore:hover{ cursor: pointer;}
+#showless:hover{ cursor: pointer;}
 
 /*emojis for settings headers*/
 #hillinessHeader::before{ content: "⛰️ "}
