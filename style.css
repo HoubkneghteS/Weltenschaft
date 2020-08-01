@@ -116,8 +116,7 @@ input[type=range] {
 
 #credits{ font-style: italic;}
 
-#showmore:hover{ cursor: pointer;}
-#showless:hover{ cursor: pointer;}
+#showmore:hover, #showless:hover{ cursor: pointer}
 
 /*emojis for settings headers*/
 #hillinessHeader::before{ content: "⛰️ "}
