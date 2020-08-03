@@ -15,6 +15,7 @@
 	"resolutionHeader":"Tamaño del mapa",
 	"granularHeader": "Granularidad",
 	"humidityRangeHeader": "Rango de humedad",
+	"waterDrawRateHeader": "Water Draw Rate",
 	"advancedSettings": "Configuración avanzada",
 	"resetSettings":"Reajustar",
 	"randomize": "Random Settings",

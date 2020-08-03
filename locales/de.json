@@ -15,6 +15,7 @@
 	"resolutionHeader":"Kartengröße",
 	"granularHeader": "Granularität",
 	"humidityRangeHeader": "Feuchtigkeitsumfang",
+	"waterDrawRateHeader": "Wasserrenderrate",
 	"advancedSettings": "Erweiterte Einstellungen",
 	"resetSettings":"Zurücksetzen",
 	"randomize": "Zufällige Einstellungen",
