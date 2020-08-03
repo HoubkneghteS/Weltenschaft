@@ -19,7 +19,7 @@ const params = {
 	if (fs.existsSync(`${__dirname}/params.json`)){
 		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
 
-		for(param in savedParams){
+		for(let param in savedParams){
 			if(param != "drawMode") params[param] = savedParams[param];
 		}
 		console.log(`Loaded params from ${__dirname}/params.json`);
