@@ -283,6 +283,7 @@ ipcRenderer.on("setting", (e, args) => {
 		}
 	}
 
+	//saves to params.json
 	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
 });
 
