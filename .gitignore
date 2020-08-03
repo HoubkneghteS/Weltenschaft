@@ -4,8 +4,8 @@ release-builds
 # Dependency directories
 node_modules/
 
-# Lang json
-lang.json
+# Params json
+params.json
 
 #ESLint config
 .eslintrc.json

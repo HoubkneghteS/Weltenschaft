@@ -12,6 +12,22 @@ const params = {
 	roundFactor: 10, //to which decimal place terrain array values are rounded
 };
 
+(function loadSavedParams () {
+	const fs = require('fs');
+	
+	if (fs.existsSync(`${__dirname}/params.json`)){
+		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
+
+		for(param in savedParams){
+			params[param] = savedParams[param];
+		}
+		console.log(`Loaded params from ${__dirname}/params.json`);
+	} else {
+		fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
+		console.log("No params.json detected, creating one");
+	}
+}());  
+
 var world;
 
 function loopThroughHeightmap(callback) {
@@ -251,7 +267,8 @@ const { ipcRenderer } = require("electron");
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
 	const settingToChange = args[0],
-		newValue = parseFloat(args[1]);
+		newValue = parseFloat(args[1]),
+		fs = require('fs');
 
 	params[settingToChange] = newValue;
 
@@ -265,6 +282,8 @@ ipcRenderer.on("setting", (e, args) => {
 			drawWater.lastCall = new Date();
 		}
 	}
+
+	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
 });
 
 //sends settings to settings screen when it's loaded
