@@ -13,21 +13,8 @@ const params = {
 	waterDrawRate: 700, //how fast water is redrawn
 };
 
-(function loadSavedParams () {
-	const fs = require('fs');
-	
-	if (fs.existsSync(`${__dirname}/params.json`)){
-		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
-
-		for(let param in savedParams){
-			if(param != "drawMode") params[param] = savedParams[param];
-		}
-		console.log(`Loaded params from ${__dirname}/params.json`);
-	} else {
-		fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
-		console.log("No params.json detected, creating one");
-	}
-}());  
+//loads saved params on init
+loadParams();
 
 var world;
 
@@ -261,6 +248,27 @@ async function loadWorld() {
 	draw();
 }
 
+function loadParams () {
+	const fs = require('fs');
+	
+	if (fs.existsSync(`${__dirname}/params.json`)){
+		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
+
+		for(let param in savedParams){
+			if(param != "drawMode") params[param] = savedParams[param];
+		}
+		console.log(`Loaded params from ${__dirname}/params.json`);
+	} else {
+		console.log("No params.json detected, creating one");
+		saveParams();
+	}
+}
+
+function saveParams(){
+	const fs = require('fs');
+	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
+}
+
 /*INTERPROCESS COMMUNICATION*/
 
 const { ipcRenderer } = require("electron");
@@ -283,9 +291,7 @@ ipcRenderer.on("setting", (e, args) => {
 			drawWater.lastCall = new Date();
 		}
 	}
-
-	//saves to params.json
-	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
+	saveParams();
 });
 
 //sends settings to settings screen when it's loaded
