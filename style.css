@@ -126,6 +126,7 @@ input[type=range] {
 #advancedSettings::before{ content: "⚙️ "}
 #granularHeader::before{ content: "🧱 "}
 #humidityRangeHeader::before{ content: "🌵 "}
+#waterDrawRateHeader::before{ content: "⏩ "}
 
 /*arrows for showmore and showless*/
 #showmore::after{ content: " ▼"}
