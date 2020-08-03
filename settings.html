@@ -32,7 +32,8 @@
 				baseHumidity: 50,
 				humidityRange: 6,
 				granularScale: 0.03,
-				seaLevel: 0
+				seaLevel: 0,
+				waterDrawRate: 700,
 			}
 
 			for (let key in value) {
@@ -46,7 +47,7 @@
 				resolution: Math.floor(Math.random() * 462) + 50,
 				hilliness: Math.floor(Math.random() * 36) + 15,
 				baseHumidity: Math.floor(Math.random() * 500) - 250,
-				seaLevel: Math.floor(Math.random() * 600) - 300
+				seaLevel: Math.floor(Math.random() * 600) - 300,
 			}
 
 			//only randomizes advanced settings if they are visible
@@ -81,6 +82,8 @@
 		<input type="range" min="0.018" max="0.1" step="0.001" id="granularScale" onInput="settingsSet('granularScale')"/>
 		<h2><label for="humidityRange" id="humidityRangeHeader">Humidity Range</label></h2>
 		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="settingsSet('humidityRange')"/>
+		<h2><label for="waterDrawRate" id="waterDrawRateHeader">Water Draw Rate</label></h2>
+		<input type="range" min="300" max="1100" step="5" id="waterDrawRate" onInput="settingsSet('waterDrawRate')"/>
 	</div>
 	<hr />
 	<div class="button-container">

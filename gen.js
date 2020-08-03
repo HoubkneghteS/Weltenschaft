@@ -10,6 +10,7 @@ const params = {
 	seaLevel: 0, //default sea level
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
 	roundFactor: 10, //to which decimal place terrain array values are rounded
+	waterDrawRate: 700, //how fast water is redrawn
 };
 
 (function loadSavedParams () {
@@ -273,7 +274,7 @@ ipcRenderer.on("setting", (e, args) => {
 	params[settingToChange] = newValue;
 
 	if (settingToChange == "seaLevel") {
-		const drawDelay = (world.elevation.length ** 2 / 700) | 0;
+		const drawDelay = (world.elevation.length ** 2 / params.waterDrawRate) | 0;
 		world.seaLevel = newValue;
 
 		//prevents redrawing from happening too often as it slows things down
@@ -289,7 +290,7 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const { resolution, hilliness, baseHumidity, humidityRange, granularScale} = params;
+	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
@@ -298,6 +299,7 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 			"humidityRange": humidityRange,
 			"granularScale": granularScale,
 			"baseHumidity": baseHumidity,
+			"waterDrawRate": waterDrawRate,
 			"seaLevel": world.seaLevel
 		});
 });
