@@ -27,6 +27,8 @@ function loopThroughHeightmap(callback) {
 	});
 }
 
+/*GENERATION OF TERRAIN*/
+
 function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
 	const { Perlin2 } = require('tumult'),
 		small = granularScale * scale,
