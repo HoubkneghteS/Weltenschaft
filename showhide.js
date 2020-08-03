@@ -6,6 +6,6 @@ function toggleShow(){
         document.getElementById("showless").id = "showmore";
         document.getElementById("advanced").style.display = "none";
     }
-    //changes showmore/showless when the id changes
+    //changes showmore/showless text when the id changes
     setLang();
 }
