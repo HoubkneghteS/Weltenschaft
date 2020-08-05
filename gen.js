@@ -278,8 +278,7 @@ const { ipcRenderer } = require("electron");
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
 	const settingToChange = args[0],
-		newValue = parseFloat(args[1]),
-		fs = require('fs');
+		newValue = parseFloat(args[1]);
 
 	params[settingToChange] = newValue;
 
