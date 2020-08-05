@@ -11,7 +11,7 @@ const params = {
 	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
 	roundFactor: 10, //to which decimal place terrain array values are rounded
 	waterDrawRate: 700, //how fast water is redrawn
-	saveLoadParams: true, //whether params should be saved/loaded
+	retainParams: true, //whether params should be saved/loaded
 };
 
 //loads saved params on init
@@ -257,11 +257,10 @@ function loadParams () {
 	if (fs.existsSync(`${__dirname}/params.json`)){
 		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
 
-		if(savedParams.saveLoadParams === false) {
-			params.saveLoadParams = false;
+		if(savedParams.retainParams == false) {
+			params.retainParams = false;
 			return
 		}
-		
 		for(let param in savedParams){
 			if(param != "drawMode") params[param] = savedParams[param];
 		}
@@ -273,7 +272,7 @@ function loadParams () {
 }
 
 function saveParams(){
-	if(params.saveLoadParams == false) return
+	if(params.retainParams == false) return
 	const fs = require('fs');
 	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
 }
@@ -304,7 +303,7 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale} = params;
+	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale, retainParams} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
@@ -314,6 +313,7 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 			"granularScale": granularScale,
 			"baseHumidity": baseHumidity,
 			"waterDrawRate": waterDrawRate,
+			"retainParams": retainParams,
 			"seaLevel": world.seaLevel
 		});
 });
