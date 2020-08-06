@@ -313,7 +313,6 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 			"granularScale": granularScale,
 			"baseHumidity": baseHumidity,
 			"waterDrawRate": waterDrawRate,
-			"retainParams": retainParams,
 			"seaLevel": world.seaLevel
 		});
 });
