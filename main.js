@@ -5,6 +5,7 @@ var locale, menuTemplate;
 app.on('ready', () => {
 
 	locale = getLocaleObject(); //sets locale from translate.js
+	//you can pass an argument "en", "de", etc to this to force the app to run in a specific language
 
 	menuTemplate = [
 		{
