@@ -307,13 +307,13 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
-			"resolution": resolution,
-			"hilliness": hilliness,
-			"humidityRange": humidityRange,
-			"granularScale": granularScale,
-			"baseHumidity": baseHumidity,
-			"waterDrawRate": waterDrawRate,
-			"seaLevel": world.seaLevel
+			resolution: resolution,
+			hilliness: hilliness,
+			humidityRange: humidityRange,
+			granularScale: granularScale,
+			baseHumidity: baseHumidity,
+			waterDrawRate: waterDrawRate,
+			seaLevel: world.seaLevel
 		});
 });
 
