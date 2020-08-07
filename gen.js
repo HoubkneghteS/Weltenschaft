@@ -115,12 +115,12 @@ function drawLand(mode = params.drawmode) {
 				else if (localElevation > 750) {
 					ctx.fillStyle = localHumidity > 0 ? biomes.mountain2 : biomes.mesa;
 				}
-				else if (localElevation > -100){
-					ctx.fillStyle = localHumidity > 250 ? biomes.urwald
-						: localHumidity > 150 ? biomes.forest
-							: localHumidity > 0 ? biomes.plains
-								: localHumidity > -30 ? biomes.savannah
-									: biomes.desert;
+				else if (localElevation > -100 ){
+					ctx.fillStyle = biomes.desert;
+					if (localHumidity > -30 ) ctx.fillStyle = biomes.savannah;
+					if (localHumidity > 0 ) ctx.fillStyle = biomes.plains;
+					if (localHumidity > 150 ) ctx.fillStyle = biomes.forest;
+					if (localHumidity > 250 ) ctx.fillStyle = biomes.urwald;
 				}
 				else if (localElevation > -500){
 					ctx.fillStyle = localHumidity > 0 ? biomes.desert : biomes.canyon;
