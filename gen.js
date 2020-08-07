@@ -101,9 +101,8 @@ function drawLand(mode = params.drawmode) {
 	const ctx = document.getElementById("terrainbox").getContext('2d'),
 		{ width, height } = document.getElementById("terrainbox"),
 		{ elevation } = world,
-		r = elevation.length,
-		boxWidth = Math.ceil(width / r),
-		boxHeight = Math.ceil(height / r),
+		boxWidth = Math.ceil(width / elevation.length),
+		boxHeight = Math.ceil(height / elevation.length),
 		biomes = require('./biomes.json');
 
 	switch (mode) {
@@ -158,9 +157,8 @@ function drawWater(mode = params.drawMode) {
 	const ctx = document.getElementById("waterbox").getContext('2d'),
 		{ width, height } = document.getElementById("waterbox"),
 		{ elevation, seaLevel } = world,
-		r = elevation.length,
-		boxWidth = Math.ceil(width / r),
-		boxHeight = Math.ceil(height / r),
+		boxWidth = Math.ceil(width / elevation.length),
+		boxHeight = Math.ceil(height / elevation.length),
 		biomes = require('./biomes.json');
 
 	ctx.clearRect(0, 0, width, height);
