@@ -44,7 +44,7 @@ hr{
 	position: absolute;
 	flex-direction: column;
 	background: var(--ui-dark);
-	width: 200px;
+	width: max-content;
 	padding: 2px;
 	border-radius: 3px;
 	text-align: left;
