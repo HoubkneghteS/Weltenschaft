@@ -206,7 +206,7 @@ function drawStructures(mode = params.drawMode) {
 		boxHeight = Math.ceil(height / elevation.length);
 
 	structures.forEach(structure => {
-
+		console.log(structure);
 	});
 }
 
