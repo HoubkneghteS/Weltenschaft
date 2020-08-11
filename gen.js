@@ -196,10 +196,26 @@ function drawWater(mode = params.drawMode) {
 	}
 }
 
+function drawStructures(mode = params.drawMode) {
+	if(mode != "normal") return
+
+	const ctx = document.getElementById("strbox").getContext('2d'),
+		{ width, height } = document.getElementById("strbox"),
+		{ elevation, seaLevel, structures } = world,
+		boxWidth = Math.ceil(width / elevation.length),
+		boxHeight = Math.ceil(height / elevation.length),
+		biomes = require('./biomes.json');
+
+	structures.forEach(structure => {
+
+	});
+}
+
 function draw(mode = params.drawMode) {
 	params.drawMode = mode || "normal";
 
 	drawLand(mode);
+	drawStructures(mode);
 	drawWater(mode);
 }
 
