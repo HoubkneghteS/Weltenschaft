@@ -301,7 +301,7 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale, retainParams} = params;
+	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
