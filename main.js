@@ -141,6 +141,7 @@ const windowDefaults = {
 	resizable: false,
 	webPreferences: {
 		nodeIntegration: true,
+		contextIsolation: false,
 	}
 };
 
