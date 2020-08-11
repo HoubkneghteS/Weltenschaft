@@ -201,7 +201,7 @@ function drawStructures(mode = params.drawMode) {
 
 	const ctx = document.getElementById("strbox").getContext('2d'),
 		{ width, height } = document.getElementById("strbox"),
-		{ elevation, seaLevel, structures } = world,
+		{ elevation, structures } = world,
 		boxWidth = Math.ceil(width / elevation.length),
 		boxHeight = Math.ceil(height / elevation.length);
 
