@@ -2,7 +2,7 @@ const { app, BrowserWindow, Menu, ipcMain } = require('electron');
 
 var locale, menuTemplate;
 
-app.on('ready', () => {
+app.whenReady().then(() => {
 
 	locale = getLocaleObject(); //sets locale from translate.js
 	//you can pass an argument "en", "de", etc to this to force the app to run in a specific language
@@ -109,15 +109,13 @@ app.on('ready', () => {
 		}
 	];
 
+	//mac menu compatibility
+	if (process.platform == 'darwin') menuTemplate.unshift({});
+
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 	createMainWindow();
 });
-
-//mac menu compatibility
-if (process.platform == 'darwin') {
-	menuTemplate.unshift({});
-}
 
 function getLocaleObject(src = app.getLocale()){
 	const fs = require('fs');
