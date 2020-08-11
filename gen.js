@@ -203,8 +203,7 @@ function drawStructures(mode = params.drawMode) {
 		{ width, height } = document.getElementById("strbox"),
 		{ elevation, seaLevel, structures } = world,
 		boxWidth = Math.ceil(width / elevation.length),
-		boxHeight = Math.ceil(height / elevation.length),
-		biomes = require('./biomes.json');
+		boxHeight = Math.ceil(height / elevation.length);
 
 	structures.forEach(structure => {
 
