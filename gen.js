@@ -197,7 +197,7 @@ function drawWater(mode = params.drawMode) {
 }
 
 function drawStructures(mode = params.drawMode) {
-	if(mode != "normal") return
+	if(mode != "normal") return //structures should only be visable in the normal drawmode
 
 	const ctx = document.getElementById("strbox").getContext('2d'),
 		{ width, height } = document.getElementById("strbox"),
