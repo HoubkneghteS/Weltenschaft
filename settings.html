@@ -21,8 +21,12 @@
 			ipcRenderer.send('polygon');
 		}
 
-		function settingsSet(setting) {
-			ipcRenderer.send("setting", setting, document.getElementById(setting).value);
+		function noWater(){
+			settingsSet("seaLevel", -Infinity);
+		}
+
+		function settingsSet(setting, value = document.getElementById(setting).value) {
+			ipcRenderer.send("setting", setting, value);
 		}
 
 		function reset() {
