@@ -26,14 +26,6 @@ app.whenReady().then(() => {
 					}
 				},
 				{
-					label: locale.regen,
-					accelerator: 'CmdOrCtrl+R',
-					click() {
-						mainWindow.webContents.send("shortcut", "regenerate");
-					}
-				},
-
-				{
 					label: "polygon",
 					visible: false,
 					accelerator: 'CmdOrCtrl+Shift+P',
@@ -41,7 +33,6 @@ app.whenReady().then(() => {
 						mainWindow.webContents.send("shortcut", "polygon");
 					}
 				},
-
 				{ type: 'separator' },
 				{
 					label: locale.save,
