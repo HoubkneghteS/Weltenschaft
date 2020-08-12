@@ -1,5 +1,6 @@
 {
 	"generate":"Generate",
+	"regen":"Regenerate world",
 	"drawmodes":"Draw Modes",
 	"elevation":"Draw Elevation",
 	"standardDraw":"Draw Regular",
