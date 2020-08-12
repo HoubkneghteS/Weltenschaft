@@ -90,6 +90,10 @@ function polygon() {
 	console.log("HAIL SIERPINSKI");
 }
 
+function regenerate(){
+	generate(params, world.seed);
+}
+
 /*DRAWING TERRAIN TO CANVAS*/
 
 function drawPixel(ctx, width, height, x, y){
