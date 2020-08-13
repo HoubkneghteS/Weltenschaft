@@ -16,6 +16,7 @@
 	"granularHeader": "Granularität",
 	"humidityRangeHeader": "Feuchtigkeitsumfang",
 	"waterDrawRateHeader": "Wasserrenderrate",
+	"removeWater":"Wasser entfernen",
 	"advancedSettings": "Erweiterte Einstellungen",
 	"resetSettings":"Zurücksetzen",
 	"randomize": "Zufällige Einstellungen",
