@@ -1,8 +1,8 @@
 {
 	"name": "weltenschaft",
 	"productName": "Weltenschaft",
-	"version": "0.4.1",
-	"description": "Open-Source JS terrain generator",
+	"version": "0.4.2",
+	"description": "Open-Source terrain generator",
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
