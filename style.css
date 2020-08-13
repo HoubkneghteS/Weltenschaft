@@ -87,8 +87,7 @@ button, ::-webkit-slider-thumb, .dropup a{
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 	transition-duration: 0.2s;
 	background:var(--ui-light);
-	padding: 0.2em 1em;
-	line-height: 2em;
+	padding: 0.6em 1em;
 	color: var(--ui-white);
 }
 
