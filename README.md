@@ -16,7 +16,7 @@ For more info and documentation, visit the [Weltenschaft Wiki](https://github.co
 * Random perlin-based elevation
 * 13 Humidity- and elevation-based biomes
 * Saving & Loading worlds
-* 3 Draw modes
+* 4 Draw modes
 * English, German, and Spanish support
 
 ## Roadmap
