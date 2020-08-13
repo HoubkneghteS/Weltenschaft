@@ -2,11 +2,11 @@
 	--ui-light: #1849A1;
 	--ui-dark: #05193D;
 	--ui-white: whitesmoke;
-	--ui-font: verdana;
+	--ui-font: 13px verdana;
 }
 
 body {
-	font: 13px var(--ui-font);
+	font: var(--ui-font);
 	color: var(--ui-white);
 }
 
@@ -70,7 +70,7 @@ img.unselectable {pointer-events: none;}
 }
 
 button{
-	font: 13px var(--ui-font);
+	font: var(--ui-font);
 	margin-right: 5px;
 }
 
