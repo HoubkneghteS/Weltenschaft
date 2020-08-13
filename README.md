@@ -1,4 +1,4 @@
-![# Weltenschaft](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/icons/logo.png)
+![Weltenschaft](assets/icons/logo.png)
 [![GitHub version](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft.svg)](https://badge.fury.io/gh/HoubkneghteS%2FWeltenschaft)
 
 Weltenschaft is an Open-Source JS terrain generator, running on Electron.js as a standalone program
@@ -25,8 +25,8 @@ For more info and documentation, visit the [Weltenschaft Wiki](https://github.co
 * Basic in-browser implementation
 
 ## Dependencies
-* ![Electron](https://github.com/electron/electron) (App framework)
-* ![Tumult](https://github.com/ScottyFillups/tumult) (Noise library)
+* [![Electron](assets/icons/electron.png)](https://github.com/electron/electron) (App framework)
+* [Tumult](https://github.com/ScottyFillups/tumult) (Noise library)
 
 ## License
 
