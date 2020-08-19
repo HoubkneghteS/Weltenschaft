@@ -1,5 +1,6 @@
 {
 	"generate":"Generar",
+	"regen": "Regenerate Seed",
 	"drawmodes":"Modos de dibujo",
 	"elevation":"Trazar elevación",
 	"standardDraw":"Dibujo estándar",
