@@ -97,7 +97,7 @@ function regenerate(){
 /*DRAWING TERRAIN TO CANVAS*/
 
 function drawPixel(ctx, width, height, x, y){
-	ctx.fillRect(width * x, height * y, width, height);
+	ctx.fillRect(width * x, height * y, width + 1, height + 1);
 }
 
 function drawLand(mode = params.drawmode) {
@@ -105,8 +105,8 @@ function drawLand(mode = params.drawmode) {
 	const ctx = document.getElementById("terrainbox").getContext('2d'),
 		{ width, height } = document.getElementById("terrainbox"),
 		{ elevation } = world,
-		boxWidth = Math.ceil(width / elevation.length),
-		boxHeight = Math.ceil(height / elevation.length),
+		boxWidth = (width / elevation.length),
+		boxHeight = (height / elevation.length),
 		biomes = require('./biomes.json');
 
 	switch (mode) {
@@ -161,8 +161,8 @@ function drawWater(mode = params.drawMode) {
 	const ctx = document.getElementById("waterbox").getContext('2d'),
 		{ width, height } = document.getElementById("waterbox"),
 		{ elevation, seaLevel } = world,
-		boxWidth = Math.ceil(width / elevation.length),
-		boxHeight = Math.ceil(height / elevation.length),
+		boxWidth = (width / elevation.length),
+		boxHeight = (height / elevation.length),
 		biomes = require('./biomes.json');
 
 	ctx.clearRect(0, 0, width, height);

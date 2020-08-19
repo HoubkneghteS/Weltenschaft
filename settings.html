@@ -59,7 +59,7 @@
 				value = {
 					...value,
 					humidityRange: Math.floor(Math.random() * 17) + 3,
-					granularScale: (Math.random() * 0.082) + 0.018,
+					granularScale: (Math.random() * 0.08) + 0.02,
 				}
 			}
 
@@ -83,7 +83,7 @@
 	<div id="advanced" style="display:none">
 		<h3 id="advancedSettings">Advanced Settings</h3>
 		<h2><label for="granularScale" id="granularHeader">Granular Scale</label></h2>
-		<input type="range" min="0.018" max="0.1" step="0.001" id="granularScale" onInput="settingsSet('granularScale')"/>
+		<input type="range" min="0.02" max="0.1" step="0.001" id="granularScale" onInput="settingsSet('granularScale')"/>
 		<h2><label for="humidityRange" id="humidityRangeHeader">Humidity Range</label></h2>
 		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="settingsSet('humidityRange')"/>
 		<h2><label for="waterDrawRate" id="waterDrawRateHeader">Water Draw Rate</label></h2>
