@@ -10,7 +10,7 @@ For more info and documentation, visit the [Weltenschaft Wiki](https://github.co
 
 ----
 
-![Weltenschaft 0.4.0](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
+![Weltenschaft 0.4.1](https://github.com/HoubkneghteS/Weltenschaft/blob/master/assets/Screenshots/Screenshot1.png)
 
 ## Features
 * Random perlin-based elevation
