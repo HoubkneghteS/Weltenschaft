@@ -16,6 +16,7 @@ h2{
 }
 
 hr{
+	background: var(--ui-dark);
 	border:1.5px solid var(--ui-light); 
 	box-shadow: 2px 2px var(--ui-dark);
 }
