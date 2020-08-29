@@ -221,7 +221,7 @@ function draw(mode = params.drawMode) {
 	drawWater(mode);
 }
 
-/* SAVING AND LOADING WORLDS*/
+/* SAVING AND LOADING WORLDS AND PARAMETERS*/
 
 function saveWorld() {
 	const saveWorld = { ...world };
