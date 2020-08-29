@@ -12,6 +12,7 @@ const params = {
 	roundFactor: 10, //to which decimal place terrain array values are rounded
 	waterDrawRate: 700, //how fast water is redrawn
 	retainParams: true, //whether params should be saved/loaded
+	generateStructures: true, //whether structures will be generated
 };
 
 //loads saved params on init
@@ -46,7 +47,7 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation } = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -79,6 +80,10 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 		seed: seed,
 		structures: [],
 	};
+
+	if (generateStructures) {
+		//generation of structures will go here
+	}
 
 	draw();
 
