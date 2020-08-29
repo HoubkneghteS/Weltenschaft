@@ -110,7 +110,6 @@ function drawLand(mode = params.drawmode) {
 		biomes = require('./biomes.json');
 
 	switch (mode) {
-		default:
 		case "normal":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > 1300) ctx.fillStyle = biomes.peak;
@@ -119,7 +118,7 @@ function drawLand(mode = params.drawmode) {
 				else if (localElevation > 750) {
 					ctx.fillStyle = localHumidity > 0 ? biomes.mountain2 : biomes.mesa;
 				}
-				else if (localElevation > -100 ){
+				else if (localElevation > -100) {
 					ctx.fillStyle = biomes.desert;
 					if (localHumidity > -30 ) ctx.fillStyle = biomes.savannah;
 					if (localHumidity > 0 ) ctx.fillStyle = biomes.plains;
