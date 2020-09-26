@@ -14,7 +14,7 @@ const params = {
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
 	structureWeights: {
-		cactus: 0.007
+		cactus: 0.012
 	} //how often the various structures generate
 };
 
@@ -88,13 +88,16 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 		//generation of structures will go here
 		loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 			let structureRoll = Math.random();
-			if(localElevation > world.seaLevel && localHumidity < -15 && localHumidity > -75){
+			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
 				world.structures.push(
 					{
 						type: "cactus",
 						x: x,
-						y: y
+						y: y,
+						elevation: localElevation,
+						humidity: localHumidity,
+						height: ((Math.random() * 2) + 1)
 					});
 			}
 		});
@@ -231,10 +234,10 @@ function drawStructures(mode = params.drawMode) {
 	if(mode != "normal") return //structures should only be visable in the normal drawmode
 
 	structures.forEach(structure => {
-		let {x, y} = structure;
-		if(structure.type == "cactus"){
+		let {x, y, type} = structure;
+		if(type == "cactus"){
 			ctx.fillStyle = "green";
-			drawPixel(ctx, boxWidth, boxHeight * 2, x, y);
+			drawPixel(ctx, boxWidth, boxHeight * structure.height, x, y);
 		}
 	});
 }
