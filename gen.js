@@ -237,7 +237,7 @@ function drawStructures(mode = params.drawMode) {
 		let {x, y, type} = structure;
 		if(type == "cactus"){
 			ctx.fillStyle = "green";
-			drawPixel(ctx, boxWidth, boxHeight * structure.height, x, y);
+			drawPixel(ctx, boxWidth, boxHeight, x, y);
 		}
 	});
 }
