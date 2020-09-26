@@ -92,8 +92,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				world.structures.push(
 					{
 						type: "cactus",
-						x: x,
-						y: y,
+						x: x + Math.random() - 0.5,
+						y: y + Math.random() - 0.5,
 						elevation: localElevation,
 						humidity: localHumidity,
 						height: ((Math.random() * 2) + 1)
