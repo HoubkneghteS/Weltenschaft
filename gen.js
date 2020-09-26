@@ -14,7 +14,8 @@ const params = {
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
 	structureWeights: {
-		cactus: 0.0075
+		cactus: 0.0071,
+		cactusDry: 0.0012
 	} //how often the various structures generate
 };
 
@@ -48,6 +49,17 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	}
 
 	return heightmap;
+}
+
+function createStructure(type, x = 0, y = 0, otherParams) {
+	world.structures.push({
+		type: type,
+		x: x + Math.random() - 0.5,
+		y: y + Math.random() - 0.5,
+		elevation: world.elevation[x][y],
+		humidity: world.humidity[x][y],
+		...otherParams
+	});
 }
 
 function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureWeights } = params, seed = Math.random()) {
@@ -89,16 +101,14 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			let structureRoll = Math.random();
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
-				world.structures.push(
-					{
-						type: "cactus",
-						x: x + Math.random() - 0.5,
-						y: y + Math.random() - 0.5,
-						elevation: localElevation,
-						humidity: localHumidity,
-						height: ((Math.random() * 2) + 1)
-					});
+				createStructure("cactus", x, y, { height: ((Math.random() * 2.2) + 1)});
 			}
+			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -100 && localHumidity > -250){
+				if(structureRoll > structureWeights.cactusDry) return
+				//dry variant of cactus cannot generate as tall
+				createStructure("cactus", x, y, { height: ((Math.random() * 1.8) + 1)});
+			}
+
 		});
 	}
 
