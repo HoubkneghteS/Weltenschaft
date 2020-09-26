@@ -13,6 +13,9 @@ const params = {
 	waterDrawRate: 700, //how fast water is redrawn
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
+	structureWeights: {
+		cactus: 0.01
+	} //how often the various structures generate
 };
 
 //loads saved params on init
@@ -47,7 +50,7 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures } = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureWeights } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -83,6 +86,18 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 
 	if (generateStructures) {
 		//generation of structures will go here
+		loopThroughHeightmap((localElevation, localHumidity, x, y) => {
+			let structureRoll = Math.random();
+			if(localElevation > world.seaLevel && localHumidity < -10 && localHumidity > -50){
+				if(structureRoll > structureWeights.cactus) return
+				world.structures.push(
+					{
+						type: "cactus",
+						x: x,
+						y: y
+					});
+			}
+		});
 	}
 
 	draw();
@@ -212,8 +227,14 @@ function drawStructures(mode = params.drawMode) {
 		boxWidth = Math.ceil(width / elevation.length),
 		boxHeight = Math.ceil(height / elevation.length);
 
+	ctx.clearRect(0, 0, width, height);
+
 	structures.forEach(structure => {
-		console.log(structure);
+		let {x, y} = structure;
+		if(structure.type == "cactus"){
+			ctx.fillStyle = "green";
+			drawPixel(ctx, boxWidth, boxHeight, x, y);
+		}
 	});
 }
 
