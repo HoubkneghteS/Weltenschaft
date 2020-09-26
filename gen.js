@@ -219,7 +219,6 @@ function drawWater(mode = params.drawMode) {
 }
 
 function drawStructures(mode = params.drawMode) {
-	if(mode != "normal") return //structures should only be visable in the normal drawmode
 
 	const ctx = document.getElementById("strbox").getContext('2d'),
 		{ width, height } = document.getElementById("strbox"),
@@ -228,6 +227,8 @@ function drawStructures(mode = params.drawMode) {
 		boxHeight = Math.ceil(height / elevation.length);
 
 	ctx.clearRect(0, 0, width, height);
+
+	if(mode != "normal") return //structures should only be visable in the normal drawmode
 
 	structures.forEach(structure => {
 		let {x, y} = structure;
