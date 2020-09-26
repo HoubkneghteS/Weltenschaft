@@ -88,7 +88,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 		//generation of structures will go here
 		loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 			let structureRoll = Math.random();
-			if(localElevation > world.seaLevel && localHumidity < -10 && localHumidity > -50){
+			if(localElevation > world.seaLevel && localHumidity < -15 && localHumidity > -60){
 				if(structureRoll > structureWeights.cactus) return
 				world.structures.push(
 					{
@@ -223,8 +223,8 @@ function drawStructures(mode = params.drawMode) {
 	const ctx = document.getElementById("strbox").getContext('2d'),
 		{ width, height } = document.getElementById("strbox"),
 		{ elevation, structures } = world,
-		boxWidth = Math.ceil(width / elevation.length),
-		boxHeight = Math.ceil(height / elevation.length);
+		boxWidth = (width / elevation.length),
+		boxHeight = (height / elevation.length);
 
 	ctx.clearRect(0, 0, width, height);
 
