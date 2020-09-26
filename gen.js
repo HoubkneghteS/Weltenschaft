@@ -14,7 +14,7 @@ const params = {
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
 	structureWeights: {
-		cactus: 0.009
+		cactus: 0.0075
 	} //how often the various structures generate
 };
 
@@ -236,8 +236,8 @@ function drawStructures(mode = params.drawMode) {
 	structures.forEach(structure => {
 		let {x, y, type} = structure;
 		if(type == "cactus"){
-			ctx.fillStyle = "blue";
-			drawPixel(ctx, boxWidth, boxHeight * structure.height, x, y / structure.height);
+			ctx.fillStyle = "#371";
+			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, y / structure.height);
 		}
 	});
 }
