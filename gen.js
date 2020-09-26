@@ -14,7 +14,7 @@ const params = {
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
 	structureWeights: {
-		cactus: 0.09
+		cactus: 0.009
 	} //how often the various structures generate
 };
 
