@@ -236,8 +236,8 @@ function drawStructures(mode = params.drawMode) {
 	structures.forEach(structure => {
 		let {x, y, type} = structure;
 		if(type == "cactus"){
-			ctx.fillStyle = "green";
-			drawPixel(ctx, boxWidth, boxHeight, x, y);
+			ctx.fillStyle = "blue";
+			drawPixel(ctx, boxWidth, boxHeight * structure.height, x, y / structure.height);
 		}
 	});
 }
