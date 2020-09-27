@@ -101,12 +101,15 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			let structureRoll = Math.random();
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
-				createStructure("cactus", x, y, { height: ((Math.random() * 2.2) + 1)});
+				createStructure("cactus", x, y, {	
+					height: (Math.random() * 2.2) + 1
+				});
 			}
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -100 && localHumidity > -250){
 				if(structureRoll > structureWeights.cactusDry) return
-				//dry variant of cactus cannot generate as tall
-				createStructure("cactus", x, y, { height: ((Math.random() * 1.8) + 1)});
+				createStructure("cactus", x, y, {
+					height: (Math.random() * 1.8) + 1 //dry variant of cactus cannot generate as tall
+				});
 			}
 
 		});
