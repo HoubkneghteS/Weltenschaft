@@ -108,7 +108,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -100 && localHumidity > -250){
 				if(structureRoll > structureWeights.cactusDry) return
 				createStructure("cactus", x, y, {
-					height: (Math.random() * 1.8) + 1 //dry variant of cactus cannot generate as tall
+					height: (Math.random() * 1.8) + 1, //dry variant of cactus cannot generate as tall
+					...(Math.random() < 0.04 && { customColor: "#C81" }) //4% of drycactuses will be "dead"
 				});
 			}
 
@@ -248,7 +249,7 @@ function drawStructures(mode = params.drawMode) {
 	structures.forEach(structure => {
 		let {x, y, type} = structure;
 		if(type == "cactus"){
-			ctx.fillStyle = "#371";
+			ctx.fillStyle = structure.customColor || "#371";
 			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, y / structure.height);
 		}
 	});
