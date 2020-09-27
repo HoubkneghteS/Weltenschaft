@@ -99,12 +99,14 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 	if (generateStructures) {
 		loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 			let structureRoll = Math.random();
+			//cactus
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
 				createStructure("cactus", x, y, {	
 					height: (Math.random() * 2.2) + 1
 				});
 			}
+			//cactusDry
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -100 && localHumidity > -250){
 				if(structureRoll > structureWeights.cactusDry) return
 				createStructure("cactus", x, y, {
