@@ -51,14 +51,14 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function createStructure(type, x = 0, y = 0, otherParams) {
+function createStructure(type, x = 0, y = 0, otherData) {
 	world.structures.push({
 		type: type,
 		x: x + Math.random() - 0.5,
 		y: y + Math.random() - 0.5,
 		elevation: world.elevation[x][y],
 		humidity: world.humidity[x][y],
-		...otherParams
+		...otherData
 	});
 }
 
