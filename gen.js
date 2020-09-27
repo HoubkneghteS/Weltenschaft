@@ -112,7 +112,6 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 					...(Math.random() < 0.04 && { customColor: "#C81" }) //4% of drycactuses will be "dead"
 				});
 			}
-
 		});
 	}
 
