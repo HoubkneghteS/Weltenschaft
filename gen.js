@@ -111,7 +111,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				if(structureRoll > structureWeights.cactusDry) return
 				createStructure("cactus", x, y, {
 					height: (Math.random() * 1.8) + 1, //dry variant of cactus cannot generate as tall
-					...(Math.random() < 0.04 && { customColor: "#C81" }) //4% of drycactuses will be "dead"
+					...(Math.random() < 0.04) && { customColor: "#C81" } //4% of drycactuses will be "dead"
 				});
 			}
 		});
