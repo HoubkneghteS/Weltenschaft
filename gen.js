@@ -13,6 +13,7 @@ const params = {
 	waterDrawRate: 700, //how fast water is redrawn
 	retainParams: true, //whether params should be saved/loaded
 	generateStructures: true, //whether structures will be generated
+	structureOffset: 0.5, //how far structures can be moved in the x and y direction
 	structureWeights: {
 		cactus: 0.0071,
 		cactusDry: 0.0012
@@ -51,18 +52,18 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function createStructure(type, x = 0, y = 0, otherData) {
+function createStructure(type, x = 0, y = 0, otherData, {offset = 0.5} = {}) {
 	world.structures.push({
 		type: type,
-		x: x + Math.random() - 0.5,
-		y: y + Math.random() - 0.5,
+		x: x + (2 * offset * Math.random()) - offset,
+		y: y + (2 * offset * Math.random()) - offset,
 		elevation: world.elevation[x][y],
 		humidity: world.humidity[x][y],
 		...otherData
 	});
 }
 
-function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureWeights } = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureOffset, structureWeights } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -104,7 +105,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				if(structureRoll > structureWeights.cactus) return
 				createStructure("cactus", x, y, {	
 					height: (Math.random() * 2.2) + 1
-				});
+				},
+				{ offset: structureOffset });
 			}
 			//cactusDry
 			if(localElevation < 400 && localElevation > seaLevel && localHumidity < -100 && localHumidity > -250){
@@ -112,7 +114,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				createStructure("cactus", x, y, {
 					height: (Math.random() * 1.8) + 1, //dry variant of cactus cannot generate as tall
 					...(Math.random() < 0.04) && { customColor: "#C81" } //4% of drycactuses will be "dead"
-				});
+				},
+				{ offset: structureOffset });
 			}
 		});
 	}
