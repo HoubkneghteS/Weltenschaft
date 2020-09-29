@@ -14,6 +14,7 @@
 	"humidityHeader":"Humidity",
 	"seaLevelHeader":"Sea Level",
 	"resolutionHeader":"Map Size",
+	"genStructuresHeader":"Generate Structures",
 	"granularHeader": "Granular Scale",
 	"humidityRangeHeader": "Humidity Range",
 	"waterDrawRateHeader": "Water Draw Rate",

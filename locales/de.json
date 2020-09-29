@@ -14,6 +14,7 @@
 	"humidityHeader":"Feuchtigkeit",
 	"seaLevelHeader":"Meeresspiegel",
 	"resolutionHeader":"Kartengröße",
+	"genStructuresHeader":"Strukturen generieren",
 	"granularHeader": "Granularität",
 	"humidityRangeHeader": "Feuchtigkeitsumfang",
 	"waterDrawRateHeader": "Wasserrenderrate",
