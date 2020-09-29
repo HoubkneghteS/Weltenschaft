@@ -6,31 +6,45 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
 </head>
+
 <body class="unselectable">
 	<script src="translate.js"></script>
 	<script>
 		const { ipcRenderer } = require("electron");
 
-		ipcRenderer.on("sendSettings", (e, value) => {
-			for (let key in value) {
-				document.getElementById(key).value = value[key];
+		ipcRenderer.on("sendSettings", (e, params) => {
+			for (let key in params) {
+				setInnerHtml(key, params[key]);
 			}
 		});
+
+		function setInnerHtml(elementId, value) {
+			if(!document.getElementById(elementId)) return
+			if (document.getElementById(elementId).type == "checkbox") {
+				document.getElementById(elementId).checked = value;
+			} else {
+				document.getElementById(elementId).value = value;
+			}
+		}
 
 		function polygon() {
 			ipcRenderer.send('polygon');
 		}
 
-		function noWater(){
+		function noWater() {
 			settingsSet("seaLevel", -Infinity);
 		}
 
 		function settingsSet(setting, value = document.getElementById(setting).value) {
+			ipcRenderer.send("setting", setting, parseFloat(value));
+		}
+
+		function settingsToggle(setting, value = document.getElementById(setting).checked) {
 			ipcRenderer.send("setting", setting, value);
 		}
 
 		function reset() {
-			let value = {
+			let params = {
 				resolution: 256,
 				hilliness: 30,
 				baseHumidity: 50,
@@ -38,16 +52,17 @@
 				granularScale: 0.03,
 				seaLevel: 0,
 				waterDrawRate: 700,
+				generateStructures: true
 			}
 
-			for (let key in value) {
-				document.getElementById(key).value = value[key];
+			for (let key in params) {
+				setInnerHtml(key, params[key]);
 				settingsSet(key);
 			}
 		}
 
 		function randomize() {
-			let value = {
+			let params = {
 				resolution: Math.floor(Math.random() * 462) + 50,
 				hilliness: Math.floor(Math.random() * 36) + 15,
 				baseHumidity: Math.floor(Math.random() * 500) - 250,
@@ -56,38 +71,41 @@
 
 			//only randomizes advanced settings if they are visible
 			if (document.getElementById("showless")) {
-				value = {
-					...value,
+				params = {
+					...params,
 					humidityRange: Math.floor(Math.random() * 17) + 3,
 					granularScale: (Math.random() * 0.08) + 0.02,
 				}
 			}
 
-			for (let key in value) {
-				document.getElementById(key).value = value[key];
+			for (let key in params) {
+				setInnerHtml(key, params[key]);
 				settingsSet(key);
 			}
 		}
 	</script>
 	<script defer src="showhide.js"></script>
 	<h2><label for="hilliness" id="hillinessHeader">Hilliness</label></h2>
-	<input type="range" min="15" step="0.5" max="50" id="hilliness" onInput="settingsSet('hilliness');"/>
+	<input type="range" min="15" step="0.5" max="50" id="hilliness" onInput="settingsSet('hilliness');" />
 	<h2><label for="baseHumdity" id="humidityHeader">Humidity</label></h2>
-	<input type="range" min="-250" max="250" id="baseHumidity" onInput="settingsSet('baseHumidity');"/>
+	<input type="range" min="-250" max="250" id="baseHumidity" onInput="settingsSet('baseHumidity');" />
 	<h2><label for="seaLevel" id="seaLevelHeader">Sea Level</label></h2>
-	<input type="range" min="-300" max="300" id="seaLevel" onInput="settingsSet('seaLevel');"/>
+	<input type="range" min="-300" max="300" id="seaLevel" onInput="settingsSet('seaLevel');" />
 	<h2><label for="resolution" id="resolutionHeader">Map Size</label></h2>
-	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');"/>
+	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');" />
+	<h2><label for="generateStructures" id="genStructuresHeader">Generate Structures</label></h2>
+	<input type="checkbox" id="generateStructures" value="true" onclick="settingsToggle('generateStructures')">
 	<hr />
 	<a id="showmore" onclick="toggleShow()">Show more</a>
 	<div id="advanced" style="display:none">
 		<h3 id="advancedSettings">Advanced Settings</h3>
 		<h2><label for="granularScale" id="granularHeader">Granular Scale</label></h2>
-		<input type="range" min="0.02" max="0.1" step="0.001" id="granularScale" onInput="settingsSet('granularScale')"/>
+		<input type="range" min="0.02" max="0.1" step="0.001" id="granularScale"
+			onInput="settingsSet('granularScale')" />
 		<h2><label for="humidityRange" id="humidityRangeHeader">Humidity Range</label></h2>
-		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="settingsSet('humidityRange')"/>
+		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="settingsSet('humidityRange')" />
 		<h2><label for="waterDrawRate" id="waterDrawRateHeader">Water Draw Rate</label></h2>
-		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="settingsSet('waterDrawRate')"/>
+		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="settingsSet('waterDrawRate')" />
 		<button id="removeWater" onclick="noWater()">Remove Water</button>
 	</div>
 	<hr />
@@ -96,4 +114,5 @@
 		<button id="randomize" onclick="randomize()">Random Settings</button>
 	</div>
 </body>
+
 </html>

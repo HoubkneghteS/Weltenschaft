@@ -346,7 +346,7 @@ const { ipcRenderer } = require("electron");
 //detects setting change from the settings window and applies it
 ipcRenderer.on("setting", (e, args) => {
 	const settingToChange = args[0],
-		newValue = parseFloat(args[1]);
+		newValue = args[1];
 
 	params[settingToChange] = newValue;
 
@@ -365,16 +365,10 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-	const { resolution, hilliness, baseHumidity, waterDrawRate, humidityRange, granularScale} = params;
 
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
-			resolution: resolution,
-			hilliness: hilliness,
-			humidityRange: humidityRange,
-			granularScale: granularScale,
-			baseHumidity: baseHumidity,
-			waterDrawRate: waterDrawRate,
+			...params,
 			seaLevel: world.seaLevel
 		});
 });
