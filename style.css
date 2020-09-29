@@ -128,6 +128,7 @@ input[type=range] {
 #granularHeader::before{ content: "🧱 "}
 #humidityRangeHeader::before{ content: "🌵 "}
 #waterDrawRateHeader::before{ content: "⏩ "}
+#genStructuresHeader::before{ content: "🏰 "}
 
 /*arrows for showmore and showless*/
 #showmore::after{ content: " ▼"}
