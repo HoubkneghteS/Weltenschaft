@@ -251,9 +251,9 @@ function drawStructures(mode = params.drawMode) {
 	if(mode != "normal") return //structures should only be visable in the normal drawmode
 
 	structures.forEach(structure => {
-		let {x, y, type} = structure;
+		const {x, y, type, customColor} = structure;
 		if(type == "cactus"){
-			ctx.fillStyle = structure.customColor || "#371";
+			ctx.fillStyle = customColor || "#371";
 			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, y / structure.height);
 		}
 	});
