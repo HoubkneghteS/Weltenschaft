@@ -254,7 +254,7 @@ function drawStructures(mode = params.drawMode) {
 		const {x, y, type, customColor} = structure;
 		if(type == "cactus"){
 			ctx.fillStyle = customColor || "#371";
-			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, y / structure.height);
+			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, (y / structure.height) - structure.height);
 		}
 	});
 }
