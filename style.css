@@ -125,7 +125,7 @@ input[type=range] {
 
 input[type='checkbox']:checked:before{
 	transform: translateX(20px);
-	background: var(--ui-dark);
+	background: var(--ui-white);
 }
 
 input[type='checkbox']:before{
