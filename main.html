@@ -28,6 +28,7 @@
 		</button>
 		<button id="save" onclick="saveWorld()">Save World</button>
 		<button id="load" onclick="loadWorld()">Open World</button>
+		<button id="settings" onclick="ipcRenderer.send('openSettings')">Settings</button>
 	</div>
 	<script>
 		document.querySelectorAll('canvas').forEach(canvas => {

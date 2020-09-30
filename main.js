@@ -240,6 +240,10 @@ ipcMain.handle('getLang', async(e, language) => {
 	return getLocaleObject(language)
 });
 
+ipcMain.on("openSettings", () => {
+	createSettingsWindow();
+});
+
 ipcMain.on("saveWorld", (e, world) => {
 	const fs = require('fs'),
 	{ dialog } = require('electron'),
