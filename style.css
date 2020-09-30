@@ -101,7 +101,7 @@ button, ::-webkit-slider-thumb, .dropup a, input[type='checkbox']{
 
 input[type=checkbox]{
 	background: var(--ui-white);
-	width: 50px;
+	width: 40px;
 	height: 20px;
 	-webkit-appearance: none;
 	position:relative;
@@ -124,13 +124,12 @@ input[type=range] {
 }
 
 input[type='checkbox']:checked:before{
-	transform: translateX(30px);
+	transform: translateX(20px);
 	background: var(--ui-dark);
 }
 
 input[type='checkbox']:before{
     content:'';
-    display: block;
     width:14px;
     height:14px;
     position:absolute;

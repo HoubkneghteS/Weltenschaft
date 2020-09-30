@@ -103,7 +103,7 @@
 	<h2><label for="resolution" id="resolutionHeader">Map Size</label></h2>
 	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');" />
 	<h2><label for="generateStructures" id="genStructuresHeader">Generate Structures</label></h2>
-	<input type="checkbox" id="generateStructures" value="true" onclick="settingsToggle('generateStructures')">
+	<input type="checkbox" id="generateStructures" value="true" onclick="settingsToggle('generateStructures')"/>
 	<hr />
 	<a id="showmore" tabindex="0" onkeypress="toggleShow()" onclick="toggleShow()">Show more</a>
 	<div id="advanced" style="display:none">
@@ -116,7 +116,7 @@
 		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="settingsSet('waterDrawRate')" />
 		<button id="removeWater" onclick="noWater()">Remove Water</button>
 		<h2><label for="retainParams" id="retainParamsHeader">Retain Settings</label></h2>
-		<input type="checkbox" id="retainParams" value="true" onclick="settingsToggle('retainParams')">	
+		<input type="checkbox" id="retainParams" value="true" onclick="settingsToggle('retainParams')"/>	
 	</div>
 	<hr />
 	<div class="button-container">
