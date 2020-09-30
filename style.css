@@ -81,7 +81,7 @@ button, ::-webkit-slider-thumb, input[type='checkbox']{
 }
 
 :focus{
-	border: 1px solid var(--ui-white);
+	border-bottom: 2px solid var(--ui-white);
 	outline: none;
 }
 
