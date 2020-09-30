@@ -108,6 +108,8 @@ input[type=range] {
 	cursor: default;
 }
 
+::-webkit-slider-thumb{ cursor: ew-resize }
+
 /*thumb for slider and toggle switches*/
 ::-webkit-slider-thumb, input[type='checkbox']:before{
 	appearance: none;
