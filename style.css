@@ -85,6 +85,7 @@ button, ::-webkit-slider-thumb, input[type='checkbox']{
 	outline: none;
 }
 
+/*custom outline because border does not work correctly for checkbox*/
 input[type=checkbox]:focus{
 	outline: 1px solid var(--ui-white);
 }
