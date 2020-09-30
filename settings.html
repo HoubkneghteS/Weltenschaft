@@ -52,7 +52,8 @@
 				granularScale: 0.03,
 				seaLevel: 0,
 				waterDrawRate: 700,
-				generateStructures: true
+				generateStructures: true,
+				retainParams: true
 			}
 
 			for (let key in params) {
@@ -107,6 +108,8 @@
 		<h2><label for="waterDrawRate" id="waterDrawRateHeader">Water Draw Rate</label></h2>
 		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="settingsSet('waterDrawRate')" />
 		<button id="removeWater" onclick="noWater()">Remove Water</button>
+		<h2><label for="retainParams" id="ratainParamsHeader">Retain Settings</label></h2>
+		<input type="checkbox" id="retainParams" value="true" onclick="settingsToggle('retainParams')">	
 	</div>
 	<hr />
 	<div class="button-container">

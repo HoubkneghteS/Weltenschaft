@@ -334,7 +334,6 @@ function loadParams () {
 }
 
 function saveParams(){
-	if(params.retainParams == false) return
 	const fs = require('fs');
 	fs.writeFileSync(`${__dirname}/params.json`, JSON.stringify(params));
 }
