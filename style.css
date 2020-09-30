@@ -11,7 +11,6 @@ body {
 }
 
 h2{
-	font-size: 150%;
 	margin: 16px 0 0;
 }
 
@@ -46,13 +45,11 @@ hr{
 	position: absolute;
 	flex-direction: column;
 	background: var(--ui-dark);
+	padding: 1px;
 	width: max-content;
-	padding: 2px;
-	border-radius: 3px;
 	text-align: left;
 	left: 0;
 	bottom: 100%;
-	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
 .dropup-container:hover .dropup, .dropup-container:focus .dropup { display: flex;}
@@ -68,16 +65,7 @@ img.unselectable {pointer-events: none;}
 	display: flex;
 	justify-content: left;
 	flex-wrap: wrap;
-}
-
-button{
-	font: var(--ui-font);
-	margin-right: 5px;
-}
-
-button, ::-webkit-slider-thumb, input[type='checkbox']{
-	border-radius: 5px;
-	border: 1px solid var(--ui-dark);
+	gap: 5px;
 }
 
 :focus{
@@ -90,21 +78,25 @@ input[type=checkbox]:focus{
 	outline: 1px solid var(--ui-white);
 }
 
-button, ::-webkit-slider-thumb, .dropup a, input[type='checkbox']{
+/*common ui border & shadow*/
+button, ::-webkit-slider-thumb, input[type='checkbox'], .dropup{
+	border-radius: 5px;
+	border: 1px solid var(--ui-dark);
 	box-shadow: 1.5px 1.5px var(--ui-dark);
-	transition-duration: 0.2s;
+}
+
+/*common ui background*/
+button, ::-webkit-slider-thumb, .dropup a, input[type='checkbox']{
+	transition: 0.2s;
 	background:var(--ui-light);
-	padding: 0.6em 1em;
-	color: var(--ui-white);
 	cursor: pointer;
 }
 
-input[type=checkbox]{
-	background: var(--ui-white);
-	width: 40px;
-	height: 20px;
-	-webkit-appearance: none;
-	position:relative;
+/*common ui text formatting*/
+button, .dropup a{
+	font: var(--ui-font);
+	padding: 0.6em 1em;
+	color: var(--ui-white);
 }
 
 input[type=range] {
@@ -112,36 +104,41 @@ input[type=range] {
 	background: var(--ui-white);
 	margin-bottom: 10px;
 	height: 4px;
-	-webkit-appearance: none;
+	appearance: none;
 	cursor: default;
 }
 
-::-webkit-slider-thumb{
-	-webkit-appearance: none;
-	width: 20px;
-	height: 20px;
-	padding: 5px;
+/*thumb for slider and toggle switches*/
+::-webkit-slider-thumb, input[type='checkbox']:before{
+	appearance: none;
+    width:15px;
+	height:15px;
+	border-radius: 3px;
+}
+
+input[type=checkbox]{
+	width: 50px;
+	height: 23px;
+	appearance: none;
+	position:relative;
 }
 
 input[type='checkbox']:checked:before{
-	transform: translateX(20px);
+	transform: translateX(26px);
 	background: var(--ui-white);
 }
 
 input[type='checkbox']:before{
     content:'';
-    width:14px;
-    height:14px;
     position:absolute;
-	top:2px;
-	left:2px;
+	top:3px;
+	left:3px;
 	background-color: var(--ui-light);
-	border-radius: 3px;
 	transition: .2s;
 }
 
-input[type='checkbox']:checked{
-	background: var(--ui-light);
+input[type='checkbox']:not(:checked){
+	background: var(--ui-white);
 }
 
 /*effects when buttons and similar items are hovered*/
