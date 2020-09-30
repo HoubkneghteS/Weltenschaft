@@ -10,9 +10,7 @@ body {
 	color: var(--ui-white);
 }
 
-h2{
-	margin: 16px 0 0;
-}
+h2{ margin: 16px 0 0; }
 
 hr{
 	background: var(--ui-dark);
