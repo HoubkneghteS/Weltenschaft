@@ -58,7 +58,11 @@
 
 			for (let key in params) {
 				setInnerHtml(key, params[key]);
-				settingsSet(key);
+				if(document.getElementById(key).type == "checkbox"){
+					settingsToggle(key);
+				}else{
+					settingsSet(key);
+				}
 			}
 		}
 
@@ -82,7 +86,11 @@
 
 			for (let key in params) {
 				setInnerHtml(key, params[key]);
-				settingsSet(key);
+				if(document.getElementById(key).type == "checkbox"){
+					settingsToggle(key);
+				}else{
+					settingsSet(key);
+				}
 			}
 		}
 	</script>
