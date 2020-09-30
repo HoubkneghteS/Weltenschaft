@@ -69,7 +69,7 @@ img.unselectable {pointer-events: none;}
 }
 
 :focus{
-	border-bottom: 2px solid var(--ui-white);
+	border-bottom: 1px solid var(--ui-white);
 	outline: none;
 }
 
