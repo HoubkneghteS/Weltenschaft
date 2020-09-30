@@ -52,7 +52,7 @@ hr{
 	bottom: 100%;
 }
 
-.dropup-container:hover .dropup, .dropup-container:focus .dropup { display: flex;}
+.dropup-container:hover .dropup, .dropup-container:focus .dropup, .dropup-container:focus-within .dropup { display: flex;}
 
 .wide{ min-width: 610px;}
 

@@ -20,10 +20,10 @@
 		<button id="generate" onclick="generate()">Generate</button>
 		<button class="dropup-container"><span id="drawmodes">Draw Modes</span>
 			<div class="dropup">
-				<a id="standardDraw" onclick="draw('normal')">Draw Regular</a>
-				<a id="elevation" onclick="draw('elevation')">Draw Elevation</a>
-				<a id="absolute" onclick="draw('absolute')">Draw Absolute Elevation</a>
-				<a id="humidity" onclick="draw('humidity')">Draw Humidity</a>
+				<a id="standardDraw" tabindex="0" onkeypress="draw('normal')" onclick="draw('normal')">Draw Regular</a>
+				<a id="elevation" tabindex="0" onkeypress="draw('elevation')" onclick="draw('elevation')">Draw Elevation</a>
+				<a id="absolute" tabindex="0" onkeypress="draw('absolute')" onclick="draw('absolute')">Draw Absolute Elevation</a>
+				<a id="humidity" tabindex="0" onkeypress="draw('humidity')"  onclick="draw('humidity')">Draw Humidity</a>
 			</div>
 		</button>
 		<button id="save" onclick="saveWorld()">Save World</button>
