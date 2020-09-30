@@ -359,6 +359,7 @@ ipcRenderer.on("setting", (e, args) => {
 			drawWater.lastCall = new Date();
 		}
 	}
+	if(settingsToChange != "retainParams" && params.retainParams == false) return //only save params to params.json if allowed to do so
 	saveParams();
 });
 
