@@ -145,9 +145,8 @@ input[type='checkbox']:checked{
 }
 
 /*effects when buttons and similar items are hovered*/
-::-webkit-slider-thumb:hover, button:hover, .dropup a:hover{
+::-webkit-slider-thumb:hover, button:hover, .dropup a:hover, input[type=checkbox]:hover:before{
 	background: var(--ui-dark);
-	cursor: pointer;
 }
 
 #credits{ font-style: italic;}
