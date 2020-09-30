@@ -19,6 +19,7 @@
 	"humidityRangeHeader": "Feuchtigkeitsumfang",
 	"waterDrawRateHeader": "Wasserrenderrate",
 	"removeWater":"Wasser entfernen",
+	"retainParamsHeader": "Einstellungen behalten",
 	"advancedSettings": "Erweiterte Einstellungen",
 	"resetSettings":"Zurücksetzen",
 	"randomize": "Zufällige Einstellungen",

@@ -19,6 +19,7 @@
 	"humidityRangeHeader": "Humidity Range",
 	"waterDrawRateHeader": "Water Draw Rate",
 	"removeWater":"Remove Water",
+	"retainParamsHeader": "Retain Settings",
 	"advancedSettings": "Advanced Settings",
 	"resetSettings":"Reset",
 	"randomize": "Random Settings",

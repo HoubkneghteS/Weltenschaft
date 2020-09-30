@@ -164,6 +164,7 @@ input[type='checkbox']:checked{
 #humidityRangeHeader::before{ content: "🌵 "}
 #waterDrawRateHeader::before{ content: "⏩ "}
 #genStructuresHeader::before{ content: "🏰 "}
+#retainParamsHeader::before{ content: "💾 "}
 
 /*arrows for showmore and showless*/
 #showmore::after{ content: " ▼"}
