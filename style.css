@@ -56,6 +56,8 @@ hr{
 
 .wide{ min-width: 610px;}
 
+#credits{ font-style: italic;}
+
 .unselectable { user-select: none;}
 
 img.unselectable {pointer-events: none;}
@@ -108,8 +110,6 @@ input[type=range] {
 	cursor: default;
 }
 
-::-webkit-slider-thumb{ cursor: ew-resize }
-
 /*thumb for slider and toggle switches*/
 ::-webkit-slider-thumb, input[type='checkbox']:before{
 	appearance: none;
@@ -148,22 +148,22 @@ input[type='checkbox']:not(:checked){
 	background: var(--ui-dark);
 }
 
-#credits{ font-style: italic;}
-
+/*changing cursors for various elements*/
 #showmore:hover, #showless:hover{ cursor: pointer}
+::-webkit-slider-thumb{ cursor: ew-resize }
 
 /*emojis for settings headers*/
-#hillinessHeader::before{ content: "⛰️ "}
-#humidityHeader::before{ content: "💧 "}
-#seaLevelHeader::before{ content: "🌊 "}
-#resolutionHeader::before{ content: "🗺️ "}
-#advancedSettings::before{ content: "⚙️ "}
-#granularHeader::before{ content: "🧱 "}
-#humidityRangeHeader::before{ content: "🌵 "}
-#waterDrawRateHeader::before{ content: "⏩ "}
-#genStructuresHeader::before{ content: "🏰 "}
-#retainParamsHeader::before{ content: "💾 "}
+#hillinessHeader:before{ content: "⛰️ "}
+#humidityHeader:before{ content: "💧 "}
+#seaLevelHeader:before{ content: "🌊 "}
+#resolutionHeader:before{ content: "🗺️ "}
+#advancedSettings:before{ content: "⚙️ "}
+#granularHeader:before{ content: "🧱 "}
+#humidityRangeHeader:before{ content: "🌵 "}
+#waterDrawRateHeader:before{ content: "⏩ "}
+#genStructuresHeader:before{ content: "🏰 "}
+#retainParamsHeader:before{ content: "💾 "}
 
 /*arrows for showmore and showless*/
-#showmore::after{ content: " ▼"}
-#showless::after{ content: " ▲"}
+#showmore:after{ content: " ▼"}
+#showless:after{ content: " ▲"}
