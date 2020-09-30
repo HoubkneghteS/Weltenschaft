@@ -365,7 +365,6 @@ ipcRenderer.on("setting", (e, args) => {
 
 //sends settings to settings screen when it's loaded
 ipcRenderer.on("loadSettings", (e, winID) => {
-
 	ipcRenderer.sendTo(winID, "sendSettings",
 		{
 			...params,
