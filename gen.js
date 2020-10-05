@@ -128,7 +128,11 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 }
 
 function polygon() {
-	generate({ ...params, granularScale: 0.000000001 });
+	generate({
+		...params,
+		granularScale: 0.000000001,
+		generateStructures: false //THERE ARE NO STRUCTURES IN THE POLYGON REALM MUAHAHAH
+	});
 	console.log("HAIL SIERPINSKI");
 }
 
