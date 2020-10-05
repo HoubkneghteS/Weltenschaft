@@ -78,20 +78,17 @@ input[type=checkbox]:focus{
 	outline: 1px dotted var(--ui-white);
 }
 
-/*common ui border & shadow*/
+/*standard ui border & shadow*/
 button, ::-webkit-slider-thumb, input[type='checkbox'], .dropup{
 	border-radius: 5px;
 	border: 1px solid var(--ui-dark);
 	box-shadow: 1.5px 1.5px var(--ui-dark);
 }
 
-/*common ui background*/
-button, ::-webkit-slider-thumb, .dropup a, input[type='checkbox']{
-	transition: 0.2s;
-	background:var(--ui-light);
-}
+/*standard ui background*/
+button, ::-webkit-slider-thumb, .dropup a, input[type='checkbox']{ background:var(--ui-light); }
 
-/*common ui text formatting*/
+/*standard ui text formatting*/
 button, .dropup a{
 	font: var(--ui-font);
 	padding: 0.6em 1em;
@@ -140,6 +137,7 @@ input[type='checkbox']:not(:checked){
 
 /*bg effects when buttons and similar items are hovered*/
 ::-webkit-slider-thumb:hover, button:hover, .dropup a:hover, input[type=checkbox]:hover:before{
+	transition: 0.2s;
 	background: var(--ui-dark);
 }
 
