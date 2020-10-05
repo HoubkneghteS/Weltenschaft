@@ -53,14 +53,16 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 }
 
 function createStructure(type, x = 0, y = 0, otherData, {offset = 0.5} = {}) {
-	world.structures.push({
+	var structure = {
 		type: type,
 		x: x + (2 * offset * Math.random()) - offset,
 		y: y + (2 * offset * Math.random()) - offset,
 		elevation: world.elevation[x][y],
 		humidity: world.humidity[x][y],
 		...otherData
-	});
+	};
+
+	return structure;
 }
 
 function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureOffset, structureWeights } = params, seed = Math.random()) {
@@ -103,19 +105,19 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			//cactus
 			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
-				createStructure("cactus", x, y, {	
+				world.structures.push(createStructure("cactus", x, y, {	
 					height: (Math.random() * 2.2) + 1
 				},
-				{ offset: structureOffset });
+				{ offset: structureOffset }));
 			}
 			//cactusDry
 			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -100 && localHumidity > -250){
 				if(structureRoll > structureWeights.cactusDry) return
-				createStructure("cactus", x, y, {
+				world.structures.push(createStructure("cactus", x, y, {
 					height: (Math.random() * 1.8) + 1, //dry variant of cactus cannot generate as tall
 					...(Math.random() < 0.04) && { customColor: "#C81" } //4% of drycactuses will be "dead"
 				},
-				{ offset: structureOffset });
+				{ offset: structureOffset }));
 			}
 		});
 	}
