@@ -3,6 +3,7 @@
 	--ui-dark: #05193D;
 	--ui-white: whitesmoke;
 	--ui-font: 13px verdana;
+	--ui-outline: 1px solid var(--ui-white);
 }
 
 body {
@@ -69,13 +70,13 @@ img.unselectable {pointer-events: none;}
 }
 
 :focus{
-	border-bottom: 1px dotted var(--ui-white);
+	border-bottom: var(--ui-outline);
 	outline: none;
 }
 
 /*custom outline because border does not work correctly for checkbox*/
 input[type=checkbox]:focus{
-	outline: 1px dotted var(--ui-white);
+	outline: var(--ui-outline);
 }
 
 /*standard ui border & shadow*/
