@@ -60,6 +60,12 @@ app.whenReady().then(() => {
 					accelerator: 'CmdOrCtrl+Q',
 					label: locale.exit,
 					role: "quit"
+				},
+				{
+					accelerator: 'CmdOrCtrl+W',
+					label: locale.exit,
+					visible: false,
+					role: "close"
 				}
 			],
 		},
