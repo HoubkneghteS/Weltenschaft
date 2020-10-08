@@ -1,29 +1,5 @@
-const params = {
-	resolution: 256, //resolution of terrain array (n * n)
-	hilliness: 30, //amplitude of the elevation heightmap
-	humidityRange: 6, //amplitude for the humidity heightmap
-	baseElevation: 0, //baseline for elevation
-	baseHumidity: 50, //baseline for humidity
-	biomeScale: 155, //scale of humidity-based biomes
-	landScale: 100, //scale for landforms
-	granularScale: 0.03, //size of granular octave relative to the land and biomeScale
-	seaLevel: 0, //default sea level
-	drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
-	roundFactor: 10, //to which decimal place terrain array values are rounded
-	waterDrawRate: 700, //how fast water is redrawn
-	retainParams: true, //whether params should be saved/loaded
-	generateStructures: true, //whether structures will be generated
-	structureOffset: 0.5, //how far structures can be moved in the x and y direction
-	structureWeights: {
-		cactus: 0.0071,
-		cactusDry: 0.0012
-	} //how often the various structures generate
-};
-
 //loads saved params on init
 loadParams();
-
-var world;
 
 function loopThroughHeightmap(callback) {
 	world.elevation.forEach((row, x) => {
@@ -321,6 +297,28 @@ async function loadWorld() {
 
 function loadParams () {
 	const fs = require('fs');
+
+	params = {
+		resolution: 256, //resolution of terrain array (n * n)
+		hilliness: 30, //amplitude of the elevation heightmap
+		humidityRange: 6, //amplitude for the humidity heightmap
+		baseElevation: 0, //baseline for elevation
+		baseHumidity: 50, //baseline for humidity
+		biomeScale: 155, //scale of humidity-based biomes
+		landScale: 100, //scale for landforms
+		granularScale: 0.03, //size of granular octave relative to the land and biomeScale
+		seaLevel: 0, //default sea level
+		drawMode: 'normal', //drawmode - valid values: normal, heightmap, humidity, absolute
+		roundFactor: 10, //to which decimal place terrain array values are rounded
+		waterDrawRate: 700, //how fast water is redrawn
+		retainParams: true, //whether params should be saved/loaded
+		generateStructures: true, //whether structures will be generated
+		structureOffset: 0.5, //how far structures can be moved in the x and y direction
+		structureWeights: {
+			cactus: 0.0071,
+			cactusDry: 0.0012
+		} //how often the various structures generate
+	};
 	
 	if (fs.existsSync(`${__dirname}/params.json`)){
 		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
