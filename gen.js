@@ -330,7 +330,8 @@ function loadParams () {
 			return
 		}
 		for(let param in savedParams){
-			if(param != "drawMode") params[param] = savedParams[param];
+			if(param == "drawMode") return //drawmode does not need to be saved
+			params[param] = savedParams[param];
 		}
 		console.log(`Loaded params from ${__dirname}/params.json`);
 	} else {
