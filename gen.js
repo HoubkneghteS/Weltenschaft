@@ -189,7 +189,6 @@ function drawWater(mode = params.drawMode) {
 		case "elevation":
 			loopThroughHeightmap((localElevation, localHumidity, x, y) => {
 				if (localElevation > seaLevel) return
-
 				ctx.fillStyle = `rgb(0, 0, ${(seaLevel - localElevation) / 10 + 30})`;
 				drawPixel(ctx, boxWidth, boxHeight, x, y);
 			});
