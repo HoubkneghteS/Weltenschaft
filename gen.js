@@ -1,6 +1,3 @@
-//loads saved params on init
-loadParams();
-
 function loopThroughHeightmap(callback) {
 	world.elevation.forEach((row, x) => {
 		row.forEach((localElevation, y) => {
