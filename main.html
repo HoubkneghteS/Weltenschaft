@@ -7,10 +7,10 @@
 	<meta name="author" content="HoubkneghteS (Adam Simons)">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body onload="loadParams(); generate();" class="unselectable">
+<body role="application" onload="loadParams(); generate();" class="unselectable">
 	<script src="translate.js"></script>
 	<script defer src="gen.js"></script>
-	<div class="wide wrapper">
+	<div role="img" class="wide wrapper">
 		<canvas id="terrainbox"></canvas>
 		<canvas id="strbox"></canvas>
 		<canvas id="waterbox"></canvas>
@@ -19,11 +19,11 @@
 	<div class="wide button-container">
 		<button id="generate" onclick="generate()">Generate</button>
 		<button class="dropup-container"><span id="drawmodes">Draw Modes</span>
-			<div class="dropup">
-				<a id="standardDraw" tabindex="0" onkeypress="draw('normal')" onclick="draw('normal')">Draw Regular</a>
-				<a id="elevation" tabindex="0" onkeypress="draw('elevation')" onclick="draw('elevation')">Draw Elevation</a>
-				<a id="absolute" tabindex="0" onkeypress="draw('absolute')" onclick="draw('absolute')">Draw Absolute Elevation</a>
-				<a id="humidity" tabindex="0" onkeypress="draw('humidity')"  onclick="draw('humidity')">Draw Humidity</a>
+			<div class="dropup" role="menu">
+				<a id="standardDraw" role="menuitem" tabindex="0" onkeypress="draw('normal')" onclick="draw('normal')">Draw Regular</a>
+				<a id="elevation" role="menuitem" tabindex="0" onkeypress="draw('elevation')" onclick="draw('elevation')">Draw Elevation</a>
+				<a id="absolute" role="menuitem" tabindex="0" onkeypress="draw('absolute')" onclick="draw('absolute')">Draw Absolute Elevation</a>
+				<a id="humidity" role="menuitem" tabindex="0" onkeypress="draw('humidity')"  onclick="draw('humidity')">Draw Humidity</a>
 			</div>
 		</button>
 		<button id="save" onclick="saveWorld()">Save World</button>
@@ -32,8 +32,8 @@
 	</div>
 	<script>
 		document.querySelectorAll('canvas').forEach(canvas => {
-			canvas.width = 1200;
-			canvas.height = 900;
+			canvas.width = 1600;
+			canvas.height = 1200;
 		});
 	</script>
 </body>
