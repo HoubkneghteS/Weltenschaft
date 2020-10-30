@@ -7,6 +7,10 @@ function loopThroughHeightmap(callback) {
 	});
 }
 
+function chooseRandom(array) {
+	return array[Math.floor(Math.random() * (array.length))];
+}
+
 /*GENERATION OF TERRAIN*/
 
 function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
@@ -98,6 +102,18 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 					roundFactor: roundFactor 
 				}));
 			}
+			//castle
+			if(localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -100){
+				if(structureRoll > structureWeights.castle) return
+				world.structures.push(createStructure("castle", x, y, {
+					customColor: chooseRandom(['#333', "#666", "#005", "#500", "#050"])
+				},
+				{
+					offset: structureOffset,
+					roundFactor: roundFactor 
+				}));
+			}
+
 		});
 	}
 
@@ -318,7 +334,8 @@ function loadParams () {
 		structureOffset: 0.5, //how far structures can be moved in the x and y direction
 		structureWeights: {
 			cactus: 0.0071,
-			cactusDry: 0.0012
+			cactusDry: 0.0012,
+			castle: 0.00005
 		} //how often the various structures generate
 	};
 	
