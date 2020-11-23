@@ -106,7 +106,9 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			if(localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -100){
 				if(structureRoll > structureWeights.castle) return
 				world.structures.push(createStructure("castle", x, y, {
-					customColor: chooseRandom(['#333', "#666", "#005", "#500", "#050"])
+					customColor: chooseRandom(['#333', "#666", "#005", "#500", "#050"]),
+					type: chooseRandom(["square", "triangle"]),
+					height: Math.round(roundFactor * (Math.random() * 2 + 2)) / roundFactor,
 				},
 				{
 					offset: structureOffset,
@@ -255,6 +257,9 @@ function drawStructures(mode = params.drawMode) {
 		if(type == "cactus"){
 			ctx.fillStyle = customColor || "#371";
 			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, (y / structure.height) - structure.height);
+		}
+		if(type =="castle"){
+
 		}
 	});
 }
