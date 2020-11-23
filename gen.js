@@ -29,7 +29,7 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	return heightmap;
 }
 
-function createStructure(type, x = 0, y = 0, otherData, {offset = 0.5, roundFactor = 10} = {}) {
+function createStructure({type, x = 0, y = 0, ...otherData} = {}, {offset = 0.5, roundFactor = 10} = {}) {
 	var structure = {
 		type: type,
 		x: Math.round((x + (2 * offset * Math.random()) - offset) * roundFactor) / roundFactor,
@@ -82,8 +82,12 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			//cactus
 			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -15 && localHumidity > -100){
 				if(structureRoll > structureWeights.cactus) return
-				world.structures.push(createStructure("cactus", x, y, {	
-					height: Math.round(roundFactor * (Math.random() * 2.3 + 1)) / roundFactor
+				world.structures.push(createStructure(
+					{
+						type: "cactus",
+						x: x,
+						y: y, 
+						height: Math.round(roundFactor * (Math.random() * 2.3 + 1)) / roundFactor
 				},
 				{
 					offset: structureOffset,
@@ -93,7 +97,11 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 			//cactusDry
 			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -100 && localHumidity > -250){
 				if(structureRoll > structureWeights.cactusDry) return
-				world.structures.push(createStructure("cactus", x, y, {
+				world.structures.push(createStructure(
+				{
+					type: "cactus",
+					x: x,
+					y: y, 
 					height: Math.round(roundFactor * (Math.random() * 1.9 + 1)) / roundFactor, //dry variant of cactus cannot generate as tall
 					...(Math.random() < 0.04) && { customColor: "#C81" } //4% of drycactuses will be "dead"
 				},
@@ -103,9 +111,13 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				}));
 			}
 			//castle
-			if(localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -100){
+			if(localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -80){
 				if(structureRoll > structureWeights.castle) return
-				world.structures.push(createStructure("castle", x, y, {
+				world.structures.push(createStructure(
+				{	
+					type: "castle",
+					x: x,
+					y: y, 
 					customColor: chooseRandom(['#333', "#666", "#005", "#500", "#050"]),
 					type: chooseRandom(["square", "triangle"]),
 					height: Math.round(roundFactor * (Math.random() * 2 + 2)) / roundFactor,
