@@ -11,6 +11,14 @@ function chooseRandom(array) {
 	return array[Math.floor(Math.random() * (array.length))];
 }
 
+function performStructureCheck(structureWeight, structureConditions) {
+	let structureRoll = Math.random();
+
+	if(structureRoll > structureWeight) return false
+	if(structureConditions == false) return false
+	return true
+}
+
 /*GENERATION OF TERRAIN*/
 
 function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
@@ -78,10 +86,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 
 	if (generateStructures) {
 		loopThroughHeightmap((localElevation, localHumidity, x, y) => {
-			let structureRoll = Math.random();
 			//cactus
-			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -15 && localHumidity > -100){
-				if(structureRoll > structureWeights.cactus) return
+			if(performStructureCheck(structureWeights.cactus, (localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -15 && localHumidity > -100))){
 				world.structures.push(createStructure(
 					{
 						type: "cactus",
@@ -95,8 +101,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				}));
 			}
 			//cactusDry
-			if(localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -100 && localHumidity > -250){
-				if(structureRoll > structureWeights.cactusDry) return
+			if(performStructureCheck(structureWeights.cactusDry, (localElevation < 400 && localElevation > (seaLevel + 15) && localHumidity < -100 && localHumidity > -250))){
 				world.structures.push(createStructure(
 				{
 					type: "cactus",
@@ -111,8 +116,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				}));
 			}
 			//castle
-			if(localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -80){
-				if(structureRoll > structureWeights.castle) return
+			if(performStructureCheck(structureWeights.castle, (localElevation < 900 && localElevation > (seaLevel + 15) && localHumidity > -80))){
 				world.structures.push(createStructure(
 				{	
 					type: "castle",
