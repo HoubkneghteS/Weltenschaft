@@ -119,7 +119,7 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 					x: x,
 					y: y, 
 					customColor: chooseRandom(['#333', "#666", "#005", "#500", "#050"]),
-					type: chooseRandom(["square", "triangle"]),
+					form: chooseRandom(["square", "triangle"]),
 					height: Math.round(roundFactor * (Math.random() * 2 + 2)) / roundFactor,
 				},
 				{
@@ -271,7 +271,8 @@ function drawStructures(mode = params.drawMode) {
 			drawPixel(ctx, boxWidth * 0.9, boxHeight * structure.height, x / 0.9, (y / structure.height) - structure.height);
 		}
 		if(type =="castle"){
-
+			ctx.fillStyle = customColor;
+			drawPixel(ctx, boxWidth * 1.5, boxHeight * structure.height, x / 1.5, (y / structure.height) - structure.height);
 		}
 	});
 }
