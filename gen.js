@@ -11,6 +11,8 @@ function chooseRandom(array) {
 	return array[Math.floor(Math.random() * (array.length))];
 }
 
+/*GENERATION OF TERRAIN*/
+
 function performStructureCheck(structureWeight, structureConditions) {
 	let structureRoll = Math.random();
 
@@ -18,8 +20,6 @@ function performStructureCheck(structureWeight, structureConditions) {
 	if(structureConditions == false) return false
 	return true
 }
-
-/*GENERATION OF TERRAIN*/
 
 function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
 	const { Perlin2 } = require('tumult'),
