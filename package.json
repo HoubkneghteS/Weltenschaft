@@ -16,7 +16,7 @@
 		"tumult": "^3.0.14"
 	},
 	"devDependencies": {
-		"electron": "^11.0.2",
+		"electron": "^11.0.3",
 		"electron-packager": "^15.1.0",
 		"eslint": "^7.1.0"
 	}
