@@ -13,6 +13,8 @@ function chooseRandom(array) {
 
 /*GENERATION OF TERRAIN*/
 
+var world, params;
+
 function performStructureCheck(structureWeight, structureConditions) {
 	let structureRoll = Math.random();
 
