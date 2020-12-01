@@ -337,9 +337,7 @@ async function loadWorld() {
 	draw();
 }
 
-function loadParams () {
-	const fs = require('fs');
-
+function initParams() {
 	params = {
 		resolution: 256, //resolution of terrain array (n * n)
 		hilliness: 30, //amplitude of the elevation heightmap
@@ -362,6 +360,12 @@ function loadParams () {
 			castle: 0.00005
 		} //how often the various structures generate
 	};
+}
+
+function loadParams () {
+	const fs = require('fs');
+
+	initParams();
 	
 	if (fs.existsSync(`${__dirname}/params.json`)){
 		let savedParams = JSON.parse(fs.readFileSync(`${__dirname}/params.json`));
