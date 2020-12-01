@@ -40,16 +40,7 @@
 		}
 
 		function reset() {
-			let params = {
-				resolution: 256,
-				hilliness: 30,
-				baseHumidity: 50,
-				humidityRange: 6,
-				granularScale: 0.03,
-				seaLevel: 0,
-				waterDrawRate: 700,
-				generateStructures: true,
-			}
+			ipcRenderer.send("resetSettings");
 
 			for (let key in params) {
 				setInnerHtml(key, params[key]);

@@ -237,8 +237,13 @@ ipcMain.on("setting", (e, ...args) => {
 	mainWindow.webContents.send("setting", args);
 });
 
-ipcMain.on("polygon", () => {
-	mainWindow.webContents.send("shortcut", "polygon");
+ipcMain.on("resetSettings", () => {
+	//init then save params
+	mainWindow.webContents.send("shortcut", "initParams");
+	mainWindow.webContents.send("shortcut", "saveParams");
+
+	//update settings window
+	mainWindow.webContents.send("loadSettings", settingsWindow.webContents.id);
 });
 
 ipcMain.handle('getLang', async(e, language) => {
