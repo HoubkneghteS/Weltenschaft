@@ -28,10 +28,10 @@
 		}
 
 		function noWater() {
-			settingsSet("seaLevel", -Infinity);
+			setSetting("seaLevel", -Infinity);
 		}
 
-		function settingsSet(setting, value = document.getElementById(setting).value) {
+		function setSetting(setting, value = document.getElementById(setting).value) {
 			ipcRenderer.send("setting", setting, parseFloat(value));
 		}
 
@@ -41,15 +41,12 @@
 
 		function reset() {
 			ipcRenderer.send("resetSettings");
-
-			for (let key in params) {
-				setInnerHtml(key, params[key]);
-				if(document.getElementById(key).type == "checkbox"){
-					settingsToggle(key);
-				}else{
-					settingsSet(key);
-				}
-			}
+			
+			//seaLevel is separate from other settings
+			setTimeout(() => {
+				setInnerHtml("seaLevel", 0);
+				setSetting("seaLevel", 0);
+			}, 200);
 		}
 
 		function randomize() {
@@ -75,20 +72,20 @@
 				if(document.getElementById(key).type == "checkbox"){
 					settingsToggle(key);
 				}else{
-					settingsSet(key);
+					setSetting(key);
 				}
 			}
 		}
 	</script>
 	<script defer src="showhide.js"></script>
 	<h2><label for="hilliness" id="hillinessHeader">Hilliness</label></h2>
-	<input type="range" role="slider" min="15" step="0.5" max="50" id="hilliness" onInput="settingsSet('hilliness');" />
+	<input type="range" role="slider" min="15" step="0.5" max="50" id="hilliness" onInput="setSetting('hilliness');" />
 	<h2><label for="baseHumdity" id="humidityHeader">Humidity</label></h2>
-	<input type="range" min="-250" max="250" id="baseHumidity" onInput="settingsSet('baseHumidity');" />
+	<input type="range" min="-250" max="250" id="baseHumidity" onInput="setSetting('baseHumidity');" />
 	<h2><label for="seaLevel" id="seaLevelHeader">Sea Level</label></h2>
-	<input type="range" min="-300" max="300" id="seaLevel" onInput="settingsSet('seaLevel');" />
+	<input type="range" min="-300" max="300" id="seaLevel" onInput="setSetting('seaLevel');" />
 	<h2><label for="resolution" id="resolutionHeader">Map Size</label></h2>
-	<input type="range" min="50" max="512" id="resolution" onInput="settingsSet('resolution');" />
+	<input type="range" min="50" max="512" id="resolution" onInput="setSetting('resolution');" />
 	<h2><label for="generateStructures" id="genStructuresHeader">Generate Structures</label></h2>
 	<input type="checkbox" id="generateStructures" value="true" onclick="settingsToggle('generateStructures')"/>
 	<hr />
@@ -96,11 +93,11 @@
 	<div id="advanced" style="display:none">
 		<h3 id="advancedSettings">Advanced Settings</h3>
 		<h2><label for="granularScale" id="granularHeader">Granular Scale</label></h2>
-		<input type="range" min="0.02" max="0.1" step="0.001" id="granularScale" onInput="settingsSet('granularScale')" />
+		<input type="range" min="0.02" max="0.1" step="0.001" id="granularScale" onInput="setSetting('granularScale')" />
 		<h2><label for="humidityRange" id="humidityRangeHeader">Humidity Range</label></h2>
-		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="settingsSet('humidityRange')" />
+		<input type="range" min="3" max="20" step="0.25" id="humidityRange" onInput="setSetting('humidityRange')" />
 		<h2><label for="waterDrawRate" id="waterDrawRateHeader">Water Draw Rate</label></h2>
-		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="settingsSet('waterDrawRate')" />
+		<input type="range" min="300" max="1100" step="50" id="waterDrawRate" onInput="setSetting('waterDrawRate')" />
 		<button id="removeWater" onclick="noWater()">Remove Water</button>
 		<h2><label for="retainParams" id="retainParamsHeader">Retain Settings</label></h2>
 		<input type="checkbox" id="retainParams" value="true" onclick="settingsToggle('retainParams')"/>	
