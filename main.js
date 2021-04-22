@@ -228,6 +228,7 @@ function createWorldStatsWindow() {
 
 	worldStatsWindow.once('ready-to-show', () => {
 		worldStatsWindow.show();
+		mainWindow.webContents.send("loadStats", worldStatsWindow.webContents.id);
 	});
 
 	worldStatsWindow.loadFile('world-stats.html');

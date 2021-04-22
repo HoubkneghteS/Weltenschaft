@@ -435,6 +435,11 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 		});
 });
 
+ipcRenderer.on("loadStats", (e, winID) => {
+	ipcRenderer.sendTo(winID, "sendStats", world);
+});
+
+
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {
 	const shortcut = args[0],
