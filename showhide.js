@@ -1,10 +1,10 @@
-function toggleShow(){
+function toggleShow(id){
     if(document.getElementById("showmore")){
         document.getElementById("showmore").id = "showless";
-        document.getElementById("advanced").style.display = "block";
+        document.getElementById(id).style.display = "block";
     }else{
         document.getElementById("showless").id = "showmore";
-        document.getElementById("advanced").style.display = "none";
+        document.getElementById(id).style.display = "none";
     }
     //changes showmore/showless text when the id changes
     setLang();
