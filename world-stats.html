@@ -15,17 +15,29 @@
 			if (document.getElementById(elementId).type == "checkbox") {
 				document.getElementById(elementId).checked = value;
 			} else {
-				document.getElementById(elementId).value = value;
+				document.getElementById(elementId).innerHTML = value;
 			}
 		}
 
 		ipcRenderer.on("sendStats", (e, world) => {
 			for (let key in world) {
-				setInnerHtml(key, params[key]);
+				setInnerHtml(key, world[key]);
+				console.log(key);
+				console.log(world[key]);
 			}
+
+			setInnerHtml("structureAmt", world.structures.length);s
 		});
 
 	</script>
 	<h1 id="worldStats">World Stats</h1>
+	<h2>Sea Level</h2>
+	<p id="seaLevel"></p>
+	<h2>Seed</h2>
+	<p id="seed"></p>
+	<h2>No Of Structures</h2>
+	<p id="structureAmt"></p>
+
+
 </body>
 </html>
