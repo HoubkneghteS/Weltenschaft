@@ -83,6 +83,13 @@ app.whenReady().then(() => {
 						createInfoWindow();
 					}
 				},
+				{
+					label: "World Stats",
+					accelerator: "CmdOrCtrl+I",
+					click() {
+						createWorldStatsWindow();
+					}
+				},
 				{ type: "separator" },
 				{
 					label: locale.standardDraw,
@@ -142,7 +149,7 @@ function getLocaleObject(src = app.getLocale()){
 
 /* WINDOWS */
 
-var mainWindow, infoWindow, settingsWindow;
+var mainWindow, infoWindow, settingsWindow, worldStatsWindow;
 
 const windowDefaults = {
 	width: 375,
@@ -207,6 +214,30 @@ function createInfoWindow() {
 		shell.openExternal(url);
 	});
 }
+
+function createWorldStatsWindow() {
+
+	if (worldStatsWindow) return; //blocks multiple from being created
+
+	worldStatsWindow = new BrowserWindow({...windowDefaults,
+		title: locale.worldStats,
+		height: 300,
+		autoHideMenuBar: true,
+		parent: mainWindow, //always shows on top of main window
+	});
+
+	worldStatsWindow.once('ready-to-show', () => {
+		worldStatsWindow.show();
+	});
+
+	worldStatsWindow.loadFile('world-stats.html');
+
+	worldStatsWindow.on('close', () => {
+		worldStatsWindow = null;
+	});
+
+}
+
 
 function createSettingsWindow() {
 
