@@ -10,6 +10,21 @@
 	<script>
 		const { ipcRenderer } = require("electron");
 
+		function setInnerHtml(elementId, value) {
+			if(!document.getElementById(elementId)) return
+			if (document.getElementById(elementId).type == "checkbox") {
+				document.getElementById(elementId).checked = value;
+			} else {
+				document.getElementById(elementId).value = value;
+			}
+		}
+
+		ipcRenderer.on("sendStats", (e, world) => {
+			for (let key in world) {
+				setInnerHtml(key, params[key]);
+			}
+		});
+
 	</script>
 	<h1 id="worldStats">World Stats</h1>
 </body>
