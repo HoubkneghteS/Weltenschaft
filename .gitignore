@@ -10,6 +10,6 @@ params.json
 #ESLint config
 .eslintrc.json
 
-#debug stuff
+#Visual Studio
 .vscode
 .vs
