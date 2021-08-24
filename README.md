@@ -25,7 +25,7 @@ For more info and documentation, visit the [Weltenschaft Wiki](https://github.co
 * Basic in-browser implementation
 
 ## Dependencies
-* [![Electron](assets/icons/electron.png)](https://github.com/electron/electron) (App framework)
+* [Electron.js](https://github.com/electron/electron) (App framework)
 * [Tumult](https://github.com/ScottyFillups/tumult) (Noise library)
 
 ## License
