@@ -20,7 +20,7 @@ For more info and documentation, visit the [Weltenschaft Wiki](https://github.co
 * English, German, and Spanish support
 
 ## Roadmap
-* Cities, rivers, and other structures
+* Cities, rivers, and other structures (in progress)
 * Temperature
 * Basic in-browser implementation
 
