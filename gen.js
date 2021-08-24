@@ -139,6 +139,9 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 	draw();
 
 	console.timeEnd("generate");
+
+	//update world info window
+	ipcRenderer.send("sendStats", world);
 }
 
 function polygon() {
@@ -436,9 +439,8 @@ ipcRenderer.on("loadSettings", (e, winID) => {
 });
 
 ipcRenderer.on("loadStats", (e, winID) => {
-	ipcRenderer.sendTo(winID, "sendStats", world);
+	ipcRenderer.send("sendStats", world);
 });
-
 
 //keyboard shortcut to generate terrain (ctrl+g) and drawmodes (ctrl + 1,2,3)
 ipcRenderer.on("shortcut", (e, ...args) => {

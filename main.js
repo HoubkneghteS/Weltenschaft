@@ -269,6 +269,11 @@ ipcMain.on("setting", (e, ...args) => {
 	mainWindow.webContents.send("setting", args);
 });
 
+ipcMain.on("sendStats", (e, world) => {
+	if(!worldStatsWindow) return
+	worldStatsWindow.webContents.send("sendStats", world);
+});
+
 ipcMain.on("resetSettings", () => {
 	//init then save params
 	mainWindow.webContents.send("shortcut", "initParams");
