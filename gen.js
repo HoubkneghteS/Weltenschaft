@@ -289,7 +289,7 @@ function drawStructures(mode = params.drawMode) {
 			ctx.fillStyle = customColor;
 
 			drawTriangle(ctx, boxWidth * 1.5, boxHeight * structure.height, x / 1.5, (y / structure.height) - structure.height)
-			drawPixel(ctx, boxWidth * 1.5, boxHeight * structure.height, x / 1.5, 0.95 + (y / structure.height) - structure.height);
+			drawPixel(ctx, boxWidth * 1.5, boxHeight * structure.height, (x / 1.5) - 0.05, 0.95 + (y / structure.height) - structure.height);
 		}
 	});
 }
