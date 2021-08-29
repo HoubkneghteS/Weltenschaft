@@ -23,7 +23,7 @@ function performStructureCheck(structureWeight, structureConditions) {
 	return true
 }
 
-function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03 } = {}, seed) {
+function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 256, roundFactor = 10, granularScale = 0.03, octaves = 5 } = {}, seed) {
 	const { Perlin2 } = require('tumult'),
 		small = granularScale * scale,
 		map = new Perlin2(seed);
@@ -31,7 +31,7 @@ function createHeightmap({ base = 0, amplitude = 1, scale = 100, resolution = 25
 	var heightmap = Array(resolution).fill().map(() => Array(resolution).fill(0));
 	for (let x = 0; x < resolution; x++) {
 		for (let y = 0; y < resolution; y++) {
-			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(5, x / scale, y / scale)) * amplitude;
+			const value = base + (6 * map.gen(x / small, y / small) + 120 * map.octavate(octaves, x / scale, y / scale)) * amplitude;
 			heightmap[x][y] = Math.round(value * roundFactor) / roundFactor;
 		}
 	}
@@ -52,7 +52,7 @@ function createStructure({type, x = 0, y = 0, ...otherData} = {}, {offset = 0.5,
 	return structure;
 }
 
-function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureOffset, structureWeights } = params, seed = Math.random()) {
+function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeScale, landScale, seaLevel, roundFactor, granularScale, baseElevation, generateStructures, structureOffset, structureWeights, octaves } = params, seed = Math.random()) {
 
 	console.time("generate");
 
@@ -67,7 +67,8 @@ function generate({ resolution, hilliness, baseHumidity, humidityRange, biomeSca
 				scale: landScale,
 				resolution: resolution,
 				roundFactor: roundFactor,
-				granularScale: granularScale
+				granularScale: granularScale,
+				octaves: octaves
 			},
 			seed + 0.01),
 		//elevation uses a different seed than humidity so that the heightmaps don't look identical
