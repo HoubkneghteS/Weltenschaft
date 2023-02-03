@@ -127,6 +127,10 @@ app.whenReady().then(() => {
 	Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 	createMainWindow();
+
+	app.on('activate', () => {
+		if (BrowserWindow.getAllWindows().length === 0) createWindow()
+	});
 });
 
 function getLocaleObject(src = app.getLocale()){
@@ -173,11 +177,11 @@ function createMainWindow() {
 
 	mainWindow.loadFile('main.html');
 	
-	//quits all windows when closed
-	mainWindow.on('close', () => {
-		app.quit();
-	});
 }
+
+app.on('window-all-closed', () => {
+	if (process.platform !== 'darwin') app.quit()
+})
 
 function createInfoWindow() {
 
